@@ -1,11 +1,12 @@
 """技能收益台账（C2 · 第二轮计划 §2；评估报告 P1）。
 
 目的：技能自进化（默认开）的收益可量化审计——触发/复用/闲置机械可算。
-- 事件侧车：``<skills_dir>/.usage.jsonl``（append-only）：
+- 事件侧车：``<skills_dir>/../state/<name>/usage.jsonl``（append-only；
+  旧路径 ``<skills_dir>/.usage.jsonl`` 兼容读）：
     {"ts": ..., "event": "loaded"|"evolved", "skill": name, ...}
 - 报表：``ledger_report``（总量/每技能 loads/last_ts/created/状态）；
 - 淘汰：``unused_candidates``（长期零复用——**仅建议**）；归档为显式动作
-  ``archive_skill``（移动到 ``_archived/``，不删除）。
+  ``archive_skill``（移动到 ``../state/<name>/archive/``，不删除；旧 ``_archived/`` 兼容读）。
 
 纪律：台账是观测不是生命线——写入失败静默（DEBUG 日志）、读取容忍损坏行。
 """
@@ -16,12 +17,41 @@ import time
 
 logger = logging.getLogger(__name__)
 
-LEDGER_FILE = ".usage.jsonl"
-_ARCHIVE_DIR = "_archived"
+LEDGER_FILE = "usage.jsonl"
+LEGACY_LEDGER_FILE = ".usage.jsonl"
+ARCHIVE_DIR = "archive"
+LEGACY_ARCHIVE_DIR = "_archived"
+
+
+def state_dir(skills_dir) -> pathlib.Path:
+    """P3：技能 sidecar 状态目录 = ``<skills_dir>/../state/<name>``。"""
+    root = pathlib.Path(skills_dir)
+    return root.parent / "state" / root.name
 
 
 def ledger_path(skills_dir) -> pathlib.Path:
-    return pathlib.Path(skills_dir) / LEDGER_FILE
+    return state_dir(skills_dir) / LEDGER_FILE
+
+
+def legacy_ledger_path(skills_dir) -> pathlib.Path:
+    return pathlib.Path(skills_dir) / LEGACY_LEDGER_FILE
+
+
+def archive_dir(skills_dir) -> pathlib.Path:
+    return state_dir(skills_dir) / ARCHIVE_DIR
+
+
+def legacy_archive_dir(skills_dir) -> pathlib.Path:
+    return pathlib.Path(skills_dir) / LEGACY_ARCHIVE_DIR
+
+
+def archived_path(skills_dir, name: str) -> pathlib.Path | None:
+    """归档目录查找（新 state 优先，旧 `_archived/` 兼容）。"""
+    for root in (archive_dir(skills_dir), legacy_archive_dir(skills_dir)):
+        p = root / str(name)
+        if p.is_dir():
+            return p
+    return None
 
 
 def record_event(skills_dir, event: str, skill: str, *, ts=None,
@@ -43,8 +73,10 @@ def record_event(skills_dir, event: str, skill: str, *, ts=None,
 
 
 def read_events(skills_dir) -> list:
-    """读取全部事件（损坏行跳过——韧性惯例）。"""
+    """读取全部事件（损坏行跳过——韧性惯例；新路径优先，旧路径兼容）。"""
     p = ledger_path(skills_dir)
+    if not p.exists():
+        p = legacy_ledger_path(skills_dir)
     if not p.exists():
         return []
     rows = []
@@ -66,7 +98,7 @@ def read_events(skills_dir) -> list:
 
 
 def list_skills(skills_dir) -> list:
-    """技能目录清单（含 SKILL.md；排除 `_archived`/隐藏目录）。"""
+    """技能目录清单（含 SKILL.md；排除旧 `_archived`/隐藏目录）。"""
     root = pathlib.Path(skills_dir)
     if not root.is_dir():
         return []
@@ -140,7 +172,7 @@ def archive_skill(skills_dir, name: str) -> dict:
     src = root / str(name)
     if not src.is_dir():
         return {"archived": False, "reason": "not-found"}
-    dest_dir = root / _ARCHIVE_DIR
+    dest_dir = archive_dir(root)
     dest = dest_dir / str(name)
     if dest.exists():
         return {"archived": False, "reason": "exists"}

@@ -35,8 +35,12 @@ def _isolate_user_config(tmp_path, monkeypatch):
                         lambda: isolated / "credentials.json")
     import wuxing.skill_state as st
     monkeypatch.setattr(st, "state_path",
-                        lambda: isolated / "skills-disabled.json")
+                        lambda: isolated / "state" / "skills" / "disabled.json")
     monkeypatch.setattr(st, "pinned_path",
+                        lambda: isolated / "state" / "skills" / "pinned.json")
+    monkeypatch.setattr(st, "legacy_state_path",
+                        lambda: isolated / "skills-disabled.json")
+    monkeypatch.setattr(st, "legacy_pinned_path",
                         lambda: isolated / "skills-pinned.json")
 
 

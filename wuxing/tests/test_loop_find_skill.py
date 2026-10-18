@@ -72,14 +72,10 @@ def test_install_skill_then_visible_in_registry():
 
 
 def test_builtin_skills_layer_scanned():
-    """内置层（代码分发 skills/ 目录）可被注册表扫描（find-skill 内挂）。"""
+    """内置层（代码分发 resources/skills/）可被注册表扫描（find-skill 内挂）。"""
     import wuxing
-    builtin = pathlib.Path(wuxing.__file__).parent / "builtin_skills"
-    if not builtin.exists():
-        builtin.mkdir(parents=True)
-        (builtin / "find-skill").mkdir(parents=True)
-        (builtin / "find-skill" / "SKILL.md").write_text(
-            "---\nname: find-skill\ndescription: 发现并安装技能\n---\n流程", encoding="utf-8")
+    builtin = pathlib.Path(wuxing.__file__).parent / "resources" / "skills"
+    assert builtin.exists(), "内置技能目录必须随包分发"
     reg = SkillRegistry(user_dir=pathlib.Path(tempfile.mkdtemp()),
                         project_dir=pathlib.Path(tempfile.mkdtemp()),
                         builtin_dir=builtin)

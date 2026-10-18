@@ -1,0 +1,417 @@
+# WUXING 工作流规则单一来源（W3.1）
+# 规则 ID / 级别与 docs/WUXING_工作流系统设计_v0.1.md §2.3/§2.4 对齐；
+# task_types 与 §3.3 对齐。修改后运行：
+#   python -m scripts.workflow_gen
+#   python -m scripts.workflow_gen --check
+version: 1
+
+rules:
+  # ── L0 · 不可违背（信任 / 安全边界） ─────────────────────────────
+  - id: L0-SEC-1
+    level: L0
+    domain: [all]
+    scope: [all]
+    trigger: "任何接触凭据（key/token/密码）的操作：接入、调试、配置、文档"
+    must: "不入库、不进日志、不进文档/提交；key 走环境变量或会话内传递；发现泄露立即报告用户"
+    evidence:
+      - "repo_hygiene 通过"
+      - "提交 diff 自查无凭据模式"
+    owner: security
+    source: "用户级宪章 §四 / README §接口与边界纪律-5"
+
+  - id: L0-TRUTH-1
+    level: L0
+    domain: [all]
+    scope: [all]
+    trigger: "任何对完成度/通过与否的陈述；测试、实验、评测结果上报"
+    must: "只陈述实际执行的命令与原始输出；失败/降级/部分完成如实标注；不伪造、不夸大、不隐瞒"
+    evidence:
+      - "命令 + 原始输出（会话或报告，可复核对）"
+    owner: engineering
+    source: "用户级宪章 §二 / README §验证流程"
+
+  - id: L0-USER-1
+    level: L0
+    domain: [all]
+    scope: [all]
+    trigger: "删除/覆盖用户数据、越工作区写、不可逆变更、改动范围超出任务授权"
+    must: "先征得用户确认；不确定先问，不擅自扩大范围"
+    evidence:
+      - "用户确认记录（会话）"
+    owner: user
+    source: "用户级宪章 §五"
+
+  - id: L0-PHIL-1
+    level: L0
+    domain: [all]
+    scope: [all]
+    trigger: "任何机制/流程/判定设计（含本工作流系统自身）"
+    must: "LLM 只作辅佐（把关者），最终裁决由机械机制承担；不引入不可审计的 LLM 硬判定"
+    evidence:
+      - "设计文档中的裁决路径说明"
+    owner: architecture
+    source: "README §这是什么 / 工作流设计 §2.3"
+
+  # ── L1 · 工程铁律（质量核心） ────────────────────────────────────
+  - id: L1-TDD-1
+    level: L1
+    domain: [execute]
+    scope: [implement, bug]
+    trigger: "编写/修改运行行为的生产代码"
+    must: "遵循红-绿流程；红/绿是否显式执行由模型自选，非代码工作不启用"
+    evidence:
+      - "红/绿输出（如执行）"
+      - "通过输出"
+    owner: engineering
+    source: "用户级宪章 §二 / README §开发流程"
+
+  - id: L1-BUG-1
+    level: L1
+    domain: [execute]
+    scope: [bug]
+    trigger: "bug/报错/测试失败/异常行为"
+    must: "先复现（机制性缺陷 3 次可复现）→ 定位根因 → 再修复；禁止猜测性乱改"
+    evidence:
+      - "复现命令/输出"
+      - "根因（文件:行/链路）"
+      - "修复后同命令复跑"
+    owner: engineering
+    source: "用户级宪章 §二"
+
+  - id: L1-EVID-1
+    level: L1
+    domain: [all]
+    scope: [all]
+    trigger: "准备声称完成/修复/通过（含收口/提交/交付）"
+    must: "先运行相关验证并展示输出；缺证不得声明"
+    evidence:
+      - "验证命令 + 输出（贴会话或落文件）"
+    owner: engineering
+    source: "用户级宪章 §二 / README §验证流程"
+
+  - id: L1-PLAN-1
+    level: L1
+    domain: [plan]
+    scope: [multi_step, implement]
+    trigger: "多步骤任务（重构/迁移/搭建/新项目）或含显著不确定性的功能"
+    must: "先产计划（步骤 + 验收标准）再动手；执行期按计划勾选"
+    evidence:
+      - "计划文件（docs/plans/）或对话内计划"
+    owner: engineering
+    source: "用户级宪章 §二"
+
+  - id: L1-REG-1
+    level: L1
+    domain: [repo]
+    scope: [implement, bug, multi_step]
+    trigger: "行为类改动完成"
+    must: "相关测试 + 全量回归全绿；算法层改动跑 golden_ratio/tests/；前端改动 npm run check；涉壳交互跑 E2E"
+    evidence:
+      - "测试命令与结果计数"
+      - "E2E / 前端门禁输出"
+    owner: engineering
+    source: "README §测试与门禁命令 / §验证流程"
+
+  - id: L1-MOUSE-1
+    level: L1
+    domain: [verify, repo]
+    scope: [review, merge]
+    trigger: "以浏览器断言作为 UI 交互可用性证据"
+    must: "真实鼠标/键盘事件（CDP/Playwright/Puppeteer）；禁 element.click() 合成点击"
+    evidence:
+      - "真实事件脚本 + 断言输出/截图"
+    owner: engineering
+    source: "README §验证流程"
+
+  - id: L1-COMMIT-1
+    level: L1
+    domain: [repo]
+    scope: [all]
+    trigger: "完成一个有意义阶段"
+    must: "一次提交只做一件事；不攒大批；提交前 git diff 自查（不提交调试代码/临时文件）"
+    evidence:
+      - "提交序列（git log）"
+      - "diff 自查"
+    owner: engineering
+    source: "用户级宪章 §四"
+
+  - id: L1-DOC-1
+    level: L1
+    domain: [repo]
+    scope: [all]
+    trigger: "用户裁决 / 设计分歧 / 重大变更"
+    must: "落决策记录/README/设计文档；禁止仅口头留痕"
+    evidence:
+      - "文档条目（日期 + 条目）"
+    owner: docs
+    source: "用户级宪章 §二 / docs/README §写作与归档规范"
+
+  - id: L1-READ-1
+    level: L1
+    domain: [all]
+    scope: [implement, bug, multi_step]
+    trigger: "修改文件（宽范围改动尤甚）"
+    must: "先读相关文件全文再改，不凭假设动刀"
+    evidence:
+      - "改动说明可核（引用的实现/调用点）"
+    owner: engineering
+    source: "README §开发流程"
+
+  - id: L1-FREEZE-1
+    level: L1
+    domain: [all]
+    scope: [all]
+    trigger: "拟启动真 LLM 接入/评分/A-B 测试"
+    must: "开发达到预期前不启动；须用户显式解冻"
+    evidence:
+      - "用户解冻记录"
+    owner: user
+    source: "AGENTS.md 导语"
+
+  - id: L1-ORIG-1
+    level: L1
+    domain: [all]
+    scope: [all]
+    trigger: "引入外部项目参照（实现/目录/命名/机制）时"
+    must: "实现可搬用但须融合适配（涉我方机制差异处重构，非照搬）；命名不得与外部完全一致"
+    evidence:
+      - "评审/diff 可核（无完全同名；差异点有说明）"
+    owner: architecture
+    source: "工作流设计 §0.5"
+
+  # ── L2 · 项目约定（一致性 / 卫生） ──────────────────────────────
+  - id: L2-SHELL-1
+    level: L2
+    domain: [repo]
+    scope: [implement, bug]
+    trigger: "修改壳/引擎边界或前端协议"
+    must: "壳只走 Engine 公开 API（run_task/resume_task/confirm_unit）；AST import 测试强制"
+    evidence:
+      - "wuxing/tests/test_import_direction.py 通过"
+      - "ci_check 通过"
+    owner: architecture
+    source: "README §接口与边界纪律-1"
+
+  - id: L2-CACHE-1
+    level: L2
+    domain: [execute]
+    scope: [implement, bug]
+    trigger: "修改 ReplyCache / ShapeCache 键或命中统计"
+    must: "ReplyCache key = {domain_id}|{prompt}；ShapeCache = task_text 规范化；改键同步文档与统计口径"
+    evidence:
+      - "相关缓存测试通过"
+      - "缓存基准复验"
+    owner: engineering
+    source: "README §接口与边界纪律-3"
+
+  - id: L2-CONFIG-1
+    level: L2
+    domain: [repo]
+    scope: [implement]
+    trigger: "新增/修改引擎配置参数"
+    must: "config.py EngineConfig 与 config_schema.py FIELD_SPECS 双写；依赖一致性测试守卫"
+    evidence:
+      - "配置一致性测试通过"
+    owner: engineering
+    source: "README §接口与边界纪律-4"
+
+  - id: L2-CRED-1
+    level: L2
+    domain: [repo]
+    scope: [implement]
+    trigger: "修改凭据存储/设置页/API"
+    must: "凭据 write-only；UI/API 永不回读值；env 遮蔽时拒绝写入"
+    evidence:
+      - "相关测试通过"
+      - "repo_hygiene 通过"
+    owner: security
+    source: "README §接口与边界纪律-5"
+
+  - id: L2-PROV-1
+    level: L2
+    domain: [execute]
+    scope: [implement]
+    trigger: "修改单元完成/委派链路"
+    must: "单元完成即写 provenance 链（append-only）；delegate 子任务带 parent 链接"
+    evidence:
+      - "provenance 测试通过"
+    owner: engineering
+    source: "README §接口与边界纪律-6"
+
+  - id: L2-PROTO-1
+    level: L2
+    domain: [repo]
+    scope: [implement]
+    trigger: "新增/修改壳事件或契约"
+    must: "先改 Python 契约 → gen_protocol_ts → 对拍；禁手改 generated.ts"
+    evidence:
+      - "python -m scripts.gen_protocol_ts --check 通过"
+    owner: architecture
+    source: "README §接口与边界纪律-7"
+
+  - id: L2-INJECT-1
+    level: L2
+    domain: [execute]
+    scope: [implement]
+    trigger: "修改提示词段/消息段装配"
+    must: "核对《注入规范》§5 前缀稳定清单；系统段字节稳定性与节级哈希守卫"
+    evidence:
+      - "wuxing/tests/test_prompt_sections.py 通过"
+    owner: engineering
+    source: "README §接口与边界纪律-8"
+
+  - id: L2-MODULE-1
+    level: L2
+    domain: [repo]
+    scope: [implement, multi_step]
+    trigger: "新增模块或拆解巨型文件"
+    must: "注解覆盖 ≥60%；静默异常回退必须注释或降级日志；新模块入 ruff；≤800 行目标；提取模块不得 import engine"
+    evidence:
+      - "test_import_direction.py 通过"
+      - "ruff 通过"
+    owner: engineering
+    source: "README §接口与边界纪律-9"
+
+  - id: L2-GIT-1
+    level: L2
+    domain: [repo]
+    scope: [all]
+    trigger: "提交改动"
+    must: "只 stage 本会话文件；显式路径 git add；提交前 git status 核对；不用 git add -A/."
+    evidence:
+      - "git status / git log 摘要"
+    owner: engineering
+    source: "用户级宪章 §四 / README §Git 操作"
+
+  - id: L2-HYGIENE-1
+    level: L2
+    domain: [repo]
+    scope: [all]
+    trigger: "提交前"
+    must: "不提交调试代码/临时文件/日志/构建产物/实验资产；不改 .gitignore 覆盖目录"
+    evidence:
+      - "git diff 自查"
+      - "repo_hygiene 通过"
+    owner: engineering
+    source: "README §Git 操作"
+
+  - id: L2-GATE-1
+    level: L2
+    domain: [repo]
+    scope: [implement, bug, multi_step, merge]
+    trigger: "行为类改动完成/收口"
+    must: "相关测试 + 全量回归 + ci_check；前端 npm run check；壳交互 E2E；全面审查按需触发"
+    evidence:
+      - "ci_check 输出"
+      - "E2E / 前端门禁输出"
+    owner: engineering
+    source: "README §验证流程 / 会话惯例 2026-10-15"
+
+  - id: L2-DOCS-1
+    level: L2
+    domain: [repo]
+    scope: [doc_writing, review, merge]
+    trigger: "新增/移动/归档文档"
+    must: "按 docs/README 命名与登记；用户裁决落决策记录；收口计划归档"
+    evidence:
+      - "docs/README 索引更新"
+      - "决策记录条目"
+    owner: docs
+    source: "docs/README §写作与归档规范"
+
+  - id: L2-SKILL-1
+    level: L2
+    domain: [repo]
+    scope: [all]
+    trigger: "任务收口且处理链高效可复用"
+    must: "自评审后沉淀 SKILL.md；沉淀前强制近义查重；同名不覆盖"
+    evidence:
+      - "trace skill_evolved / skill_evolve_skipped"
+      - "技能目录变更"
+    owner: engineering
+    source: "README §技能自进化"
+
+  - id: L2-MOBILE-1
+    level: L2
+    domain: [repo]
+    scope: [implement, review]
+    trigger: "修改 Web UI 或移动端薄壳"
+    must: "先 npm run deploy 再 E2E；真机证据单独记录；不把模拟器结果冒充真机"
+    evidence:
+      - "deploy 记录"
+      - "E2E / 真机日志"
+    owner: engineering
+    source: "public/README §贡献-12"
+
+  # ── L3 · 建议（自由裁量） ────────────────────────────────────────
+  - id: L3-OPT-1
+    level: L3
+    domain: [all]
+    scope: [all]
+    trigger: "评估流程/机制/文档改动提案"
+    must: "先问机械负载与上下文注入增量；优先净减（合并去重 > 有理由微增 > 零增）；仅形式收益不做"
+    evidence:
+      - "提案中的强度评估"
+    owner: architecture
+    source: "工作流设计 §0.4"
+
+task_types:
+  - id: bug
+    scene: "缺陷/报错/测试失败/异常"
+    skills: [systematic-debugging]
+    evidence: E-bug
+    note: "L1-BUG-1 挂钩"
+
+  - id: implement
+    scene: "功能/修复的生产代码实现"
+    skills: [test-driven-development]
+    evidence: E-impl
+    note: "L1-TDD-1 挂钩"
+
+  - id: multi_step
+    scene: "重构/迁移/搭建/新项目"
+    skills: [writing-plans, executing-plans]
+    evidence: E-plan
+    note: "执行期可按批次拆分"
+
+  - id: feature_design
+    scene: "新功能/方案/创意设计（含方案裁决）"
+    skills: [brainstorming]
+    evidence: E-design
+    note: "先探索需求再实现"
+
+  - id: doc_writing
+    scene: "正式文档（方案/报告/README/说明书）"
+    skills: [doc-coauthoring]
+    evidence: E-doc
+    note: "先读者/结构后迭代"
+
+  - id: research
+    scene: "调研（外部项目/材料/一手来源）"
+    skills: []
+    evidence: E-research
+    note: "无流程技能——按项目研究纪律（一手来源 + 版本 + 证据索引）"
+
+  - id: review
+    scene: "审查（代码/UI/全面审查）"
+    skills: []
+    evidence: E-review
+    note: "候选 code-reviewer；项目审查纪律；发现登记（含未修复项）"
+
+  - id: merge
+    scene: "合并/交付前"
+    skills: [requesting-code-review, finishing-a-development-branch]
+    evidence: E-merge
+    note: "场景工作流（默认关）"
+
+  - id: review_received
+    scene: "收到外部评审意见"
+    skills: [receiving-code-review]
+    evidence: E-rcv
+    note: "逐条处置"
+
+  - id: isolation
+    scene: "需要隔离工作区（实验/并行）"
+    skills: [using-git-worktrees]
+    evidence: E-iso
+    note: "场景工作流（默认关）"

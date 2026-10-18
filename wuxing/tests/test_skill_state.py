@@ -1,6 +1,6 @@
 """TDD：技能启停（M7 挂账 #5 · A1——用户裁决 2026-09-20）。
 
-- 默认全部启用；停用状态持久化（sidecar：~/.wuxing/skills-disabled.json，测试隔离）
+- 默认全部启用；停用状态持久化（sidecar：~/.wuxing/state/skills/disabled.json，测试隔离）
 - 停用后：list_skills 标记 enabled=False；load_skill 工具拒绝；技能索引消息不列出
 - 内置技能不可停用；未知/非法技能名报错
 """
@@ -12,7 +12,10 @@ from wuxing.engine import Engine
 
 def _mk(tmp_path, monkeypatch):
     import wuxing.skill_state as st
-    monkeypatch.setattr(st, "state_path", lambda: tmp_path / "skills-disabled.json")
+    monkeypatch.setattr(st, "state_path",
+                        lambda: tmp_path / "state" / "skills" / "disabled.json")
+    monkeypatch.setattr(st, "legacy_state_path",
+                        lambda: tmp_path / "skills-disabled.json")
     wd = tmp_path / "wd"
     sdir = wd / ".skills" / "my-skill"
     sdir.mkdir(parents=True)

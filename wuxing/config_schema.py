@@ -215,6 +215,10 @@ FIELD_SPECS = [
               desc="不可信内容净化（SEC1）：中和伪边界/隐形字符/高置信注入短语；关闭=仅信封"),
     FieldSpec("mcp_servers", "list", [], item_type="mcp",
               desc="MCP 服务列表：名称 + 启动命令 + 参数 + 权限声明；未声明权限的工具默认拦截"),
+    FieldSpec("mcp_project_enabled", "bool", False,
+              desc="项目级 MCP 信任开关（仅用户级 ~/.wuxing/config.jsonc 或 env "
+                   "WUXING_MCP_PROJECT_ENABLED 生效；工作区设置被忽略）——开启后才加载 "
+                   "<ws>/.agents/mcp.json（P2 统一便携根）"),
     FieldSpec("extension_enabled", "bool", True,
               desc="E0-A 扩展机制（默认开）：加载 ~/.wuxing/extensions 与 <工作区>/.wuxing/extensions 的"
                    "自定义工具与事件钩子；扩展=进程内完全信任代码，置 false 整体关闭"),

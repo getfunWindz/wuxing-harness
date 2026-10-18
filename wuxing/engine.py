@@ -5,6 +5,15 @@ logger = logging.getLogger(__name__)
 import pathlib
 import tempfile
 
+
+def _builtin_skills_dir() -> pathlib.Path:
+    """P3：内置技能 canonical `wuxing/resources/skills`；旧 `builtin_skills` 兼容。"""
+    root = pathlib.Path(__file__).resolve().parent
+    canonical = root / "resources" / "skills"
+    if canonical.exists():
+        return canonical
+    return root / "builtin_skills"
+
 from wuxing.artifacts import result_artifacts
 from wuxing.config import EngineConfig
 from wuxing.config_schema import FIELD_SPECS
@@ -177,25 +186,43 @@ class Engine(EngineSkillsMixin, EngineMetricsMixin, EngineShapeMixin, EngineSess
         self.router = router
         # 2026-09-18（用户裁决）：真实形状化默认开——无凭据不再构造期 fail-fast，
         # 由 _shape_or_cached 降级 mock + 报告引导提示（不阻断机制运行）。
-        # SK：技能注册表（内置层 + 用户级 ~/.wuxing/skills + 项目级 workdir/.skills）——渐进披露
+        # SK：技能注册表（内置层 + 用户级 ~/.wuxing/skills + 用户便携 ~/.agents/skills
+        # + 项目级 workdir/.skills + 项目便携 workdir/.agents/skills）——渐进披露
         from wuxing.skills import SkillRegistry
         if self.isolated:
-            # G4：技能三层全剥离（用户级/内置/项目级都不扫描）
-            self.skills = SkillRegistry(user_dir=None, project_dir=None,
-                                        builtin_dir=None)
+            # G4：技能多层全剥离（用户级/内置/项目级/便携根都不扫描）
+            self.skills = SkillRegistry(
+                user_dir=None, project_dir=None, builtin_dir=None,
+                user_agents_dir=None, project_agents_dir=None)
         else:
             self.skills = SkillRegistry(
-                project_dir=self.workdir / ".skills",
-                builtin_dir=pathlib.Path(__file__).parent / "builtin_skills")
+                project_dir=self.workdir / ".skills",          # legacy（兼容告警）
+                project_agents_dir=self.workdir / ".agents" / "skills",  # canonical
+                builtin_dir=_builtin_skills_dir())
         # L2-1（审查 A3）：MCP 配置面接线——config.jsonc mcp_servers → 工具装载；
+        # P2：叠加用户/项目便携根 `.agents/mcp.json`（项目级受全局信任开关控制）。
         # 权限未声明 → 工具默认拦截（最小权限——显式解锁）
         from wuxing.tools.mcp_bridge import McpServerConfig
-        mcp_cfgs = [] if self.isolated else [McpServerConfig(
-            name=c["name"], command=c["command"],
+        if self.isolated:
+            mcp_servers, self._mcp_sources = [], []
+        else:
+            from wuxing.mcp_config import resolve_mcp_servers
+            mcp_servers, self._mcp_sources = resolve_mcp_servers(
+                self.workdir,
+                list(getattr(self.cfg, "mcp_servers", None) or []),
+                enable_project=bool(
+                    getattr(self.cfg, "mcp_project_enabled", False)),
+            )
+            if self._mcp_sources:
+                logger.info("MCP 配置来源：%s", "; ".join(self._mcp_sources))
+        mcp_cfgs = [McpServerConfig(
+            name=c["name"], command=c.get("command", ""),
             args=list(c.get("args") or []),
+            url=c.get("url"),
+            headers=dict(c.get("headers") or {}),
             permissions=dict(c.get("permissions") or {}),
             env=dict(c.get("env") or {}))  # E4：环境白名单（值=环境变量名）
-            for c in (getattr(self.cfg, "mcp_servers", None) or [])]
+            for c in mcp_servers]
         # E1（企业级审查）：MCP 常驻连接池——工具调用复用连接（秒级→毫秒级）
         from wuxing.tools.mcp_bridge import _make_pool
         self._mcp_pool = _make_pool() if mcp_cfgs else None
@@ -591,6 +618,10 @@ class Engine(EngineSkillsMixin, EngineMetricsMixin, EngineShapeMixin, EngineSess
         for k in ("default_domains", "minimal_pure_tools"):
             if k in kwargs and isinstance(kwargs[k], list):
                 kwargs[k] = tuple(kwargs[k])
+        if "mcp_project_enabled" in kwargs:
+            # P2-A：项目级 MCP 信任只认用户级全局配置/env；工作区值被覆盖
+            from wuxing.config_loader import global_mcp_project_enabled
+            kwargs["mcp_project_enabled"] = global_mcp_project_enabled()
         return EngineConfig(**kwargs)
 
     def _wrap_events(self, on_event):

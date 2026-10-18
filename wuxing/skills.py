@@ -11,6 +11,7 @@ import re
 logger = logging.getLogger(__name__)
 
 _UNSET = object()  # 哨兵：user_dir 未提供（默认 → ~/.wuxing/skills）；显式 None = 不扫用户层
+_LEGACY_PROJECT_WARNED = False  # P1：项目 .skills legacy 告警（每进程一次）
 
 # E2-1 格式契约（设计 §2）：名称 kebab-case ≤40；描述必填；level 枚举。
 NAME_MAX = 40
@@ -20,20 +21,35 @@ _LEVELS = ("domain", "fragment")
 
 
 class SkillRegistry:
-    """技能注册表：内置层（代码分发）+ 用户级（~/.wuxing/skills）+ 项目级（<workdir>/.skills）。
+    """技能注册表：内置层 + 用户级（~/.wuxing/skills、~/.agents/skills）+ 项目级（<workdir>/.skills、<workdir>/.agents/skills）。
 
     G4（2026-09-26）：`user_dir=_UNSET` 保持现行为；显式 `user_dir=None` → 用户层
-    不扫描（隔离装配——最小运行时零隐式继承）。
+    不扫描（隔离装配——最小运行时零隐式继承）。P0（2026-10-18）：`.agents/skills`
+    便携根只读兼容；显式 `user_dir`（含 None）不默认扫描用户便携根。
     """
 
     def __init__(self, user_dir: pathlib.Path | None = _UNSET,
                  project_dir: pathlib.Path | None = None,
-                 builtin_dir: pathlib.Path | None = None):
+                 builtin_dir: pathlib.Path | None = None,
+                 user_agents_dir: pathlib.Path | None = _UNSET,
+                 project_agents_dir: pathlib.Path | None = None):
         import os
+        home = pathlib.Path(os.path.expanduser("~"))
         if user_dir is _UNSET:
-            user_dir = pathlib.Path(os.path.expanduser("~")) / ".wuxing" / "skills"
+            user_dir = home / ".wuxing" / "skills"
+            if user_agents_dir is _UNSET:
+                user_agents_dir = home / ".agents" / "skills"
+        elif user_agents_dir is _UNSET:
+            # 显式 user_dir（含 None）→ 不默认扫用户便携根（G4 隔离）
+            user_agents_dir = None
         self.user_dir = pathlib.Path(user_dir) if user_dir else None
+        self.user_agents_dir = (
+            pathlib.Path(user_agents_dir) if user_agents_dir else None
+        )
         self.project_dir = pathlib.Path(project_dir) if project_dir else None
+        self.project_agents_dir = (
+            pathlib.Path(project_agents_dir) if project_agents_dir else None
+        )
         self.builtin_dir = pathlib.Path(builtin_dir) if builtin_dir else None
         self._index_cache = None
         self._index_fp = None  # D2：mtime 指纹（索引缓存失效判据）
@@ -44,9 +60,33 @@ class SkillRegistry:
             dirs.append(self.builtin_dir)
         if self.user_dir is not None:
             dirs.append(self.user_dir)
+        if self.user_agents_dir is not None:
+            dirs.append(self.user_agents_dir)
         if self.project_dir is not None:
             dirs.append(self.project_dir)
+        if self.project_agents_dir is not None:
+            dirs.append(self.project_agents_dir)
         return dirs
+
+    def _warn_legacy_project_root(self) -> None:
+        """P1：项目 `.skills` 为 legacy 兼容根；每进程只告警一次。"""
+        global _LEGACY_PROJECT_WARNED
+        if _LEGACY_PROJECT_WARNED:
+            return
+        root = self.project_dir
+        if root is None or root.name != ".skills" or not root.exists():
+            return
+        try:
+            has_skill = any(root.glob("*/SKILL.md"))
+        except OSError:
+            # 技能根不可读 → 视为无 legacy 技能（不阻塞索引）
+            return
+        if not has_skill:
+            return
+        _LEGACY_PROJECT_WARNED = True
+        logger.warning(
+            "项目技能根 .skills 为 legacy（兼容）；建议迁移到 .agents/skills（P1）"
+        )
 
     def index(self) -> dict:
         """扫描全部技能 → {name: {name, description, level, path, scripts}}。
@@ -55,6 +95,7 @@ class SkillRegistry:
         D2（2026-09-07）：mtime 失效缓存——重复 index()（每 run_unit 一次）不
         重新读盘；技能目录变更（SKILL.md mtime 指纹）→ 重建。
         """
+        self._warn_legacy_project_root()
         fingerprint = self._mtime_fingerprint()
         if self._index_cache is not None and self._index_fp == fingerprint:
             return self._index_cache
@@ -69,7 +110,7 @@ class SkillRegistry:
                 if info is None:
                     continue
                 if info["name"] in idx:
-                    logger.warning("覆盖同名技能 %s（项目层优先）", info["name"])
+                    logger.warning("覆盖同名技能 %s（后扫描层优先）", info["name"])
                 idx[info["name"]] = info
         self._index_cache = idx
         self._index_fp = fingerprint

@@ -68,7 +68,7 @@ def test_apply_and_restore(tmp_path, monkeypatch):
     _mk(tmp_path / "s", "old", created=now - 100 * DAY)
     out = apply_transitions(tmp_path / "s", now=now)
     assert out["archived"] == ["old"]
-    assert (tmp_path / "s" / "_archived" / "old").is_dir()
+    assert (tmp_path / "state" / "s" / "archive" / "old").is_dir()
     assert skill_status(tmp_path / "s", "old", now=now) == "archived"
     assert restore_skill(tmp_path / "s", "old")["restored"] is True
     assert skill_status(tmp_path / "s", "old", now=now) == "stale"

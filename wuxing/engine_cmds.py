@@ -65,4 +65,7 @@ class EngineCmdsMixin:
                 "stats": dict(stats.get(c.name)
                               or {"connections": 0, "calls": 0}),
             })
-        return {"enabled": bool(cfgs), "servers": servers}
+        return {"enabled": bool(cfgs), "servers": servers,
+                "sources": list(getattr(self, "_mcp_sources", []) or []),
+                "project_mcp_enabled": bool(
+                    getattr(self.cfg, "mcp_project_enabled", False))}

@@ -18,6 +18,7 @@ CHECKS = [
                   "wuxing", "golden_ratio", "scripts", "e2e",
                   "--ignore", "BLE001,S110,B017"]),
     ("协议对拍", [sys.executable, "-m", "scripts.gen_protocol_ts", "--check"]),
+    ("工作流校验", [sys.executable, "-m", "scripts.workflow_check"]),
 ]
 
 

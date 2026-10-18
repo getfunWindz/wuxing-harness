@@ -185,6 +185,10 @@ class EngineConfig:
     # L2-1（审查 A3）：MCP 服务器配置（配置面接线——此前 McpServerConfig 死路径）
     # 每项：{name, command, args?, permissions?}——permissions 未声明 → 工具默认拦截
     mcp_servers: list = field(default_factory=list)
+    # P2（2026-10-18 · 用户裁决 A）：项目级 MCP 信任开关——仅用户级
+    # ~/.wuxing/config.jsonc 或 env WUXING_MCP_PROJECT_ENABLED 生效；工作区 config
+    # 该值会被全局值覆盖（项目不能自我授权）。开启后才加载 <ws>/.agents/mcp.json。
+    mcp_project_enabled: bool = False
     # E0-A 扩展机制（设计 2026-09-26 · D2 默认开启可显式关闭）：
     # 目录约定 ~/.wuxing/extensions（用户级）+ <workdir>/.wuxing/extensions（项目级）；
     # extension_dirs 为附加目录（相对路径按工作区解析）。目录不存在 = 零行为；

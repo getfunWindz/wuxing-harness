@@ -10,6 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "jieba",
+    "pyyaml",
     "requests",
 ]
 
@@ -28,5 +29,5 @@ include = ["wuxing*", "golden_ratio*"]
 exclude = ["wuxing.tests*", "golden_ratio.tests*"]
 
 [tool.setuptools.package-data]
-wuxing = ["shell/web/static/**/*", "builtin_skills/**/*"]
+wuxing = ["shell/web/static/**/*", "resources/skills/**/*", "builtin_skills/**/*"]
 golden_ratio = ["data/*.json"]

@@ -1,9 +1,10 @@
 """技能生命周期 curator（E2-1 · item 11；Hermes 对齐：确定性转换）。
 
 设计权威：`docs/WUXING_技能专项设计_2026-10-03.md` §4。
-- 状态派生（不落盘）：archived（`_archived/`）→ pinned（侧车）→ stale（空闲
-  ≥14 天）→ active；最近活动 = max(最近 loaded, 创建时间)；
-- 转换确定性无 LLM：stale 仅标记（报告）；archive 移动进 `_archived/`
+- 状态派生（不落盘）：archived（`../state/<name>/archive/`，旧 `_archived/`
+  兼容读）→ pinned（侧车）→ stale（空闲 ≥14 天）→ active；最近活动 =
+  max(最近 loaded, 创建时间)；
+- 转换确定性无 LLM：stale 仅标记（报告）；archive 移动进 state archive
   （**绝不删除**；`restore_skill` 可恢复；目标已存在则拒绝）；
 - 零使用宽限：loads==0 时归档阈值 = ARCHIVE_DAYS + ZERO_USE_GRACE_DAYS
   （"零使用是证据缺失，不是可弃证明"）；
@@ -20,7 +21,6 @@ from wuxing.skills import _parse_frontmatter
 STALE_DAYS = 14
 ARCHIVE_DAYS = 30
 ZERO_USE_GRACE_DAYS = 14
-_ARCHIVE_DIR = "_archived"
 
 
 def _activity(row: dict) -> float | None:
@@ -41,7 +41,7 @@ def skill_status(skills_dir, name, *, now=None, pinned=None,
     """派生状态：archived / pinned / stale / active（不落盘）。"""
     name = str(name)
     root = pathlib.Path(skills_dir)
-    if (root / _ARCHIVE_DIR / name).is_dir():
+    if skill_ledger.archived_path(root, name) is not None:
         return "archived"
     if _is_pinned_now(name, pinned):
         return "pinned"
@@ -103,14 +103,14 @@ def apply_transitions(skills_dir, *, now=None, pinned=None,
 
 
 def restore_skill(skills_dir, name) -> dict:
-    """从 `_archived/` 恢复（可恢复语义——归档非删除；目标已存在拒绝）。
+    """从 state archive 恢复（旧 `_archived/` 兼容；目标已存在拒绝）。
 
     韧性：同 archive（Windows 目录 rename 瞬时占用 → 有界重试）。
     """
     root = pathlib.Path(skills_dir)
-    src = root / _ARCHIVE_DIR / str(name)
+    src = skill_ledger.archived_path(root, name)
     dest = root / str(name)
-    if not src.is_dir():
+    if src is None:
         return {"restored": False, "reason": "not-found"}
     if dest.exists():
         return {"restored": False, "reason": "exists"}

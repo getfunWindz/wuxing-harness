@@ -6,9 +6,12 @@
 - ConfigError：校验失败早报（带字段定位）
 """
 import json
+import logging
 import pathlib
 
 from wuxing.config_schema import validate_config
+
+logger = logging.getLogger(__name__)
 
 
 class ConfigError(ValueError):
@@ -112,3 +115,31 @@ def load_config(workdir: pathlib.Path, global_config_dir: pathlib.Path | None = 
     if errors:
         raise ConfigError("配置校验失败: " + "; ".join(errors))
     return merged
+
+
+def load_global_config(global_config_dir: pathlib.Path | None = None) -> dict:
+    """只读取全局层（~/.wuxing/config.jsonc）——用于不可被项目层覆盖的信任开关。"""
+    gd = global_config_dir or _global_config_dir()
+    gp = gd / "config.jsonc"
+    if not gp.exists():
+        return {}
+    try:
+        data = parse_jsonc(gp.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        # 全局信任文件不可读/非法 → fail-closed（不加载项目 MCP）
+        logger.warning("全局配置读取失败（MCP 项目信任 fail-closed）：%s", exc)
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def global_mcp_project_enabled(global_config_dir: pathlib.Path | None = None) -> bool:
+    """P2-A：项目级 MCP 信任开关——仅用户级全局配置或 env 生效。
+
+    工作区 config.jsonc 中的同名字段不被本函数读取；Engine 装载后还会用本值
+    覆盖合并配置里的 mcp_project_enabled，防止项目自我授权。
+    """
+    import os
+    env = os.environ.get("WUXING_MCP_PROJECT_ENABLED", "").strip().lower()
+    if env in ("1", "true", "yes", "on"):
+        return True
+    return bool(load_global_config(global_config_dir).get("mcp_project_enabled", False))
