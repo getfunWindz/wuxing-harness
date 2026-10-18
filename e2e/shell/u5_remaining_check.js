@@ -360,7 +360,12 @@ function check(name, pass, detail) {
     check("单条驳回（已决理由 + 任务失败）", rejected);
   }
   // 确认失败可见（引擎异常 → 错误卡）
-  await sleep(500);
+  // CI 慢环境：前一轮确认流可能仍在收尾——等输入区可用再提交
+  await waitFor(async () => await page.evaluate(() => {
+    const t = document.querySelector(".cbox textarea");
+    return !!t && !t.disabled;
+  }), 12000);
+  await sleep(300);
   await page.click(composerSel);
   await page.type(composerSel, "U5 确认失败巡检（确认失败）");
   await page.keyboard.press("Enter");

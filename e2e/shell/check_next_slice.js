@@ -210,8 +210,13 @@ function check(name, pass, detail) {
     document.querySelector(".stream-meta")?.textContent ?? "");
   const rows = await page.evaluate(() =>
     [...document.querySelectorAll(".unit-card")].map((el) => el.textContent));
-  const report = await page.evaluate(() =>
-    document.querySelector(".stream-report")?.textContent ?? "");
+  let report = "";
+  // CI 慢环境：报告可能在 meta 完成后异步渲染——轮询到出现（不改变断言口径）
+  for (let i = 0; i < 20 && !report.includes("mock 报告"); i += 1) {
+    report = await page.evaluate(() =>
+      document.querySelector(".stream-report")?.textContent ?? "");
+    if (!report.includes("mock 报告")) await sleep(200);
+  }
 
   check("出现 F-1 单元卡", rows.some((row) => row.includes("F-1")), rows.join(" | "));
   const cardStyle = await page.evaluate(() => {

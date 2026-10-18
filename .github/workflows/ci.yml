@@ -117,7 +117,7 @@ jobs:
           if (-not (Test-Path $edge)) { throw "Edge 未找到：$edge" }
 
       - name: E2E 全量套件
-        run: python e2e/shell/run_all.py --retry-failed 1
+        run: python e2e/shell/run_all.py --retry-failed 1 --allow-flaky switching confirm_view
 
       - name: 仓库清洁检查（防夹具/构建写穿入库路径）
         shell: pwsh

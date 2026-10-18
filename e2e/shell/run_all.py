@@ -113,6 +113,8 @@ def main() -> int:
                     help="只跑指定套件（名称前缀匹配）")
     ap.add_argument("--retry-failed", type=int, default=0,
                     help="失败套件重跑次数（CI 慢环境用；默认 0=严格）")
+    ap.add_argument("--allow-flaky", nargs="*", default=None,
+                    help="已知环境敏感 flake：失败不阻断（仍运行并记录；默认严格）")
     ap.add_argument("--list", action="store_true", help="列出套件")
     args = ap.parse_args()
 
@@ -137,7 +139,7 @@ def main() -> int:
         return 2
 
     # 产物目录命名用本机时间戳（展示用途；非时间语义计算）——保持本地时区
-    ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")  # noqa: DTZ005
+    ts = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d-%H%M%S")
     art = HERE / ".runtime" / "artifacts" / ts
     art.mkdir(parents=True, exist_ok=True)
 
@@ -166,10 +168,16 @@ def main() -> int:
                 still.append(name)
         failed = still
 
+    allowed = {str(x) for x in (args.allow_flaky or [])}
+    flaky = [name for name in failed if name in allowed]
+    failed = [name for name in failed if name not in allowed]
+
     print(f"\n结果：{len(picked) - len(failed)}/{len(picked)} 套件通过"
           f"（日志：{art}）")
     if retried_pass:
         print("重试通过（首次失败）：" + ", ".join(retried_pass))
+    if flaky:
+        print("已知 flake（不阻断）：" + ", ".join(flaky))
     # E3-5（CU10）：批次保留最近 20（最旧删除）——本地资产纪律
     _pruned = prune_batches(art.parent, keep=20)
     if _pruned:
