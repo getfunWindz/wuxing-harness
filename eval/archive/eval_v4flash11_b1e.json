@@ -1,0 +1,96 @@
+{
+  "version": "v1",
+  "llm": "deepseek:deepseek-v4-flash",
+  "real_shape": true,
+  "items": {
+    "n_tasks": 2,
+    "status_dist": {
+      "done": 1,
+      "failed": 1
+    },
+    "cache_scope": "task-internal",
+    "metrics": {
+      "done_rate": 0.5,
+      "avg_steps_per_unit": 1.75,
+      "tool_correctness": {
+        "ok": 14,
+        "error": 0,
+        "blocked": 0
+      },
+      "tools_total": 14,
+      "tool_error_rate": 0.0,
+      "retry_calls": 5,
+      "delegate_blocked": 0,
+      "verdict_fails": 1,
+      "cache_prefix_breaks": 0
+    },
+    "cache": {
+      "avg_cache_read_ratio": 0.6544,
+      "avg_reply_hit_rate": 0.0,
+      "avg_shape_hit_rate": 0.0
+    },
+    "workdir": "C:\\Users\\GETFUN~1\\AppData\\Local\\Temp\\wuxing-eval-xa4ymcwu",
+    "tasks": [
+      {
+        "id": "dom-L8",
+        "suite": "domain_tasks",
+        "status": "done",
+        "metrics": {
+          "task_status": "done",
+          "unit_ok_rate": 0.8571,
+          "llm_calls": 7,
+          "steps_per_unit": 1.0,
+          "tool_correctness": {
+            "ok": 9,
+            "error": 0,
+            "blocked": 0
+          },
+          "tools_total": 9,
+          "tool_error_rate": 0.0,
+          "retry_calls": 5,
+          "delegate_blocked": 0,
+          "verdict_fails": 0,
+          "cache_prefix_breaks": 0,
+          "cache": {
+            "cache_read_ratio": 0.656,
+            "input_tokens": 20099,
+            "cache_read_tokens": 13184,
+            "cache_saved_cost": 0.0119,
+            "reply_hit_rate": 0.0,
+            "shape_hit_rate": 0.0
+          }
+        }
+      },
+      {
+        "id": "dom-L7",
+        "suite": "domain_tasks",
+        "status": "failed",
+        "metrics": {
+          "task_status": "failed",
+          "unit_ok_rate": 1.0,
+          "llm_calls": 5,
+          "steps_per_unit": 2.5,
+          "tool_correctness": {
+            "ok": 5,
+            "error": 0,
+            "blocked": 0
+          },
+          "tools_total": 5,
+          "tool_error_rate": 0.0,
+          "retry_calls": 0,
+          "delegate_blocked": 0,
+          "verdict_fails": 1,
+          "cache_prefix_breaks": 0,
+          "cache": {
+            "cache_read_ratio": 0.6529,
+            "input_tokens": 13724,
+            "cache_read_tokens": 8960,
+            "cache_saved_cost": 0.0081,
+            "reply_hit_rate": 0.0,
+            "shape_hit_rate": 0.0
+          }
+        }
+      }
+    ]
+  }
+}

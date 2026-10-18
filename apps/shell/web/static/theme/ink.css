@@ -1,0 +1,31 @@
+/* 水墨主题 · 令牌层（壳 C4 → UI 重构）
+   设计 §8：本阶段（交互层）不铺装饰——只保留令牌与字体栈；
+   美学第二层在此覆盖/扩展令牌即可，不动结构与组件。
+   中性交互层样式见 theme/layout.css 与 theme/components.css。 */
+
+:root {
+  /* 色：宣纸与墨（第二层使用） */
+  --paper: #f4f1ea;
+  --paper-deep: #ece7dc;
+  --ink: #23211e;
+  --ink-soft: #5a544c;
+  --ink-faint: #736c62;   /* 4.6:1 on paper（原 #8b847a 3.28）——审查 V1 */
+  --cinnabar: #a53f33;      /* 朱砂（警示/驳回） */
+  --jade: #1f4f45;          /* 黛青（成功/活跃）——交互层 accent 取其色 */
+  --line: rgba(35, 33, 30, 0.14);
+  --line-strong: rgba(35, 33, 30, 0.28);
+  --shadow: 0 10px 30px rgba(35, 33, 30, 0.08);
+  /* 质感与动效（第二层） */
+  --wash-opacity: 0.05;
+  --ribbon-duration: 46s;
+  /* 动效令牌（Wave-2 T6）：统一曲线 cubic-bezier(0.4,0,0.2,1)——时长近似保持；
+     结构级=侧栏/抽屉/折叠容器；内容级=淡入/透明度/边框；微交互=chevron/按钮。
+     prefers-reduced-motion 降级见 layout.css（全局块）。 */
+  --motion-structural: 160ms cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-content: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-micro: 120ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* 字体栈 */
+  --font-serif: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "STSong", serif;
+  --font-sans: system-ui, "Segoe UI", "Microsoft YaHei", sans-serif;
+  --font-mono: "Cascadia Code", Consolas, "Courier New", monospace;
+}

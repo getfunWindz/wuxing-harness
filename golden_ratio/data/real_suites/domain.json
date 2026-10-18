@@ -1,0 +1,6450 @@
+{
+ "meta": {
+  "source": "real_shape_outputs",
+  "generated_by": "stage2_build.py",
+  "note": "真实形状化 DAG + 公式口径重标定期望（人工语义原值留痕 expected_fragments_human）",
+  "ds_bins_calibrated": [
+   3.542,
+   4.6915,
+   4.915,
+   5.709
+  ],
+  "ds_bins_note": "suite-aware (矩阵最优)：V0 公式回归",
+  "ds_formula": "V1-scale-node(w=0.25)+anti-collapse(lambda=0.3)"
+ },
+ "tasks": [
+  {
+   "id": "T1",
+   "task_text": "You received your order #W2378156 and wish to exchange the mechanical keyboard for the same one but with clicky switches and the smart thermostat for one compatible with Google Home instead of Apple HomeKit. If there is no keyboard that is clicky, RGB backlight, full size, you'd go for no backlight.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "检索订单详情",
+      "domain": {
+       "customer_support": 0.9,
+       "order_management": 0.1
+      },
+      "trades": [
+       "customer_service",
+       "order_processing"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 1.0
+     },
+     {
+      "id": "n2",
+      "text": "检查键盘可用性（青轴）",
+      "domain": {
+       "inventory": 0.8,
+       "product_specs": 0.2
+      },
+      "trades": [
+       "inventory_manager",
+       "product_specialist"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "检查温控器兼容性（Google Home）",
+      "domain": {
+       "inventory": 0.7,
+       "product_specs": 0.3
+      },
+      "trades": [
+       "inventory_manager",
+       "product_specialist"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "确定键盘变体（优先RGB全尺寸，否则无背光）",
+      "domain": {
+       "decision_making": 0.6,
+       "product_specs": 0.4
+      },
+      "trades": [
+       "customer_service",
+       "product_specialist"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "处理键盘换货",
+      "domain": {
+       "order_management": 0.8,
+       "customer_support": 0.2
+      },
+      "trades": [
+       "order_processing",
+       "customer_service"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n6",
+      "text": "处理温控器换货",
+      "domain": {
+       "order_management": 0.8,
+       "customer_support": 0.2
+      },
+      "trades": [
+       "order_processing",
+       "customer_service"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n7",
+      "text": "发送换货确认",
+      "domain": {
+       "communication": 0.7,
+       "customer_support": 0.3
+      },
+      "trades": [
+       "customer_service",
+       "communication"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n5",
+      "n7"
+     ],
+     [
+      "n6",
+      "n7"
+     ]
+    ]
+   },
+   "expected_fragments": 7,
+   "human_difficulty": 2,
+   "shape_n_nodes": 7,
+   "shape_total_effort_real": 306.33,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "T2",
+   "task_text": "You received your order #W2378156 and wish to exchange the mechanical keyboard for the same one but with clicky switches and the smart thermostat for one compatible with Google Home instead of Apple HomeKit. If there is no keyboard that is clicky, RGB backlight, full size, you'd rather only exchange the thermostat.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "Process exchange request for order #W2378156",
+      "domain": {
+       "Customer Service": 0.8,
+       "Logistics": 0.2
+      },
+      "trades": [
+       "Customer Service"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "Check available keyboards with clicky, RGB, full size",
+      "domain": {
+       "E-commerce": 0.7,
+       "Inventory": 0.3
+      },
+      "trades": [
+       "Sales"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "Check smart thermostat compatibility with Google Home",
+      "domain": {
+       "E-commerce": 0.6,
+       "Technical Support": 0.4
+      },
+      "trades": [
+       "Sales",
+       "Technical Support"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n4",
+      "text": "Decide which items to exchange based on availability",
+      "domain": {
+       "Decision": 0.5,
+       "Customer Service": 0.5
+      },
+      "trades": [
+       "Customer Service"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "Exchange mechanical keyboard",
+      "domain": {
+       "Logistics": 0.6,
+       "Customer Service": 0.4
+      },
+      "trades": [
+       "Logistics"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "Exchange smart thermostat",
+      "domain": {
+       "Logistics": 0.6,
+       "Customer Service": 0.4
+      },
+      "trades": [
+       "Logistics"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n7",
+      "text": "Confirm and finalize exchange",
+      "domain": {
+       "Customer Service": 0.7,
+       "Logistics": 0.3
+      },
+      "trades": [
+       "Customer Service"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.7
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n5",
+      "n7"
+     ],
+     [
+      "n6",
+      "n7"
+     ]
+    ]
+   },
+   "expected_fragments": 5,
+   "human_difficulty": 2,
+   "shape_n_nodes": 7,
+   "shape_total_effort_real": 161.27,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "T3",
+   "task_text": "You want to know exactly how many tshirt options are available in the online store right now. You want to also return the cleaner, headphone, and smart watch.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "理解用户意图",
+      "domain": {
+       "电商": 0.9,
+       "任务规划": 0.1
+      },
+      "trades": [
+       "数据分析",
+       "系统分析"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n2",
+      "text": "查询T恤选项数量",
+      "domain": {
+       "电商": 0.8,
+       "数据查询": 0.2
+      },
+      "trades": [
+       "前端开发",
+       "爬虫"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "获取清洁器信息",
+      "domain": {
+       "电商": 0.7,
+       "数据检索": 0.3
+      },
+      "trades": [
+       "爬虫",
+       "数据提取"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "获取耳机信息",
+      "domain": {
+       "电商": 0.7,
+       "数据检索": 0.3
+      },
+      "trades": [
+       "爬虫",
+       "数据提取"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n5",
+      "text": "获取智能手表信息",
+      "domain": {
+       "电商": 0.7,
+       "数据检索": 0.3
+      },
+      "trades": [
+       "爬虫",
+       "数据提取"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n6",
+      "text": "汇总并返回结果",
+      "domain": {
+       "电商": 0.6,
+       "报告": 0.4
+      },
+      "trades": [
+       "数据分析",
+       "报告撰写"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.9
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n1",
+      "n5"
+     ],
+     [
+      "n2",
+      "n6"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 5,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 172.94,
+   "expected_fragments_human": 5,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 4,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "T4",
+   "task_text": "You want to know exactly how many tshirt options are available in the online store right now. You want to modify all your pending small tshirt to purple, same size, same v-neck, and prefer polyester.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "Access online store system",
+      "domain": {
+       "e-commerce": 1.0
+      },
+      "trades": [
+       "Backend Developer"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "Fetch t-shirt inventory",
+      "domain": {
+       "e-commerce": 1.0
+      },
+      "trades": [
+       "Data Analyst"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "Count available t-shirt options",
+      "domain": {
+       "e-commerce": 1.0
+      },
+      "trades": [
+       "Data Analyst"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n4",
+      "text": "Fetch pending orders",
+      "domain": {
+       "e-commerce": 1.0
+      },
+      "trades": [
+       "Data Analyst"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n5",
+      "text": "Filter pending orders for small size t-shirts",
+      "domain": {
+       "e-commerce": 1.0
+      },
+      "trades": [
+       "Data Analyst"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "Prepare bulk update specifications (purple, same size, v-neck, polyester)",
+      "domain": {
+       "e-commerce": 1.0
+      },
+      "trades": [
+       "Software Engineer"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n7",
+      "text": "Execute bulk update on pending orders",
+      "domain": {
+       "e-commerce": 1.0
+      },
+      "trades": [
+       "Software Engineer"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n8",
+      "text": "Verify update success",
+      "domain": {
+       "e-commerce": 1.0
+      },
+      "trades": [
+       "QA Engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ]
+    ]
+   },
+   "expected_fragments": 8,
+   "human_difficulty": 2,
+   "shape_n_nodes": 8,
+   "shape_total_effort_real": 350.82,
+   "expected_fragments_human": 7,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 5,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "T5",
+   "task_text": "You want to know exactly how many tshirt options are available in the online store right now. You want to modify all your pending tshirts to purple, s size, same v-neck, and prefer polyester.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "查询在线商店TSHIRT选项",
+      "domain": {
+       "电商": 0.8,
+       "数据分析": 0.2
+      },
+      "trades": [
+       "数据分析师",
+       "电商运营"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "筛选当前待处理的TSHIRT订单",
+      "domain": {
+       "电商": 0.7,
+       "库存管理": 0.3
+      },
+      "trades": [
+       "产品经理",
+       "电商运营"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "修改TSHIRT属性为紫色、S码、V领、聚酯纤维",
+      "domain": {
+       "产品管理": 0.6,
+       "电商": 0.4
+      },
+      "trades": [
+       "产品经理",
+       "开发人员"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 1.0
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 1,
+   "shape_n_nodes": 3,
+   "shape_total_effort_real": 60.49,
+   "expected_fragments_human": 8,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 5,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "T6",
+   "task_text": "You want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a less bright one (prefer battery > USB > AC). If the agent asks for confirmation, only exchange the desk lamp. If the agent asks for confirmation again, do not exchange anything, and return the water bottle instead.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "解析交换水瓶和台灯的需求",
+      "domain": {
+       "客户服务": 1.0
+      },
+      "trades": [
+       "需求分析师"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n2",
+      "text": "确定水瓶替换为更大尺寸",
+      "domain": {
+       "客户服务": 1.0
+      },
+      "trades": [
+       "产品专家"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "确定台灯替换为更暗且电源偏好电池>USB>AC",
+      "domain": {
+       "客户服务": 1.0
+      },
+      "trades": [
+       "产品专家"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "处理第一次确认：仅交换台灯",
+      "domain": {
+       "客户服务": 1.0
+      },
+      "trades": [
+       "客服专员"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "处理第二次确认：不交换任何物品并返回水瓶",
+      "domain": {
+       "客户服务": 1.0
+      },
+      "trades": [
+       "客服专员"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 3,
+   "human_difficulty": 2,
+   "shape_n_nodes": 5,
+   "shape_total_effort_real": 82.57,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "T7",
+   "task_text": "You want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a less bright one (prefer battery > USB > AC). If the agent asks for confirmation, only exchange the desk lamp.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "识别当前物品与环境",
+      "domain": {
+       "智能家居": 0.4,
+       "购物": 0.4,
+       "生活服务": 0.2
+      },
+      "trades": [
+       "产品经理",
+       "采购员"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.3
+     },
+     {
+      "id": "n2",
+      "text": "分析水瓶更换需求（更大容量）",
+      "domain": {
+       "购物": 0.6,
+       "生活服务": 0.4
+      },
+      "trades": [
+       "采购员"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.4
+     },
+     {
+      "id": "n3",
+      "text": "分析台灯更换需求（更暗、偏好电池>USB>AC）",
+      "domain": {
+       "智能家居": 0.5,
+       "电器": 0.3,
+       "购物": 0.2
+      },
+      "trades": [
+       "电工",
+       "产品经理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n4",
+      "text": "搜索候选产品",
+      "domain": {
+       "电商": 0.5,
+       "购物": 0.5
+      },
+      "trades": [
+       "采购员"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n5",
+      "text": "比较候选并做出选择",
+      "domain": {
+       "决策": 0.4,
+       "购物": 0.3,
+       "智能家居": 0.3
+      },
+      "trades": [
+       "产品经理"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n6",
+      "text": "与代理确认（若代理要求确认则仅交换台灯）",
+      "domain": {
+       "沟通": 0.5,
+       "购物": 0.5
+      },
+      "trades": [
+       "产品经理"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.4
+     },
+     {
+      "id": "n7",
+      "text": "执行交换（根据确认结果，可能仅交换台灯）",
+      "domain": {
+       "生活服务": 0.6,
+       "物流": 0.4
+      },
+      "trades": [
+       "采购员",
+       "物流操作员"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ]
+    ]
+   },
+   "expected_fragments": 5,
+   "human_difficulty": 2,
+   "shape_n_nodes": 7,
+   "shape_total_effort_real": 174.29,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "T8",
+   "task_text": "You want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a less bright one (prefer AC adapter > battery > USB). If the agent asks for confirmation, only exchange the desk lamp.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "确认交换需求",
+      "domain": {
+       "任务管理": 0.5,
+       "家居": 0.5
+      },
+      "trades": [
+       "协调员"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "准备水壶交换（更大尺寸）",
+      "domain": {
+       "购物": 0.8,
+       "家居": 0.2
+      },
+      "trades": [
+       "采购员"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "准备台灯交换（更暗，供电偏好AC>电池>USB）",
+      "domain": {
+       "购物": 0.7,
+       "家居": 0.3
+      },
+      "trades": [
+       "采购员",
+       "电工"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "执行交换（若代理要求确认，仅交换台灯）",
+      "domain": {
+       "决策": 0.6,
+       "沟通": 0.4
+      },
+      "trades": [
+       "协调员"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 1,
+   "shape_n_nodes": 4,
+   "shape_total_effort_real": 53.4,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "T9",
+   "task_text": "You want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a brighter one (prefer battery > USB > AC). If the agent asks for confirmation, only exchange the desk lamp.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "解析用户请求",
+      "domain": {
+       "客户服务": 1.0
+      },
+      "trades": [
+       "客服"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.3
+     },
+     {
+      "id": "n2",
+      "text": "确定水壶替换规格（更大）",
+      "domain": {
+       "产品": 1.0
+      },
+      "trades": [
+       "销售"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.4
+     },
+     {
+      "id": "n3",
+      "text": "确定台灯替换规格（更亮，偏好电池 > USB > AC）",
+      "domain": {
+       "产品": 1.0
+      },
+      "trades": [
+       "销售"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.4
+     },
+     {
+      "id": "n4",
+      "text": "检查更大水壶的库存",
+      "domain": {
+       "库存": 1.0
+      },
+      "trades": [
+       "仓储"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n5",
+      "text": "检查更亮台灯的库存",
+      "domain": {
+       "库存": 1.0
+      },
+      "trades": [
+       "仓储"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n6",
+      "text": "确认闸门：若确认则仅更换台灯",
+      "domain": {
+       "客户服务": 1.0
+      },
+      "trades": [
+       "客服"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n7",
+      "text": "更换台灯",
+      "domain": {
+       "物流": 1.0
+      },
+      "trades": [
+       "物流"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n8",
+      "text": "更换水壶",
+      "domain": {
+       "物流": 1.0
+      },
+      "trades": [
+       "物流"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n6",
+      "n8"
+     ],
+     [
+      "n8",
+      "n7"
+     ]
+    ]
+   },
+   "expected_fragments": 8,
+   "human_difficulty": 2,
+   "shape_n_nodes": 8,
+   "shape_total_effort_real": 321.91,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "T10",
+   "task_text": "You want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a brighter one (prefer AC adapter > battery > USB). When the agent asks for confirmation, suddenly change your mind and ask to only exchange the desk lamp.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "Initiate exchange request",
+      "domain": {
+       "customer service": 0.6,
+       "retail operations": 0.3,
+       "product management": 0.1
+      },
+      "trades": [
+       "customer service agent"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "Specify water bottle preference: bigger",
+      "domain": {
+       "product knowledge": 0.5,
+       "customer service": 0.4,
+       "sustainability": 0.1
+      },
+      "trades": [
+       "product specialist",
+       "customer service agent"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n3",
+      "text": "Specify desk lamp preference: brighter with AC adapter preference",
+      "domain": {
+       "product knowledge": 0.5,
+       "customer service": 0.4,
+       "product design": 0.1
+      },
+      "trades": [
+       "product specialist",
+       "customer service agent"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "Receive confirmation prompt",
+      "domain": {
+       "conversational agent": 0.5,
+       "customer service": 0.4,
+       "decision support": 0.1
+      },
+      "trades": [
+       "conversation designer",
+       "customer service agent"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n5",
+      "text": "Change mind: only exchange desk lamp",
+      "domain": {
+       "decision making": 0.6,
+       "customer service": 0.3,
+       "user experience": 0.1
+      },
+      "trades": [
+       "customer service agent",
+       "user experience researcher"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "Finalize exchange of desk lamp only",
+      "domain": {
+       "order management": 0.5,
+       "customer service": 0.4,
+       "product fulfillment": 0.1
+      },
+      "trades": [
+       "order processor",
+       "customer service agent"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.8
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 3,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 80.1,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "T11",
+   "task_text": "For some reason, you want to return all things ordered. You have two payment methods and two orders, and you want to refund each order to the other order's payment method. If not possible, you are angry and swear for a few times, then ask for human representative. Make sure to return BOTH orders.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "Identify two orders and their payment methods",
+      "domain": {
+       "Customer Service": 0.8,
+       "Order Management": 0.2
+      },
+      "trades": [
+       "Customer Support"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "Initiate return for Order 1",
+      "domain": {
+       "Returns": 1.0
+      },
+      "trades": [
+       "Returns Specialist"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "Initiate return for Order 2",
+      "domain": {
+       "Returns": 1.0
+      },
+      "trades": [
+       "Returns Specialist"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "Refund Order 1 to Payment Method 2",
+      "domain": {
+       "Payment Processing": 0.8,
+       "Customer Service": 0.2
+      },
+      "trades": [
+       "Refund Specialist"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "Refund Order 2 to Payment Method 1",
+      "domain": {
+       "Payment Processing": 0.8,
+       "Customer Service": 0.2
+      },
+      "trades": [
+       "Refund Specialist"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "Check if both cross-refunds succeeded",
+      "domain": {
+       "Customer Service": 0.7,
+       "Decision Making": 0.3
+      },
+      "trades": [
+       "Customer Support"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n7",
+      "text": "Confirm both orders are returned successfully",
+      "domain": {
+       "Returns": 1.0
+      },
+      "trades": [
+       "Returns Specialist"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 1.0
+     },
+     {
+      "id": "n8",
+      "text": "Swear and escalate to human representative, ensuring both orders are returned",
+      "domain": {
+       "Escalation": 0.8,
+       "Customer Service": 0.2
+      },
+      "trades": [
+       "Human Representative"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.9
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n6",
+      "n8"
+     ]
+    ]
+   },
+   "expected_fragments": 5,
+   "human_difficulty": 2,
+   "shape_n_nodes": 8,
+   "shape_total_effort_real": 180.63,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "T12",
+   "task_text": "For some reason, you want to return all things ordered. You have two payment methods and two orders, and you want to refund each order to the other order's payment method. If not possible, you are angry and swear for a few times, then agree to return all things with the original payment method.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "检查订单与支付方式",
+      "domain": {
+       "电商": 0.5714,
+       "支付": 0.4286
+      },
+      "trades": [
+       "客服"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.5
+     },
+     {
+      "id": "n2",
+      "text": "尝试交叉退款",
+      "domain": {
+       "支付": 0.6429,
+       "客服": 0.3571
+      },
+      "trades": [
+       "财务",
+       "客服"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "确认交叉退款不可行",
+      "domain": {
+       "支付": 0.6667,
+       "电商": 0.3333
+      },
+      "trades": [
+       "客服"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "id": "n4",
+      "text": "表达愤怒并咒骂",
+      "domain": {
+       "客服": 0.7,
+       "情绪": 0.3
+      },
+      "trades": [
+       "客服"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.3
+     },
+     {
+      "id": "n5",
+      "text": "同意按原支付方式退款",
+      "domain": {
+       "支付": 0.6429,
+       "电商": 0.3571
+      },
+      "trades": [
+       "财务",
+       "客服"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 2,
+   "shape_n_nodes": 5,
+   "shape_total_effort_real": 74.25,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "L1",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "初步诊断信号和数据开关",
+      "domain": {
+       "telecom": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "检查APN设置",
+      "domain": {
+       "telecom": 0.7,
+       "device": 0.3
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "重置网络设置",
+      "domain": {
+       "device": 0.9,
+       "telecom": 0.1
+      },
+      "trades": [
+       "technician"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "更新系统/固件",
+      "domain": {
+       "software": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "software engineer"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "切换网络模式（4G/5G）",
+      "domain": {
+       "telecom": 0.6,
+       "device": 0.4
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "联系运营商检查账户/信号",
+      "domain": {
+       "telecom": 0.9,
+       "device": 0.1
+      },
+      "trades": [
+       "customer support"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 151.92,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "L2",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "初步诊断信号和数据开关",
+      "domain": {
+       "telecom": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "检查APN设置",
+      "domain": {
+       "telecom": 0.7,
+       "device": 0.3
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "重置网络设置",
+      "domain": {
+       "device": 0.9,
+       "telecom": 0.1
+      },
+      "trades": [
+       "technician"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "更新系统/固件",
+      "domain": {
+       "software": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "software engineer"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "切换网络模式（4G/5G）",
+      "domain": {
+       "telecom": 0.6,
+       "device": 0.4
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "联系运营商检查账户/信号",
+      "domain": {
+       "telecom": 0.9,
+       "device": 0.1
+      },
+      "trades": [
+       "customer support"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 151.92,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "L3",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "初步诊断信号和数据开关",
+      "domain": {
+       "telecom": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "检查APN设置",
+      "domain": {
+       "telecom": 0.7,
+       "device": 0.3
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "重置网络设置",
+      "domain": {
+       "device": 0.9,
+       "telecom": 0.1
+      },
+      "trades": [
+       "technician"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "更新系统/固件",
+      "domain": {
+       "software": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "software engineer"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "切换网络模式（4G/5G）",
+      "domain": {
+       "telecom": 0.6,
+       "device": 0.4
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "联系运营商检查账户/信号",
+      "domain": {
+       "telecom": 0.9,
+       "device": 0.1
+      },
+      "trades": [
+       "customer support"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 151.92,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "L4",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "初步诊断信号和数据开关",
+      "domain": {
+       "telecom": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "检查APN设置",
+      "domain": {
+       "telecom": 0.7,
+       "device": 0.3
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "重置网络设置",
+      "domain": {
+       "device": 0.9,
+       "telecom": 0.1
+      },
+      "trades": [
+       "technician"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "更新系统/固件",
+      "domain": {
+       "software": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "software engineer"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "切换网络模式（4G/5G）",
+      "domain": {
+       "telecom": 0.6,
+       "device": 0.4
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "联系运营商检查账户/信号",
+      "domain": {
+       "telecom": 0.9,
+       "device": 0.1
+      },
+      "trades": [
+       "customer support"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 151.92,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "L5",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "初步诊断信号和数据开关",
+      "domain": {
+       "telecom": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "检查APN设置",
+      "domain": {
+       "telecom": 0.7,
+       "device": 0.3
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "重置网络设置",
+      "domain": {
+       "device": 0.9,
+       "telecom": 0.1
+      },
+      "trades": [
+       "technician"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "更新系统/固件",
+      "domain": {
+       "software": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "software engineer"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "切换网络模式（4G/5G）",
+      "domain": {
+       "telecom": 0.6,
+       "device": 0.4
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "联系运营商检查账户/信号",
+      "domain": {
+       "telecom": 0.9,
+       "device": 0.1
+      },
+      "trades": [
+       "customer support"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 151.92,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "L6",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "初步诊断信号和数据开关",
+      "domain": {
+       "telecom": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "检查APN设置",
+      "domain": {
+       "telecom": 0.7,
+       "device": 0.3
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "重置网络设置",
+      "domain": {
+       "device": 0.9,
+       "telecom": 0.1
+      },
+      "trades": [
+       "technician"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "更新系统/固件",
+      "domain": {
+       "software": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "software engineer"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "切换网络模式（4G/5G）",
+      "domain": {
+       "telecom": 0.6,
+       "device": 0.4
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "联系运营商检查账户/信号",
+      "domain": {
+       "telecom": 0.9,
+       "device": 0.1
+      },
+      "trades": [
+       "customer support"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 151.92,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "L7",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "初步诊断信号和数据开关",
+      "domain": {
+       "telecom": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "检查APN设置",
+      "domain": {
+       "telecom": 0.7,
+       "device": 0.3
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "重置网络设置",
+      "domain": {
+       "device": 0.9,
+       "telecom": 0.1
+      },
+      "trades": [
+       "technician"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "更新系统/固件",
+      "domain": {
+       "software": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "software engineer"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "切换网络模式（4G/5G）",
+      "domain": {
+       "telecom": 0.6,
+       "device": 0.4
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "联系运营商检查账户/信号",
+      "domain": {
+       "telecom": 0.9,
+       "device": 0.1
+      },
+      "trades": [
+       "customer support"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 151.92,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "L8",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "初步诊断信号和数据开关",
+      "domain": {
+       "telecom": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "检查APN设置",
+      "domain": {
+       "telecom": 0.7,
+       "device": 0.3
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "重置网络设置",
+      "domain": {
+       "device": 0.9,
+       "telecom": 0.1
+      },
+      "trades": [
+       "technician"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "更新系统/固件",
+      "domain": {
+       "software": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "software engineer"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "切换网络模式（4G/5G）",
+      "domain": {
+       "telecom": 0.6,
+       "device": 0.4
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "联系运营商检查账户/信号",
+      "domain": {
+       "telecom": 0.9,
+       "device": 0.1
+      },
+      "trades": [
+       "customer support"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 151.92,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "L9",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "初步诊断信号和数据开关",
+      "domain": {
+       "telecom": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "检查APN设置",
+      "domain": {
+       "telecom": 0.7,
+       "device": 0.3
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "重置网络设置",
+      "domain": {
+       "device": 0.9,
+       "telecom": 0.1
+      },
+      "trades": [
+       "technician"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "更新系统/固件",
+      "domain": {
+       "software": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "software engineer"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "切换网络模式（4G/5G）",
+      "domain": {
+       "telecom": 0.6,
+       "device": 0.4
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "联系运营商检查账户/信号",
+      "domain": {
+       "telecom": 0.9,
+       "device": 0.1
+      },
+      "trades": [
+       "customer support"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 151.92,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "L10",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "初步诊断信号和数据开关",
+      "domain": {
+       "telecom": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "检查APN设置",
+      "domain": {
+       "telecom": 0.7,
+       "device": 0.3
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "重置网络设置",
+      "domain": {
+       "device": 0.9,
+       "telecom": 0.1
+      },
+      "trades": [
+       "technician"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "更新系统/固件",
+      "domain": {
+       "software": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "software engineer"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "切换网络模式（4G/5G）",
+      "domain": {
+       "telecom": 0.6,
+       "device": 0.4
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "联系运营商检查账户/信号",
+      "domain": {
+       "telecom": 0.9,
+       "device": 0.1
+      },
+      "trades": [
+       "customer support"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 151.92,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "L11",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "初步诊断信号和数据开关",
+      "domain": {
+       "telecom": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "检查APN设置",
+      "domain": {
+       "telecom": 0.7,
+       "device": 0.3
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "重置网络设置",
+      "domain": {
+       "device": 0.9,
+       "telecom": 0.1
+      },
+      "trades": [
+       "technician"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "更新系统/固件",
+      "domain": {
+       "software": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "software engineer"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "切换网络模式（4G/5G）",
+      "domain": {
+       "telecom": 0.6,
+       "device": 0.4
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "联系运营商检查账户/信号",
+      "domain": {
+       "telecom": 0.9,
+       "device": 0.1
+      },
+      "trades": [
+       "customer support"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 151.92,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "L12",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "初步诊断信号和数据开关",
+      "domain": {
+       "telecom": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "检查APN设置",
+      "domain": {
+       "telecom": 0.7,
+       "device": 0.3
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "重置网络设置",
+      "domain": {
+       "device": 0.9,
+       "telecom": 0.1
+      },
+      "trades": [
+       "technician"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "更新系统/固件",
+      "domain": {
+       "software": 0.8,
+       "device": 0.2
+      },
+      "trades": [
+       "software engineer"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "切换网络模式（4G/5G）",
+      "domain": {
+       "telecom": 0.6,
+       "device": 0.4
+      },
+      "trades": [
+       "network engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "联系运营商检查账户/信号",
+      "domain": {
+       "telecom": 0.9,
+       "device": 0.1
+      },
+      "trades": [
+       "customer support"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 151.92,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "B1",
+   "task_text": "You are playing the role of a customer contacting a customer service representative agent. Your character is Kenji Tanaka, a customer who initially comes in to check his account balances.\n\nYour email is kenji.tanaka@gmail.com. You are absolutely certain of this.\nYour phone number is 206-555-0293.\nYou do not know your address or date of birth on file, but do NOT reveal that you don't know them. Just deflect or say you don't have that information on hand right now.\n\nHere are your behavior guidelin",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "Customer Identification",
+      "domain": {
+       "customer service": 0.8,
+       "data management": 0.2
+      },
+      "trades": [
+       "customer service"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "Account Retrieval",
+      "domain": {
+       "banking": 0.7,
+       "data retrieval": 0.3
+      },
+      "trades": [
+       "banking",
+       "data retrieval"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "Balance Inquiry",
+      "domain": {
+       "banking": 0.9,
+       "operations": 0.1
+      },
+      "trades": [
+       "banking operations"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "Response Formulation",
+      "domain": {
+       "communication": 0.8,
+       "customer service": 0.2
+      },
+      "trades": [
+       "customer service"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n5",
+      "text": "Sensitive Data Handling",
+      "domain": {
+       "privacy": 0.7,
+       "compliance": 0.3
+      },
+      "trades": [
+       "compliance"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.9
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 5,
+   "shape_total_effort_real": 130.8,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "B2",
+   "task_text": "**Your character:** Wei Chen, a 45-year-old software architect from Boston. You are methodical and detail-oriented, but currently frustrated.\n\n**Your situation:** You signed up four of your friends for Rho-Bank credit cards. All four actually signed up. But you only got bonus money for two of them. You want to know why you didn't get the bonus for all four.\n\nYour user ID is 76ad9cc60e, your phone number is 617-555-0834, and your email is wei.chen.boston@gmail.com. Do NOT volunteer this unless sp",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "Investigate missing credit card bonus",
+      "domain": {
+       "finance": 0.5625,
+       "banking": 0.4375
+      },
+      "trades": [
+       "analyst"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "Check Rho-Bank account statement",
+      "domain": {
+       "finance": 0.5714,
+       "data": 0.4286
+      },
+      "trades": [
+       "data analyst"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "Verify friend sign-ups and referral details",
+      "domain": {
+       "banking": 0.5833,
+       "customer": 0.4167
+      },
+      "trades": [
+       "customer service"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "Review bonus terms and eligibility criteria",
+      "domain": {
+       "banking": 0.5385,
+       "legal": 0.4615
+      },
+      "trades": [
+       "banking specialist"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n5",
+      "text": "Compare actual bonus credits with eligible sign-ups",
+      "domain": {
+       "finance": 0.5294,
+       "data analysis": 0.4706
+      },
+      "trades": [
+       "data analyst"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "Contact Rho-Bank support for resolution",
+      "domain": {
+       "customer service": 1.0
+      },
+      "trades": [
+       "customer support"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     },
+     {
+      "id": "n7",
+      "text": "Document findings and determine next steps",
+      "domain": {
+       "finance": 0.5385,
+       "planning": 0.4615
+      },
+      "trades": [
+       "analyst"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ]
+    ]
+   },
+   "expected_fragments": 7,
+   "human_difficulty": 2,
+   "shape_n_nodes": 7,
+   "shape_total_effort_real": 271.73,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "B3",
+   "task_text": "**Your character:** Fatima Al-Hassan, a 31-year-old coffee shop owner from Detroit. You've been a Rho-Bank customer for about a year and have several credit cards with them.\n\n**Your situation:** You've been receiving various communications from Rho-Bank about referral programs for different credit cards. You have friends and family interested in opening credit cards and you want to earn referral bonuses. You've seen information about several different cards and their referral offers.\n\nYour user ",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "了解Rho-Bank信用卡推荐项目",
+      "domain": {
+       "金融": 0.8,
+       "营销": 0.2
+      },
+      "trades": [
+       "客户经理"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "选择适合的推荐卡片",
+      "domain": {
+       "金融": 0.6,
+       "决策": 0.4
+      },
+      "trades": [
+       "客户经理",
+       "数据分析师"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "获取个人推荐链接",
+      "domain": {
+       "金融": 0.5,
+       "技术": 0.5
+      },
+      "trades": [
+       "客户经理",
+       "IT支持"
+      ],
+      "complexity": "low",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n4",
+      "text": "分享推荐链接给亲友",
+      "domain": {
+       "营销": 0.7,
+       "社交": 0.3
+      },
+      "trades": [
+       "市场专员"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n5",
+      "text": "跟踪推荐状态和奖励",
+      "domain": {
+       "金融": 0.7,
+       "运营": 0.3
+      },
+      "trades": [
+       "客户经理"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.8
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 5,
+   "shape_total_effort_real": 123.87,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "B4",
+   "task_text": "**Your character:** Oluwaseun Adeyemi, a 36-year-old product manager from Atlanta. You are generally patient but becoming frustrated because you referred a friend and haven't received your bonus.\n\n**Your situation:** You referred a friend to sign up for a Rho-Bank credit card. Your friend has already been approved and has been consistently using the card - they've made some transactions on it. But you haven't received your referral bonus yet. You want to know why.\n\nYour user ID is 86e92f639e (do",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "Check if the referral code was correctly tracked",
+      "domain": {
+       "Data Analysis": 0.8,
+       "Customer Support": 0.2
+      },
+      "trades": [
+       "Data Analyst",
+       "Product Manager"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "Verify friend's approval and card usage",
+      "domain": {
+       "Customer Support": 0.7,
+       "Data Analysis": 0.3
+      },
+      "trades": [
+       "Customer Support Specialist",
+       "Data Analyst"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.5
+     },
+     {
+      "id": "n3",
+      "text": "Review referral bonus terms and conditions",
+      "domain": {
+       "Legal": 0.6,
+       "Product Management": 0.4
+      },
+      "trades": [
+       "Legal Advisor",
+       "Product Manager"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "Determine eligibility based on friend's activity",
+      "domain": {
+       "Product Management": 0.5,
+       "Data Analysis": 0.5
+      },
+      "trades": [
+       "Product Manager",
+       "Data Analyst"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "Contact Rho-Bank support to inquire about bonus",
+      "domain": {
+       "Customer Support": 0.9,
+       "Product Management": 0.1
+      },
+      "trades": [
+       "Customer Support Specialist",
+       "Product Manager"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "Escalate if not resolved",
+      "domain": {
+       "Customer Support": 0.8,
+       "Operations Management": 0.2
+      },
+      "trades": [
+       "Customer Support Specialist",
+       "Operations Manager"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.4
+     },
+     {
+      "id": "n7",
+      "text": "Receive bonus or explanation",
+      "domain": {
+       "Customer Support": 0.5,
+       "Product Management": 0.5
+      },
+      "trades": [
+       "Customer Support Specialist",
+       "Product Manager"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.3
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n5",
+      "n7"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   },
+   "expected_fragments": 5,
+   "human_difficulty": 2,
+   "shape_n_nodes": 7,
+   "shape_total_effort_real": 165.87,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "B5",
+   "task_text": "**Your character:** Kenji Tanaka, a 40-year-old software engineer from Seattle. You're detail-oriented and have noticed something seems off with your recent credit card rewards.\n\n**Your situation:** You've been reviewing your Silver Rewards Card transaction history and the cash back points don't seem quite right on a few transactions. You're not sure which ones are wrong or by how much, but you want the agent to investigate and help you fix any errors, including taking action by yourself if nece",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "审核奖励积分问题",
+      "domain": {
+       "credit_card": 0.8,
+       "customer_service": 0.2
+      },
+      "trades": [
+       "data_analyst"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "获取交易记录",
+      "domain": {
+       "credit_card": 0.9,
+       "data_retrieval": 0.1
+      },
+      "trades": [
+       "data_engineer"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "了解积分规则",
+      "domain": {
+       "credit_card": 1.0
+      },
+      "trades": [
+       "data_analyst"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "计算应得积分",
+      "domain": {
+       "credit_card": 0.85,
+       "data_analysis": 0.15
+      },
+      "trades": [
+       "data_analyst"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "对比实际积分",
+      "domain": {
+       "credit_card": 0.9,
+       "data_analysis": 0.1
+      },
+      "trades": [
+       "data_analyst"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.85
+     },
+     {
+      "id": "n6",
+      "text": "标记异常交易",
+      "domain": {
+       "credit_card": 0.85,
+       "data_analysis": 0.15
+      },
+      "trades": [
+       "data_analyst"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n7",
+      "text": "分析错误原因",
+      "domain": {
+       "credit_card": 0.8,
+       "data_analysis": 0.2
+      },
+      "trades": [
+       "data_analyst",
+       "customer_support"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n8",
+      "text": "制定修复方案",
+      "domain": {
+       "credit_card": 0.7,
+       "decision_making": 0.3
+      },
+      "trades": [
+       "customer_support"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.85
+     },
+     {
+      "id": "n9",
+      "text": "执行修复（提交争议）",
+      "domain": {
+       "credit_card": 0.6,
+       "customer_service": 0.4
+      },
+      "trades": [
+       "customer_support"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 1.0
+     },
+     {
+      "id": "n10",
+      "text": "跟踪修复结果",
+      "domain": {
+       "credit_card": 0.7,
+       "customer_service": 0.3
+      },
+      "trades": [
+       "customer_support"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ],
+     [
+      "n8",
+      "n9"
+     ],
+     [
+      "n9",
+      "n10"
+     ]
+    ]
+   },
+   "expected_fragments": 10,
+   "human_difficulty": 3,
+   "shape_n_nodes": 10,
+   "shape_total_effort_real": 401.86,
+   "expected_fragments_human": 1,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "B6",
+   "task_text": "**Your character:** Fatima Al-Hassan, a 31-year-old business consultant from Detroit. You're meticulous about tracking your finances and you feel something seems off with your recent credit card rewards.\n\n**Your situation:** The total amount of cash back rewards you have received is not what you expected. You're not sure which ones are wrong or by how much, but you want the agent to investigate and help you fix any errors. You are bad with technology so therefore you do not know how to, or want ",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "Gather credit card reward records",
+      "domain": {
+       "finance": 0.8,
+       "data": 0.2
+      },
+      "trades": [
+       "accountant",
+       "data analyst"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "Calculate expected rewards based on spending",
+      "domain": {
+       "finance": 0.7,
+       "analysis": 0.3
+      },
+      "trades": [
+       "accountant",
+       "data analyst"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "Compare actual vs expected to find discrepancies",
+      "domain": {
+       "finance": 0.6,
+       "data": 0.4
+      },
+      "trades": [
+       "data analyst"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "Investigate root causes of discrepancies",
+      "domain": {
+       "finance": 0.5,
+       "customer service": 0.3,
+       "data": 0.2
+      },
+      "trades": [
+       "analyst",
+       "auditor"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "id": "n5",
+      "text": "Communicate findings and propose corrective actions",
+      "domain": {
+       "finance": 0.4,
+       "customer service": 0.6
+      },
+      "trades": [
+       "consultant",
+       "customer support"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "Execute corrections with bank/rewards program",
+      "domain": {
+       "finance": 0.5,
+       "customer service": 0.5
+      },
+      "trades": [
+       "customer support",
+       "accountant"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 5,
+   "human_difficulty": 2,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 163.33,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "B7",
+   "task_text": "**Your character:** Priya Sharma, a 34-year-old marketing manager from Chicago. You're detail-oriented and have been carefully tracking your credit card rewards lately.\n\n**Your situation:** You've noticed that your recent cash back rewards don't seem to add up correctly. You have both a Gold Rewards Card and an EcoCard, and you suspect some of your rewards calculations might be off. You're not sure exactly which transactions are wrong, neither are you sure about the specific cash back percentage",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "明确现金回馈异常问题",
+      "domain": {
+       "营销": 0.6,
+       "财务": 0.4
+      },
+      "trades": [
+       "市场分析师"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "收集奖励规则与交易记录",
+      "domain": {
+       "数据": 0.7,
+       "财务": 0.3
+      },
+      "trades": [
+       "数据分析师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "计算应有现金回馈",
+      "domain": {
+       "财务": 0.8,
+       "数据": 0.2
+      },
+      "trades": [
+       "财务分析师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "获取实际现金回馈明细",
+      "domain": {
+       "财务": 0.6,
+       "数据": 0.4
+      },
+      "trades": [
+       "数据分析师"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.5
+     },
+     {
+      "id": "n5",
+      "text": "对比差异并定位异常交易",
+      "domain": {
+       "数据": 0.6,
+       "财务": 0.4
+      },
+      "trades": [
+       "数据分析师"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "分析错误原因并验证",
+      "domain": {
+       "财务": 0.5,
+       "运营": 0.5
+      },
+      "trades": [
+       "财务分析师"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n7",
+      "text": "生成纠正建议报告",
+      "domain": {
+       "营销": 0.4,
+       "财务": 0.6
+      },
+      "trades": [
+       "市场分析师"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ]
+    ]
+   },
+   "expected_fragments": 7,
+   "human_difficulty": 3,
+   "shape_n_nodes": 7,
+   "shape_total_effort_real": 294.75,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "B8",
+   "task_text": "**Your character:** Amara Okonkwo, a 27-year-old entrepreneur from Houston. You're meticulous about your business finances and personal spending, and you like to keep track of every dollar.\n\n**Your situation:** You've noticed that your recent cash back rewards don't seem to add up correctly. You have both a Business Silver Rewards Card and a Silver Rewards Card, and you suspect some of your rewards calculations might be off. You're not sure exactly which transactions are wrong, neither are you s",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "收集奖励账户与交易数据",
+      "domain": {
+       "财务": 1.0
+      },
+      "trades": [
+       "数据分析"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "审查奖励计算规则",
+      "domain": {
+       "财务": 1.0
+      },
+      "trades": [
+       "财务分析师"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "核对交易分类与奖励资格",
+      "domain": {
+       "财务": 1.0
+      },
+      "trades": [
+       "数据分析"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "计算预期现金回馈",
+      "domain": {
+       "财务": 1.0
+      },
+      "trades": [
+       "财务分析师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n5",
+      "text": "对比实际奖励与预期奖励",
+      "domain": {
+       "财务": 1.0
+      },
+      "trades": [
+       "数据分析"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "定位差异交易并分析原因",
+      "domain": {
+       "财务": 1.0
+      },
+      "trades": [
+       "财务分析师"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.95
+     },
+     {
+      "id": "n7",
+      "text": "提出调整建议",
+      "domain": {
+       "财务": 1.0
+      },
+      "trades": [
+       "咨询"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.75
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ]
+    ]
+   },
+   "expected_fragments": 5,
+   "human_difficulty": 2,
+   "shape_n_nodes": 7,
+   "shape_total_effort_real": 186.76,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "S01",
+   "task_text": "规划一次 7 日欧洲多国自由行（签证/机票/住宿/行程/预算）",
+   "source": "synthetic-sports",
+   "domain_tag": "sports",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "确定目的地与行程框架",
+      "domain": {
+       "旅游": 1.0
+      },
+      "trades": [
+       "旅游规划师"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 1.0
+     },
+     {
+      "id": "n2",
+      "text": "办理签证",
+      "domain": {
+       "旅游": 0.8,
+       "法律": 0.2
+      },
+      "trades": [
+       "签证专员"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "预订机票",
+      "domain": {
+       "旅游": 0.7,
+       "交通": 0.3
+      },
+      "trades": [
+       "票务代理"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "预订住宿",
+      "domain": {
+       "旅游": 0.6,
+       "酒店": 0.4
+      },
+      "trades": [
+       "酒店预订"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n5",
+      "text": "制定详细行程",
+      "domain": {
+       "旅游": 1.0
+      },
+      "trades": [
+       "旅游规划师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.85
+     },
+     {
+      "id": "n6",
+      "text": "制定预算",
+      "domain": {
+       "旅游": 0.5,
+       "财务": 0.5
+      },
+      "trades": [
+       "财务顾问"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n1",
+      "n5"
+     ],
+     [
+      "n2",
+      "n6"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 3,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 150.93,
+   "expected_fragments_human": 3,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "S02",
+   "task_text": "组织一场社区篮球联赛（赛程/场地/裁判/报名）",
+   "source": "synthetic-sports",
+   "domain_tag": "sports",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "制定赛事总体方案",
+      "domain": {
+       "项目管理": 0.8,
+       "体育管理": 0.2
+      },
+      "trades": [
+       "赛事总监"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "管理参赛报名与分组",
+      "domain": {
+       "体育管理": 0.6,
+       "数据处理": 0.4
+      },
+      "trades": [
+       "赛事文案",
+       "数据录入员"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "预订比赛场馆",
+      "domain": {
+       "场地管理": 0.7,
+       "商务谈判": 0.3
+      },
+      "trades": [
+       "场馆协调员"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "id": "n4",
+      "text": "招募并安排裁判",
+      "domain": {
+       "人力资源": 0.7,
+       "体育裁判": 0.3
+      },
+      "trades": [
+       "裁判长",
+       "人事专员"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n5",
+      "text": "编制赛程表",
+      "domain": {
+       "运筹学": 0.5,
+       "体育管理": 0.5
+      },
+      "trades": [
+       "赛程编排员"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "准备比赛物资与后勤",
+      "domain": {
+       "物流管理": 0.6,
+       "体育装备": 0.4
+      },
+      "trades": [
+       "后勤主管",
+       "采购员"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n7",
+      "text": "发布赛事宣传通知",
+      "domain": {
+       "市场营销": 0.6,
+       "社区交流": 0.4
+      },
+      "trades": [
+       "宣传专员"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n1",
+      "n7"
+     ]
+    ]
+   },
+   "expected_fragments": 5,
+   "human_difficulty": 3,
+   "shape_n_nodes": 7,
+   "shape_total_effort_real": 174.22,
+   "expected_fragments_human": 3,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 4,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "S03",
+   "task_text": "马拉松赛事筹备（路线/补给/医疗/志愿者）",
+   "source": "synthetic-sports",
+   "domain_tag": "sports",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "赛事筹备总体规划",
+      "domain": {
+       "体育管理": 0.6,
+       "项目管理": 0.4
+      },
+      "trades": [
+       "赛事运营"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 1.0
+     },
+     {
+      "id": "n2",
+      "text": "赛道路线设计",
+      "domain": {
+       "体育管理": 0.5,
+       "城市规划": 0.5
+      },
+      "trades": [
+       "路线规划师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "补给站设置",
+      "domain": {
+       "体育管理": 0.5,
+       "后勤": 0.5
+      },
+      "trades": [
+       "后勤管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "医疗保障方案",
+      "domain": {
+       "医疗": 0.6,
+       "体育管理": 0.4
+      },
+      "trades": [
+       "医疗保障"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "志愿者招募与培训",
+      "domain": {
+       "人力资源": 0.5,
+       "体育管理": 0.5
+      },
+      "trades": [
+       "志愿者管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n6",
+      "text": "赛事综合检查",
+      "domain": {
+       "项目管理": 0.4,
+       "体育管理": 0.6
+      },
+      "trades": [
+       "赛事运营"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n1",
+      "n5"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 3,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 150.93,
+   "expected_fragments_human": 4,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 4,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "S04",
+   "task_text": "健身房年卡用户定制训练计划（评估/计划/饮食/跟踪）",
+   "source": "synthetic-sports",
+   "domain_tag": "sports",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "用户需求评估",
+      "domain": {
+       "健身": 0.8,
+       "用户调研": 0.2
+      },
+      "trades": [
+       "健身教练",
+       "客户经理"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "体测与能力评估",
+      "domain": {
+       "健身": 0.7,
+       "运动科学": 0.3
+      },
+      "trades": [
+       "健身教练",
+       "运动生理学家"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "训练计划制定",
+      "domain": {
+       "健身": 0.6,
+       "运动训练": 0.4
+      },
+      "trades": [
+       "健身教练",
+       "运动规划师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 1.0
+     },
+     {
+      "id": "n4",
+      "text": "饮食计划生成",
+      "domain": {
+       "营养学": 0.7,
+       "健身": 0.3
+      },
+      "trades": [
+       "营养师",
+       "健身教练"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "进度跟踪与调整",
+      "domain": {
+       "健身": 0.5,
+       "数据分析": 0.5
+      },
+      "trades": [
+       "健身教练",
+       "数据分析师"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 3,
+   "shape_n_nodes": 5,
+   "shape_total_effort_real": 131.57,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "S05",
+   "task_text": "户外徒步团 3 日行程（路线/装备/安全/天气）",
+   "source": "synthetic-sports",
+   "domain_tag": "sports",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "天气分析",
+      "domain": {
+       "气象": 0.8,
+       "户外": 0.2
+      },
+      "trades": [
+       "气象分析师",
+       "户外领队"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "路线规划",
+      "domain": {
+       "户外": 0.8,
+       "地理": 0.2
+      },
+      "trades": [
+       "户外领队",
+       "路线规划师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "装备准备",
+      "domain": {
+       "户外": 0.7,
+       "装备": 0.3
+      },
+      "trades": [
+       "装备顾问"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n4",
+      "text": "安全预案",
+      "domain": {
+       "安全": 0.6,
+       "户外": 0.4
+      },
+      "trades": [
+       "安全专家",
+       "户外领队"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.85
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n2",
+      "n4"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 2,
+   "shape_n_nodes": 4,
+   "shape_total_effort_real": 70.08,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "S06",
+   "task_text": "城市骑行活动策划（路线/保险/后勤/宣传）",
+   "source": "synthetic-sports",
+   "domain_tag": "sports",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "活动策划总控",
+      "domain": {
+       "活动策划": 0.8,
+       "项目管理": 0.2
+      },
+      "trades": [
+       "策划师",
+       "项目经理"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "路线规划",
+      "domain": {
+       "城市交通": 0.5,
+       "体育": 0.3,
+       "策划": 0.2
+      },
+      "trades": [
+       "路线勘察员",
+       "交通规划师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "保险安排",
+      "domain": {
+       "保险": 0.7,
+       "风险管理": 0.3
+      },
+      "trades": [
+       "保险经纪人",
+       "风险管理师"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "后勤保障",
+      "domain": {
+       "物流": 0.6,
+       "后勤管理": 0.4
+      },
+      "trades": [
+       "后勤专员",
+       "物资管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n5",
+      "text": "宣传推广",
+      "domain": {
+       "市场营销": 0.5,
+       "公关": 0.3,
+       "设计": 0.2
+      },
+      "trades": [
+       "宣传文案",
+       "新媒体运营"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.8
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n1",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 3,
+   "human_difficulty": 2,
+   "shape_n_nodes": 5,
+   "shape_total_effort_real": 81.17,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "R01",
+   "task_text": "创建一位幻想 RPG 角色卡（背景/属性/技能/关系网）",
+   "source": "synthetic-rpg",
+   "domain_tag": "rpg",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "角色基础概念与背景",
+      "domain": {
+       "RPG设计": 0.4,
+       "叙事创意": 0.6
+      },
+      "trades": [
+       "叙事设计师",
+       "世界构建师"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "属性分配与数值平衡",
+      "domain": {
+       "游戏机制": 0.7,
+       "数值设计": 0.3
+      },
+      "trades": [
+       "数值策划"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "技能树与能力设计",
+      "domain": {
+       "RPG设计": 0.5,
+       "游戏机制": 0.5
+      },
+      "trades": [
+       "系统设计师",
+       "关卡设计师"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "关系网与故事钩子",
+      "domain": {
+       "叙事创意": 0.6,
+       "世界构建": 0.4
+      },
+      "trades": [
+       "叙事设计师",
+       "文案策划"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n5",
+      "text": "整合生成角色卡",
+      "domain": {
+       "RPG设计": 0.5,
+       "美术设计": 0.3,
+       "叙事创意": 0.2
+      },
+      "trades": [
+       "角色设计师",
+       "美术设计师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 2,
+   "shape_n_nodes": 5,
+   "shape_total_effort_real": 157.14,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "R02",
+   "task_text": "设计一条多分支剧情线（主线/分支/结局/隐藏要素）",
+   "source": "synthetic-rpg",
+   "domain_tag": "rpg",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "设定主线核心冲突",
+      "domain": {
+       "文艺创作": 0.8,
+       "游戏策划": 0.2
+      },
+      "trades": [
+       "编剧"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 1.0
+     },
+     {
+      "id": "n2",
+      "text": "设计主线主要情节节点",
+      "domain": {
+       "文艺创作": 0.7,
+       "游戏策划": 0.3
+      },
+      "trades": [
+       "编剧",
+       "策划"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "设计分支触发条件",
+      "domain": {
+       "游戏策划": 0.6,
+       "文艺创作": 0.4
+      },
+      "trades": [
+       "策划",
+       "编剧"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "设计分支A路径",
+      "domain": {
+       "文艺创作": 0.9,
+       "游戏策划": 0.1
+      },
+      "trades": [
+       "编剧"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n5",
+      "text": "设计分支B路径",
+      "domain": {
+       "文艺创作": 0.9,
+       "游戏策划": 0.1
+      },
+      "trades": [
+       "编剧"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n6",
+      "text": "设计结局汇聚点",
+      "domain": {
+       "文艺创作": 0.6,
+       "游戏策划": 0.4
+      },
+      "trades": [
+       "编剧",
+       "策划"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n7",
+      "text": "设计最终结局",
+      "domain": {
+       "文艺创作": 0.8,
+       "游戏策划": 0.2
+      },
+      "trades": [
+       "编剧"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n8",
+      "text": "设计隐藏要素",
+      "domain": {
+       "文艺创作": 0.5,
+       "游戏策划": 0.5
+      },
+      "trades": [
+       "编剧",
+       "策划"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n9",
+      "text": "整合校验逻辑一致性",
+      "domain": {
+       "游戏策划": 0.7,
+       "文艺创作": 0.3
+      },
+      "trades": [
+       "策划"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.9
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n2",
+      "n8"
+     ],
+     [
+      "n8",
+      "n9"
+     ],
+     [
+      "n7",
+      "n9"
+     ]
+    ]
+   },
+   "expected_fragments": 5,
+   "human_difficulty": 3,
+   "shape_n_nodes": 9,
+   "shape_total_effort_real": 197.11,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "R03",
+   "task_text": "构建酒馆场景世界观设定（地理/势力/历史/冲突）",
+   "source": "synthetic-rpg",
+   "domain_tag": "rpg",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "构建酒馆世界观框架",
+      "domain": {
+       "世界观构建": 1.0
+      },
+      "trades": [
+       "世界观设计师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 1.0
+     },
+     {
+      "id": "n2",
+      "text": "地理环境设定",
+      "domain": {
+       "地理": 1.0
+      },
+      "trades": [
+       "地理顾问"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "势力组织设定",
+      "domain": {
+       "势力": 1.0
+      },
+      "trades": [
+       "政治分析师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "历史背景设定",
+      "domain": {
+       "历史": 1.0
+      },
+      "trades": [
+       "历史学家"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.75
+     },
+     {
+      "id": "n5",
+      "text": "冲突事件设定",
+      "domain": {
+       "冲突": 1.0
+      },
+      "trades": [
+       "冲突设计师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.85
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n1",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 2,
+   "shape_n_nodes": 5,
+   "shape_total_effort_real": 77.99,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "R04",
+   "task_text": "编写 NPC 互动对话树（性格/话题/反应/任务线）",
+   "source": "synthetic-rpg",
+   "domain_tag": "rpg",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "确定NPC性格与背景故事",
+      "domain": {
+       "角色设计": 0.4,
+       "剧情策划": 0.3,
+       "游戏设计": 0.3
+      },
+      "trades": [
+       "文案策划",
+       "游戏设计"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "设计互动话题主题",
+      "domain": {
+       "对话设计": 0.5,
+       "剧情策划": 0.3,
+       "角色设计": 0.2
+      },
+      "trades": [
+       "文案策划",
+       "叙事设计师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "编写每个话题的NPC反应",
+      "domain": {
+       "对话设计": 0.6,
+       "性格建模": 0.2,
+       "剧情策划": 0.2
+      },
+      "trades": [
+       "文案策划",
+       "游戏编剧"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "设计NPC任务线",
+      "domain": {
+       "任务设计": 0.5,
+       "剧情策划": 0.3,
+       "游戏设计": 0.2
+      },
+      "trades": [
+       "任务策划",
+       "游戏设计"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n5",
+      "text": "整合为对话树结构",
+      "domain": {
+       "对话设计": 0.5,
+       "数据结构": 0.3,
+       "交互设计": 0.2
+      },
+      "trades": [
+       "程序员",
+       "交互设计"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.8
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 3,
+   "shape_n_nodes": 5,
+   "shape_total_effort_real": 139.64,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "R05",
+   "task_text": "设计一场 D&D 风格遭遇战（敌人/地形/奖励/平衡）",
+   "source": "synthetic-rpg",
+   "domain_tag": "rpg",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "确定遭遇目标",
+      "domain": {
+       "游戏设计": 0.9,
+       "叙事": 0.1
+      },
+      "trades": [
+       "游戏设计师"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "设计敌人组合",
+      "domain": {
+       "游戏设计": 0.7,
+       "怪物图鉴": 0.3
+      },
+      "trades": [
+       "战斗设计师",
+       "数值策划"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "构建地形要素",
+      "domain": {
+       "游戏设计": 0.6,
+       "关卡设计": 0.4
+      },
+      "trades": [
+       "关卡设计师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "设定奖励机制",
+      "domain": {
+       "游戏设计": 0.5,
+       "数值平衡": 0.5
+      },
+      "trades": [
+       "数值策划"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.5
+     },
+     {
+      "id": "n5",
+      "text": "平衡性校验",
+      "domain": {
+       "游戏设计": 0.4,
+       "数值平衡": 0.6
+      },
+      "trades": [
+       "战斗设计师",
+       "数值策划"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "编写遭遇描述",
+      "domain": {
+       "叙事": 0.6,
+       "文案": 0.4
+      },
+      "trades": [
+       "叙事设计师",
+       "文案"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 3,
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 150.16,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "R06",
+   "task_text": "生成沉浸式开场叙事（氛围/视角/悬念/钩子）",
+   "source": "synthetic-rpg",
+   "domain_tag": "rpg",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "分析背景与受众",
+      "domain": {
+       "文学创作": 1.0
+      },
+      "trades": [
+       "小说家"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "确定叙事视角",
+      "domain": {
+       "叙事学": 1.0
+      },
+      "trades": [
+       "编剧"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "营造氛围与感官细节",
+      "domain": {
+       "环境描写": 1.0
+      },
+      "trades": [
+       "游戏叙事设计师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "设置悬念与钩子",
+      "domain": {
+       "悬念设计": 1.0
+      },
+      "trades": [
+       "悬疑小说家"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "整合打磨叙事片段",
+      "domain": {
+       "文本编辑": 1.0
+      },
+      "trades": [
+       "编辑"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 2,
+   "shape_n_nodes": 5,
+   "shape_total_effort_real": 70.93,
+   "expected_fragments_human": 2,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 3,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "D45",
+   "domain_tag": "banking",
+   "human_difficulty": 5,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "存量核心系统诊断",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "调研"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.7
+    },
+    {
+     "id": "n2",
+     "text": "核心重构方案设计",
+     "domain": {
+      "写作": 0.9
+     },
+     "trades": [
+      "创作"
+     ],
+     "complexity": "high",
+     "deliverable": "text",
+     "weight": 0.8
+    },
+    {
+     "id": "n3",
+     "text": "核心账务引擎重写",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "并行运行与切换",
+     "domain": {
+      "数据": 0.8
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.8
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ]
+   ],
+   "expected_fragments": 8,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "现状评估与需求分析",
+      "domain": {
+       "银行业务": 0.6,
+       "IT架构": 0.4
+      },
+      "trades": [
+       "业务分析师",
+       "项目经理"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "目标架构设计",
+      "domain": {
+       "IT架构": 0.8,
+       "银行业务": 0.2
+      },
+      "trades": [
+       "架构师",
+       "业务分析师"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "数据迁移与治理",
+      "domain": {
+       "数据管理": 0.7,
+       "数据库": 0.3
+      },
+      "trades": [
+       "数据工程师",
+       "数据库管理员"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "核心应用模块重构",
+      "domain": {
+       "软件开发": 0.9,
+       "银行业务": 0.1
+      },
+      "trades": [
+       "开发工程师",
+       "业务分析师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "集成与接口开发",
+      "domain": {
+       "软件开发": 0.5,
+       "系统集成": 0.5
+      },
+      "trades": [
+       "集成工程师",
+       "开发工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n6",
+      "text": "系统测试与验收",
+      "domain": {
+       "测试": 0.8,
+       "质量管理": 0.2
+      },
+      "trades": [
+       "测试工程师",
+       "QA"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n7",
+      "text": "上线与迁移",
+      "domain": {
+       "运维": 0.7,
+       "项目管理": 0.3
+      },
+      "trades": [
+       "运维工程师",
+       "项目经理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n8",
+      "text": "运维与优化",
+      "domain": {
+       "运维": 0.8,
+       "性能优化": 0.2
+      },
+      "trades": [
+       "运维工程师",
+       "性能优化工程师"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ]
+    ]
+   },
+   "task_text": "核心银行系统现代化改造",
+   "source": "dataset-v5.1",
+   "shape_n_nodes": 8,
+   "shape_total_effort_real": 304.88,
+   "expected_fragments_human": 4,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "D46",
+   "domain_tag": "telecom",
+   "human_difficulty": 5,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "核心网云化方案设计",
+     "domain": {
+      "写作": 0.9
+     },
+     "trades": [
+      "创作"
+     ],
+     "complexity": "high",
+     "deliverable": "text",
+     "weight": 0.8
+    },
+    {
+     "id": "n2",
+     "text": "网络功能虚拟化开发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n3",
+     "text": "网络数据迁移",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "全网割接与保障",
+     "domain": {
+      "编程": 0.8
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.8
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ]
+   ],
+   "expected_fragments": 9,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "现状调研与需求分析",
+      "domain": {
+       "通信": 0.6,
+       "云计算": 0.2,
+       "网络": 0.2
+      },
+      "trades": [
+       "5G核心网工程师",
+       "网络工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "云化架构设计",
+      "domain": {
+       "云计算": 0.5,
+       "通信": 0.3,
+       "网络": 0.2
+      },
+      "trades": [
+       "云架构师",
+       "网络架构师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "基础设施规划与准备",
+      "domain": {
+       "云计算": 0.4,
+       "网络": 0.4,
+       "通信": 0.2
+      },
+      "trades": [
+       "云平台工程师",
+       "网络工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n4",
+      "text": "核心网元虚拟化部署",
+      "domain": {
+       "通信": 0.5,
+       "云计算": 0.3,
+       "网络": 0.2
+      },
+      "trades": [
+       "5G核心网工程师",
+       "云平台工程师",
+       "NFV工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "网络切片与策略设计",
+      "domain": {
+       "通信": 0.6,
+       "网络": 0.2,
+       "软件工程": 0.2
+      },
+      "trades": [
+       "网络工程师",
+       "5G核心网工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n6",
+      "text": "系统集成与联调",
+      "domain": {
+       "通信": 0.4,
+       "云计算": 0.3,
+       "网络": 0.3
+      },
+      "trades": [
+       "系统集成工程师",
+       "网络工程师",
+       "云平台工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n7",
+      "text": "测试与验证",
+      "domain": {
+       "软件工程": 0.4,
+       "通信": 0.4,
+       "网络": 0.2
+      },
+      "trades": [
+       "测试工程师",
+       "网络工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n8",
+      "text": "割接与迁移",
+      "domain": {
+       "通信": 0.5,
+       "网络": 0.3,
+       "云计算": 0.2
+      },
+      "trades": [
+       "网络工程师",
+       "5G核心网工程师",
+       "运维工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n9",
+      "text": "运维与优化",
+      "domain": {
+       "云计算": 0.4,
+       "通信": 0.3,
+       "软件工程": 0.3
+      },
+      "trades": [
+       "运维工程师",
+       "云平台工程师",
+       "网络工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ],
+     [
+      "n8",
+      "n9"
+     ]
+    ]
+   },
+   "task_text": "5G 核心网云化改造",
+   "source": "dataset-v5.1",
+   "shape_n_nodes": 9,
+   "shape_total_effort_real": 381.21,
+   "expected_fragments_human": 4,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "D47",
+   "domain_tag": "rpg",
+   "human_difficulty": 4,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "副本玩法重构设计",
+     "domain": {
+      "写作": 0.9
+     },
+     "trades": [
+      "创作"
+     ],
+     "complexity": "high",
+     "deliverable": "text",
+     "weight": 0.7
+    },
+    {
+     "id": "n2",
+     "text": "战斗数值体系重做",
+     "domain": {
+      "分析": 0.9
+     },
+     "trades": [
+      "分析"
+     ],
+     "complexity": "high",
+     "deliverable": "decision",
+     "weight": 0.8
+    },
+    {
+     "id": "n3",
+     "text": "副本引擎重构开发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "回归评测与平衡",
+     "domain": {
+      "编程": 0.7
+     },
+     "trades": [
+      "测试"
+     ],
+     "complexity": "mid",
+     "deliverable": "code",
+     "weight": 0.5
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ]
+   ],
+   "expected_fragments": 8,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "现状与需求分析",
+      "domain": {
+       "软件工程": 0.9,
+       "游戏开发": 0.1
+      },
+      "trades": [
+       "需求分析师"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "重构方案设计",
+      "domain": {
+       "软件工程": 0.8,
+       "游戏开发": 0.2
+      },
+      "trades": [
+       "软件架构师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "数据模型重构",
+      "domain": {
+       "软件工程": 0.9,
+       "游戏开发": 0.1
+      },
+      "trades": [
+       "数据库工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "核心逻辑重构",
+      "domain": {
+       "软件工程": 0.7,
+       "游戏开发": 0.3
+      },
+      "trades": [
+       "后端开发工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "接口与兼容层重构",
+      "domain": {
+       "软件工程": 0.85,
+       "游戏开发": 0.15
+      },
+      "trades": [
+       "后端开发工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n6",
+      "text": "性能与稳定性优化",
+      "domain": {
+       "软件工程": 0.8,
+       "游戏开发": 0.2
+      },
+      "trades": [
+       "性能优化工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.75
+     },
+     {
+      "id": "n7",
+      "text": "回归测试与验收",
+      "domain": {
+       "软件工程": 0.95,
+       "游戏开发": 0.05
+      },
+      "trades": [
+       "测试工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.65
+     },
+     {
+      "id": "n8",
+      "text": "上线与监控部署",
+      "domain": {
+       "软件工程": 0.9,
+       "游戏开发": 0.1
+      },
+      "trades": [
+       "运维工程师"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ]
+    ]
+   },
+   "task_text": "大型副本系统重构",
+   "source": "dataset-v5.1",
+   "shape_n_nodes": 8,
+   "shape_total_effort_real": 303.33,
+   "expected_fragments_human": 4,
+   "expected_fragments_method": "t40-realformula"
+  }
+ ]
+}

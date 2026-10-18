@@ -1,0 +1,4645 @@
+{
+ "meta": {
+  "version": "v5.1",
+  "note": "扩充+under覆盖（dataset_gen.py 生成）"
+ },
+ "tasks": [
+  {
+   "id": "M01",
+   "task_text": "为企业部署一套完整的 ERP 系统（财务/供应链/生产/人力四大模块）",
+   "human_difficulty": 5,
+   "expected_fragments": 20,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "需求调研与选型",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "业务流程梳理",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "系统架构设计",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "财务模块-总账",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "财务模块-应收应付",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "供应链-采购管理",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n7",
+      "text": "供应链-库存管理",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n8",
+      "text": "生产模块-MRP",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n9",
+      "text": "人力模块-考勤薪酬",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n10",
+      "text": "数据库设计与迁移",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n11",
+      "text": "接口集成层开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n12",
+      "text": "权限与安全体系",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n13",
+      "text": "报表中心开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n14",
+      "text": "单元测试覆盖",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n15",
+      "text": "模块联调",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n16",
+      "text": "用户验收测试 UAT",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.5
+     },
+     {
+      "id": "n17",
+      "text": "用户培训材料编写",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n18",
+      "text": "上线数据初始化",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n19",
+      "text": "生产环境部署",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n20",
+      "text": "系统运维手册",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n3",
+      "n7"
+     ],
+     [
+      "n3",
+      "n8"
+     ],
+     [
+      "n3",
+      "n9"
+     ],
+     [
+      "n4",
+      "n10"
+     ],
+     [
+      "n5",
+      "n10"
+     ],
+     [
+      "n6",
+      "n10"
+     ],
+     [
+      "n7",
+      "n10"
+     ],
+     [
+      "n8",
+      "n10"
+     ],
+     [
+      "n9",
+      "n10"
+     ],
+     [
+      "n10",
+      "n11"
+     ],
+     [
+      "n11",
+      "n12"
+     ],
+     [
+      "n11",
+      "n13"
+     ],
+     [
+      "n11",
+      "n14"
+     ],
+     [
+      "n12",
+      "n15"
+     ],
+     [
+      "n13",
+      "n15"
+     ],
+     [
+      "n14",
+      "n15"
+     ],
+     [
+      "n15",
+      "n16"
+     ],
+     [
+      "n16",
+      "n17"
+     ],
+     [
+      "n16",
+      "n18"
+     ],
+     [
+      "n18",
+      "n19"
+     ],
+     [
+      "n19",
+      "n19"
+     ],
+     [
+      "n19",
+      "n20"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "M02",
+   "task_text": "对现有电商平台进行全栈重构（前端/后端/数据三层）",
+   "human_difficulty": 5,
+   "expected_fragments": 17,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "存量系统评估",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "重构目标与技术选型",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "数据模型重构",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "API 网关与统一认证",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "订单服务重构",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "支付服务重构",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n7",
+      "text": "商品服务重构",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n8",
+      "text": "用户中心重构",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n9",
+      "text": "前端框架迁移",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n10",
+      "text": "移动端适配",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n11",
+      "text": "性能优化-缓存层",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n12",
+      "text": "数据迁移脚本",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n13",
+      "text": "灰度发布方案",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n14",
+      "text": "全链路回归测试",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n15",
+      "text": "压测与容量评估",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n16",
+      "text": "重构上线与回滚预案",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n17",
+      "text": "新架构技术文档",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n3",
+      "n7"
+     ],
+     [
+      "n4",
+      "n7"
+     ],
+     [
+      "n4",
+      "n8"
+     ],
+     [
+      "n5",
+      "n9"
+     ],
+     [
+      "n6",
+      "n9"
+     ],
+     [
+      "n7",
+      "n9"
+     ],
+     [
+      "n8",
+      "n9"
+     ],
+     [
+      "n9",
+      "n10"
+     ],
+     [
+      "n5",
+      "n11"
+     ],
+     [
+      "n6",
+      "n11"
+     ],
+     [
+      "n7",
+      "n11"
+     ],
+     [
+      "n3",
+      "n12"
+     ],
+     [
+      "n9",
+      "n13"
+     ],
+     [
+      "n10",
+      "n14"
+     ],
+     [
+      "n11",
+      "n14"
+     ],
+     [
+      "n13",
+      "n14"
+     ],
+     [
+      "n14",
+      "n15"
+     ],
+     [
+      "n15",
+      "n16"
+     ],
+     [
+      "n16",
+      "n17"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "M03",
+   "task_text": "建设企业级数据中台（采集/清洗/建模/服务/治理五层）",
+   "human_difficulty": 5,
+   "expected_fragments": 15,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "数据源盘点",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "数据采集管道建设",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "实时流处理",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "离线数仓分层设计",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "数据质量监控",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n6",
+      "text": "主数据管理 MDM",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n7",
+      "text": "指标体系设计",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n8",
+      "text": "数据模型开发",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n9",
+      "text": "ETL 任务调度",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n10",
+      "text": "数据服务 API 层",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n11",
+      "text": "BI 看板开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n12",
+      "text": "数据安全与权限",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n13",
+      "text": "数据资产目录",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n14",
+      "text": "数据治理规范文档",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n15",
+      "text": "平台运维监控",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "low",
+      "deliverable": "code",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n4",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ],
+     [
+      "n8",
+      "n9"
+     ],
+     [
+      "n8",
+      "n10"
+     ],
+     [
+      "n9",
+      "n11"
+     ],
+     [
+      "n10",
+      "n11"
+     ],
+     [
+      "n10",
+      "n12"
+     ],
+     [
+      "n6",
+      "n13"
+     ],
+     [
+      "n12",
+      "n13"
+     ],
+     [
+      "n13",
+      "n14"
+     ],
+     [
+      "n9",
+      "n15"
+     ]
+    ]
+   },
+   "note_expect_fix": "v5.1: 人工期望18>节点数15不可达，修正为15"
+  },
+  {
+   "id": "M04",
+   "task_text": "撰写并出版一份行业技术白皮书（调研/写作/评审/排版/发布）",
+   "human_difficulty": 4,
+   "expected_fragments": 10,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "行业趋势调研",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "竞品与案例收集",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "白皮书大纲设计",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n4",
+      "text": "第一章-行业现状撰写",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "第二章-技术方案撰写",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n6",
+      "text": "第三章-案例实践撰写",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n7",
+      "text": "数据图表制作",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n8",
+      "text": "专家评审第一轮",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "评审"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "id": "n9",
+      "text": "修订与补写",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n10",
+      "text": "专家评审第二轮",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "评审"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "id": "n11",
+      "text": "终稿校对",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "评审"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n12",
+      "text": "版式设计与排版",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n13",
+      "text": "印刷与电子版制作",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     },
+     {
+      "id": "n14",
+      "text": "发布与推广材料",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n2",
+      "n6"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n5",
+      "n7"
+     ],
+     [
+      "n4",
+      "n8"
+     ],
+     [
+      "n5",
+      "n8"
+     ],
+     [
+      "n6",
+      "n8"
+     ],
+     [
+      "n8",
+      "n9"
+     ],
+     [
+      "n9",
+      "n10"
+     ],
+     [
+      "n10",
+      "n11"
+     ],
+     [
+      "n11",
+      "n12"
+     ],
+     [
+      "n12",
+      "n13"
+     ],
+     [
+      "n13",
+      "n14"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "M05",
+   "task_text": "银行核心系统迁移（评估/改造/双跑/切换/验证全流程）",
+   "human_difficulty": 5,
+   "expected_fragments": 18,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "现网核心系统评估",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "迁移可行性分析",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "目标架构设计",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "核心账务模块改造",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "支付结算模块改造",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "信贷模块改造",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n7",
+      "text": "数据迁移方案设计",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n8",
+      "text": "历史数据迁移",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n9",
+      "text": "并行双跑环境搭建",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n10",
+      "text": "双跑对账机制",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n11",
+      "text": "业务回归测试",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n12",
+      "text": "性能容量测试",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n13",
+      "text": "监管合规检查",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "评审"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "id": "n14",
+      "text": "切换演练",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n15",
+      "text": "正式切换",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n16",
+      "text": "切换后验证与保障",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n17",
+      "text": "应急回退预案",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n18",
+      "text": "迁移总结报告",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n3",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ],
+     [
+      "n4",
+      "n9"
+     ],
+     [
+      "n5",
+      "n9"
+     ],
+     [
+      "n6",
+      "n9"
+     ],
+     [
+      "n9",
+      "n10"
+     ],
+     [
+      "n8",
+      "n10"
+     ],
+     [
+      "n10",
+      "n11"
+     ],
+     [
+      "n10",
+      "n12"
+     ],
+     [
+      "n11",
+      "n13"
+     ],
+     [
+      "n11",
+      "n14"
+     ],
+     [
+      "n12",
+      "n14"
+     ],
+     [
+      "n14",
+      "n15"
+     ],
+     [
+      "n13",
+      "n15"
+     ],
+     [
+      "n15",
+      "n16"
+     ],
+     [
+      "n15",
+      "n17"
+     ],
+     [
+      "n16",
+      "n18"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "M06",
+   "task_text": "城市级智慧交通平台（感知/分析/调度/信息服务四大子系统）",
+   "human_difficulty": 5,
+   "expected_fragments": 18,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "城市交通现状调研",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n2",
+      "text": "总体架构规划",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "路侧感知设备接入",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "视频识别引擎",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "交通流数据汇聚",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "实时路况分析",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n7",
+      "text": "信号灯智能调度",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n8",
+      "text": "拥堵预测模型",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n9",
+      "text": "公众出行信息服务 App",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n10",
+      "text": "应急指挥调度台",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n11",
+      "text": "数据仓库建设",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n12",
+      "text": "大数据分析报表",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n13",
+      "text": "系统安全防护",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n14",
+      "text": "接口开放平台",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n15",
+      "text": "全系统联调测试",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n16",
+      "text": "试运行与优化",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n17",
+      "text": "运维监控中心",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n18",
+      "text": "市民宣传与培训",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n6",
+      "n8"
+     ],
+     [
+      "n6",
+      "n9"
+     ],
+     [
+      "n6",
+      "n10"
+     ],
+     [
+      "n6",
+      "n11"
+     ],
+     [
+      "n11",
+      "n12"
+     ],
+     [
+      "n6",
+      "n13"
+     ],
+     [
+      "n6",
+      "n14"
+     ],
+     [
+      "n7",
+      "n15"
+     ],
+     [
+      "n8",
+      "n15"
+     ],
+     [
+      "n9",
+      "n15"
+     ],
+     [
+      "n10",
+      "n15"
+     ],
+     [
+      "n14",
+      "n15"
+     ],
+     [
+      "n15",
+      "n16"
+     ],
+     [
+      "n16",
+      "n17"
+     ],
+     [
+      "n16",
+      "n18"
+     ]
+    ]
+   },
+   "note_expect_fix": "v5.1: 人工期望20>节点数18不可达，修正为18"
+  },
+  {
+   "id": "M07",
+   "task_text": "开源项目从 0 到 1 并进入维护期（设计/开发/社区/发布）",
+   "human_difficulty": 4,
+   "expected_fragments": 11,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "项目定位与路线图",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "核心架构设计",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "核心功能开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "插件机制设计",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "文档与示例编写",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n6",
+      "text": "测试体系搭建",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n7",
+      "text": "CI/CD 流水线",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n8",
+      "text": "代码评审流程",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "评审"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.5
+     },
+     {
+      "id": "n9",
+      "text": "首个版本发布",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n10",
+      "text": "社区建设与运营",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n11",
+      "text": "Issue 管理体系",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "code",
+      "weight": 0.4
+     },
+     {
+      "id": "n12",
+      "text": "贡献者指南",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     },
+     {
+      "id": "n13",
+      "text": "安全公告机制",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "low",
+      "deliverable": "code",
+      "weight": 0.4
+     },
+     {
+      "id": "n14",
+      "text": "版本迭代规划",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n3",
+      "n8"
+     ],
+     [
+      "n4",
+      "n8"
+     ],
+     [
+      "n7",
+      "n9"
+     ],
+     [
+      "n8",
+      "n9"
+     ],
+     [
+      "n9",
+      "n10"
+     ],
+     [
+      "n9",
+      "n11"
+     ],
+     [
+      "n10",
+      "n12"
+     ],
+     [
+      "n9",
+      "n13"
+     ],
+     [
+      "n10",
+      "n14"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "M08",
+   "task_text": "大型金融风控系统（规则/模型/决策/监控全链路）",
+   "human_difficulty": 5,
+   "expected_fragments": 16,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "风控业务规则梳理",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "风控架构设计",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "规则引擎开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "特征计算平台",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "反欺诈模型训练",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "信用评分模型",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n7",
+      "text": "决策流引擎",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n8",
+      "text": "实时决策 API",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n9",
+      "text": "离线批量决策",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n10",
+      "text": "模型监控与漂移检测",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n11",
+      "text": "规则配置管理台",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n12",
+      "text": "模拟回测环境",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n13",
+      "text": "上线灰度验证",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n14",
+      "text": "监管报送对接",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n15",
+      "text": "系统容量规划",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.5
+     },
+     {
+      "id": "n16",
+      "text": "风控运营手册",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n3",
+      "n7"
+     ],
+     [
+      "n5",
+      "n7"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ],
+     [
+      "n7",
+      "n9"
+     ],
+     [
+      "n5",
+      "n10"
+     ],
+     [
+      "n6",
+      "n10"
+     ],
+     [
+      "n3",
+      "n11"
+     ],
+     [
+      "n7",
+      "n12"
+     ],
+     [
+      "n8",
+      "n13"
+     ],
+     [
+      "n9",
+      "n13"
+     ],
+     [
+      "n8",
+      "n14"
+     ],
+     [
+      "n13",
+      "n15"
+     ],
+     [
+      "n15",
+      "n16"
+     ]
+    ]
+   },
+   "note_expect_fix": "v5.1: 人工期望18>节点数16不可达，修正为16"
+  },
+  {
+   "id": "M09",
+   "task_text": "构建大规模企业知识库系统（采集/处理/检索/问答/权限）",
+   "human_difficulty": 4,
+   "expected_fragments": 13,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "知识体系规划",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "多源文档采集",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "文档解析与清洗",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "向量化与索引构建",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "检索服务开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "问答系统开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n7",
+      "text": "知识图谱构建",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n8",
+      "text": "权限体系设计",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n9",
+      "text": "管理后台开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n10",
+      "text": "检索质量评估",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n11",
+      "text": "结果相关性调优",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n12",
+      "text": "系统上线",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "low",
+      "deliverable": "code",
+      "weight": 0.5
+     },
+     {
+      "id": "n13",
+      "text": "知识运营流程",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n3",
+      "n7"
+     ],
+     [
+      "n1",
+      "n8"
+     ],
+     [
+      "n5",
+      "n9"
+     ],
+     [
+      "n6",
+      "n9"
+     ],
+     [
+      "n5",
+      "n10"
+     ],
+     [
+      "n6",
+      "n10"
+     ],
+     [
+      "n10",
+      "n11"
+     ],
+     [
+      "n11",
+      "n12"
+     ],
+     [
+      "n12",
+      "n13"
+     ]
+    ]
+   },
+   "note_expect_fix": "v5.1: 人工期望15>节点数13不可达，修正为13"
+  },
+  {
+   "id": "M10",
+   "task_text": "医疗信息系统（HIS）全院部署（门诊/住院/药房/检验/影像）",
+   "human_difficulty": 5,
+   "expected_fragments": 18,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "医院流程调研",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "系统总体设计",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "门诊挂号系统",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "门诊医生工作站",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "住院管理系统",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "药房管理系统",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n7",
+      "text": "检验科 LIS 对接",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n8",
+      "text": "影像科 PACS 对接",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n9",
+      "text": "电子病历系统",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n10",
+      "text": "医技收费对接",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n11",
+      "text": "医保接口对接",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n12",
+      "text": "数据集成平台",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n13",
+      "text": "临床数据中心 CDR",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n14",
+      "text": "数据上报卫健委",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n15",
+      "text": "全院培训",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n16",
+      "text": "并行试运行",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n17",
+      "text": "正式上线",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n18",
+      "text": "运维保障体系",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "low",
+      "deliverable": "code",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n2",
+      "n6"
+     ],
+     [
+      "n2",
+      "n7"
+     ],
+     [
+      "n2",
+      "n8"
+     ],
+     [
+      "n3",
+      "n9"
+     ],
+     [
+      "n4",
+      "n9"
+     ],
+     [
+      "n5",
+      "n9"
+     ],
+     [
+      "n6",
+      "n10"
+     ],
+     [
+      "n9",
+      "n11"
+     ],
+     [
+      "n9",
+      "n12"
+     ],
+     [
+      "n12",
+      "n13"
+     ],
+     [
+      "n13",
+      "n14"
+     ],
+     [
+      "n11",
+      "n15"
+     ],
+     [
+      "n14",
+      "n16"
+     ],
+     [
+      "n16",
+      "n17"
+     ],
+     [
+      "n17",
+      "n18"
+     ]
+    ]
+   },
+   "note_expect_fix": "v5.1: 人工期望19>节点数18不可达，修正为18"
+  },
+  {
+   "id": "M11",
+   "task_text": "跨国企业年度报告编制（多语言/多币种/审计/发布）",
+   "human_difficulty": 4,
+   "expected_fragments": 14,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "财务数据收集",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "多币种折算处理",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "合并报表编制",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "经营分析撰写",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "管理层讨论与分析",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n6",
+      "text": "董事会报告",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n7",
+      "text": "审计对接与调整",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "评审"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n8",
+      "text": "英文版翻译",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n9",
+      "text": "日文版翻译",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n10",
+      "text": "财务图表制作",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n11",
+      "text": "合规性审查",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "评审"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n12",
+      "text": "排版设计",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n13",
+      "text": "内部终审",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "评审"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "id": "n14",
+      "text": "交易所提交与披露",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n15",
+      "text": "投资者关系材料",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n3",
+      "n7"
+     ],
+     [
+      "n4",
+      "n8"
+     ],
+     [
+      "n5",
+      "n8"
+     ],
+     [
+      "n6",
+      "n8"
+     ],
+     [
+      "n4",
+      "n9"
+     ],
+     [
+      "n5",
+      "n9"
+     ],
+     [
+      "n6",
+      "n9"
+     ],
+     [
+      "n3",
+      "n10"
+     ],
+     [
+      "n7",
+      "n11"
+     ],
+     [
+      "n8",
+      "n12"
+     ],
+     [
+      "n9",
+      "n12"
+     ],
+     [
+      "n10",
+      "n12"
+     ],
+     [
+      "n12",
+      "n13"
+     ],
+     [
+      "n13",
+      "n14"
+     ],
+     [
+      "n14",
+      "n15"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "M12",
+   "task_text": "物联网平台建设（设备接入/边缘计算/数据处理/应用生态）",
+   "human_difficulty": 5,
+   "expected_fragments": 16,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "物联场景需求分析",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "平台架构设计",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "设备接入网关",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "设备管理服务",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "规则引擎开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "边缘计算框架",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n7",
+      "text": "时序数据存储",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n8",
+      "text": "设备消息路由",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n9",
+      "text": "告警通知系统",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n10",
+      "text": "数据可视化大屏",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n11",
+      "text": "应用开放 API",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n12",
+      "text": "设备固件 OTA",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n13",
+      "text": "安全认证体系",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n14",
+      "text": "大规模并发压测",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n15",
+      "text": "生态应用商店",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.5
+     },
+     {
+      "id": "n16",
+      "text": "平台运营手册",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.4
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n2",
+      "n6"
+     ],
+     [
+      "n3",
+      "n7"
+     ],
+     [
+      "n3",
+      "n8"
+     ],
+     [
+      "n7",
+      "n8"
+     ],
+     [
+      "n5",
+      "n9"
+     ],
+     [
+      "n8",
+      "n9"
+     ],
+     [
+      "n8",
+      "n10"
+     ],
+     [
+      "n8",
+      "n11"
+     ],
+     [
+      "n4",
+      "n12"
+     ],
+     [
+      "n4",
+      "n13"
+     ],
+     [
+      "n5",
+      "n13"
+     ],
+     [
+      "n9",
+      "n14"
+     ],
+     [
+      "n13",
+      "n14"
+     ],
+     [
+      "n11",
+      "n15"
+     ],
+     [
+      "n14",
+      "n16"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "M13",
+   "human_difficulty": 5,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "交通数据接入治理",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.9
+    },
+    {
+     "id": "n2",
+     "text": "信号控制模型研发",
+     "domain": {
+      "分析": 0.9
+     },
+     "trades": [
+      "分析"
+     ],
+     "complexity": "high",
+     "deliverable": "decision",
+     "weight": 0.8
+    },
+    {
+     "id": "n3",
+     "text": "调度平台开发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "城市路网数字孪生",
+     "domain": {
+      "数据": 0.8
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.8
+    },
+    {
+     "id": "n5",
+     "text": "整体联调与试运行",
+     "domain": {
+      "编程": 0.7
+     },
+     "trades": [
+      "测试"
+     ],
+     "complexity": "mid",
+     "deliverable": "code",
+     "weight": 0.5
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ],
+    [
+     "n4",
+     "n5"
+    ]
+   ],
+   "expected_fragments": 5,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "交通数据接入治理",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "信号控制模型研发",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "调度平台开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "城市路网数字孪生",
+      "domain": {
+       "数据": 0.8
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "整体联调与试运行",
+      "domain": {
+       "编程": 0.7
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "task_text": "城市级智慧交通系统建设",
+   "source": "dataset-v5.1"
+  },
+  {
+   "id": "M14",
+   "human_difficulty": 5,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "存量数据资产盘点",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "调研"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.7
+    },
+    {
+     "id": "n2",
+     "text": "湖仓一体化架构搭建",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.9
+    },
+    {
+     "id": "n3",
+     "text": "数据管道迁移重写",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "全量数据校验",
+     "domain": {
+      "数据": 0.8
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.8
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ]
+   ],
+   "expected_fragments": 4,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "存量数据资产盘点",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "湖仓一体化架构搭建",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "数据管道迁移重写",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "全量数据校验",
+      "domain": {
+       "数据": 0.8
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "task_text": "万亿级数据湖平台迁移",
+   "source": "dataset-v5.1"
+  },
+  {
+   "id": "M15",
+   "human_difficulty": 5,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "调度业务现状调研",
+     "domain": {
+      "分析": 0.9
+     },
+     "trades": [
+      "调研"
+     ],
+     "complexity": "high",
+     "deliverable": "text",
+     "weight": 0.6
+    },
+    {
+     "id": "n2",
+     "text": "调度自动化架构设计",
+     "domain": {
+      "写作": 0.8
+     },
+     "trades": [
+      "创作"
+     ],
+     "complexity": "high",
+     "deliverable": "text",
+     "weight": 0.8
+    },
+    {
+     "id": "n3",
+     "text": "核心调度引擎开发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "电网数据接入平台",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.9
+    },
+    {
+     "id": "n5",
+     "text": "容灾演练与切换",
+     "domain": {
+      "编程": 0.8
+     },
+     "trades": [
+      "测试"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.7
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ],
+    [
+     "n4",
+     "n5"
+    ]
+   ],
+   "expected_fragments": 5,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "调度业务现状调研",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "调度自动化架构设计",
+      "domain": {
+       "写作": 0.8
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "核心调度引擎开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "电网数据接入平台",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "容灾演练与切换",
+      "domain": {
+       "编程": 0.8
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.7
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "task_text": "全国电力调度系统升级",
+   "source": "dataset-v5.1"
+  },
+  {
+   "id": "M16",
+   "human_difficulty": 5,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "数字货币体系设计",
+     "domain": {
+      "写作": 0.9
+     },
+     "trades": [
+      "创作"
+     ],
+     "complexity": "high",
+     "deliverable": "text",
+     "weight": 0.8
+    },
+    {
+     "id": "n2",
+     "text": "账本与共识机制研发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n3",
+     "text": "钱包与支付场景落地",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "货币发行结算系统",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.9
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ]
+   ],
+   "expected_fragments": 4,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "数字货币体系设计",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "账本与共识机制研发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "钱包与支付场景落地",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "货币发行结算系统",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "task_text": "大型央行数字货币系统",
+   "source": "dataset-v5.1"
+  },
+  {
+   "id": "M17",
+   "human_difficulty": 5,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "供应链业务建模",
+     "domain": {
+      "分析": 0.9
+     },
+     "trades": [
+      "分析"
+     ],
+     "complexity": "high",
+     "deliverable": "decision",
+     "weight": 0.7
+    },
+    {
+     "id": "n2",
+     "text": "全球物流数据采集",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.8
+    },
+    {
+     "id": "n3",
+     "text": "孪生仿真引擎开发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "优化决策算法研发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n5",
+     "text": "系统集成与上线",
+     "domain": {
+      "编程": 0.7
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "mid",
+     "deliverable": "code",
+     "weight": 0.6
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ],
+    [
+     "n4",
+     "n5"
+    ]
+   ],
+   "expected_fragments": 5,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "供应链业务建模",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "全球物流数据采集",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "孪生仿真引擎开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "优化决策算法研发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "系统集成与上线",
+      "domain": {
+       "编程": 0.7
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "task_text": "全球供应链数字孪生系统",
+   "source": "dataset-v5.1"
+  },
+  {
+   "id": "M18",
+   "human_difficulty": 5,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "产线工艺流程数字化",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.8
+    },
+    {
+     "id": "n2",
+     "text": "MES 核心功能开发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n3",
+     "text": "设备数据采集平台",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.8
+    },
+    {
+     "id": "n4",
+     "text": "质量追溯体系",
+     "domain": {
+      "数据": 0.8
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.7
+    },
+    {
+     "id": "n5",
+     "text": "车间部署与培训",
+     "domain": {
+      "写作": 0.7
+     },
+     "trades": [
+      "创作"
+     ],
+     "complexity": "mid",
+     "deliverable": "text",
+     "weight": 0.5
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ],
+    [
+     "n4",
+     "n5"
+    ]
+   ],
+   "expected_fragments": 5,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "产线工艺流程数字化",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "MES 核心功能开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "设备数据采集平台",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "质量追溯体系",
+      "domain": {
+       "数据": 0.8
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n5",
+      "text": "车间部署与培训",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "task_text": "智能工厂 MES 系统建设",
+   "source": "dataset-v5.1"
+  }
+ ]
+}

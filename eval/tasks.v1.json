@@ -1,0 +1,230 @@
+{
+  "version": "v1",
+  "created": "2026-09-06",
+  "method": "seed=42 均衡抽样；元数据从套件字段 + 引擎路由推导",
+  "tasks": [
+    {
+      "id": "cal-T17",
+      "task_text": "开发一个带用户系统的网站",
+      "suite": "calibration_tasks",
+      "difficulty": 4,
+      "expected_kinds": [
+        "result",
+        "verdict"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "synthetic"
+    },
+    {
+      "id": "cal-T13",
+      "task_text": "设计并实施一个 A/B 实验方案",
+      "suite": "calibration_tasks",
+      "difficulty": 3,
+      "expected_kinds": [
+        "plan",
+        "result"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "synthetic"
+    },
+    {
+      "id": "cal-T10",
+      "task_text": "为已有接口补充三个边界用例测试",
+      "suite": "calibration_tasks",
+      "difficulty": 2,
+      "expected_kinds": [
+        "result",
+        "verdict"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "swe-bench风格"
+    },
+    {
+      "id": "cal-T27",
+      "task_text": "大型活动综合保障方案",
+      "suite": "calibration_tasks",
+      "difficulty": 3,
+      "expected_kinds": [
+        "result"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "dataset-v5.1"
+    },
+    {
+      "id": "meg-M15",
+      "task_text": "全国电力调度系统升级",
+      "suite": "mega_tasks",
+      "difficulty": 5,
+      "expected_kinds": [
+        "result"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "dataset-v5.1"
+    },
+    {
+      "id": "meg-M18",
+      "task_text": "智能工厂 MES 系统建设",
+      "suite": "mega_tasks",
+      "difficulty": 5,
+      "expected_kinds": [
+        "result"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "dataset-v5.1"
+    },
+    {
+      "id": "meg-M08",
+      "task_text": "大型金融风控系统（规则/模型/决策/监控全链路）",
+      "suite": "mega_tasks",
+      "difficulty": 5,
+      "expected_kinds": [
+        "plan",
+        "result",
+        "verdict"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "mega-template-v1"
+    },
+    {
+      "id": "meg-M11",
+      "task_text": "跨国企业年度报告编制（多语言/多币种/审计/发布）",
+      "suite": "mega_tasks",
+      "difficulty": 4,
+      "expected_kinds": [
+        "result",
+        "verdict"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "mega-template-v1"
+    },
+    {
+      "id": "pro-P16",
+      "task_text": "反洗钱智能监测体系",
+      "suite": "professional_tasks",
+      "difficulty": 5,
+      "expected_kinds": [
+        "result"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "dataset-v5.1"
+    },
+    {
+      "id": "pro-P14",
+      "task_text": "集团合同全生命周期管理系统",
+      "suite": "professional_tasks",
+      "difficulty": 5,
+      "expected_kinds": [
+        "result"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "dataset-v5.1"
+    },
+    {
+      "id": "pro-P07",
+      "task_text": "药物临床试验方案设计与实施",
+      "suite": "professional_tasks",
+      "difficulty": 5,
+      "expected_kinds": [
+        "plan",
+        "result",
+        "verdict"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "professional-v1"
+    },
+    {
+      "id": "pro-P03",
+      "task_text": "跨境并购项目合规审查全流程",
+      "suite": "professional_tasks",
+      "difficulty": 5,
+      "expected_kinds": [
+        "plan",
+        "result",
+        "verdict"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "professional-v1"
+    },
+    {
+      "id": "dom-T1",
+      "task_text": "You received your order #W2378156 and wish to exchange the mechanical keyboard for the same one but with clicky switches and the smart thermostat for one compatible with Google Home instead of Apple HomeKit. If there is no keyboard that is clicky, RGB backlight, full size, you'd go for no backlight.",
+      "suite": "domain_tasks",
+      "difficulty": 3,
+      "expected_kinds": [
+        "result"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "tau2-retail"
+    },
+    {
+      "id": "dom-L8",
+      "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+      "suite": "domain_tasks",
+      "difficulty": 2,
+      "expected_kinds": [
+        "result"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "tau2-telecom"
+    },
+    {
+      "id": "dom-L7",
+      "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+      "suite": "domain_tasks",
+      "difficulty": 2,
+      "expected_kinds": [
+        "result"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "tau2-telecom"
+    },
+    {
+      "id": "dom-S04",
+      "task_text": "健身房年卡用户定制训练计划（评估/计划/饮食/跟踪）",
+      "suite": "domain_tasks",
+      "difficulty": 3,
+      "expected_kinds": [
+        "plan",
+        "result"
+      ],
+      "acceptance_notes": "验收要点：任务完整闭环（plan/execute/verify 收敛，产物真实存在且与任务目标一致）",
+      "source": "synthetic-sports"
+    },
+    {
+      "id": "git-G182",
+      "task_text": "Clean up the wiki here https://github.com/jupyter/jupyter/wiki can always use a set of eyes, as it frequently gets updated with spam or just generally unhelpful test changes.",
+      "suite": "github_tasks",
+      "difficulty": "unknown",
+      "expected_kinds": [],
+      "acceptance_notes": "验收要点：基础闭环（无预成型 DAG——按任务语义执行并收口）",
+      "source": "https://github.com/jupyter/jupyter/issues/785"
+    },
+    {
+      "id": "git-G157",
+      "task_text": "docs: Add Redis Streams consumer group example ## Description Adds example of creating and reading from a Redis Stream consumer group.",
+      "suite": "github_tasks",
+      "difficulty": "unknown",
+      "expected_kinds": [],
+      "acceptance_notes": "验收要点：基础闭环（无预成型 DAG——按任务语义执行并收口）",
+      "source": "https://github.com/redis/redis/issues/15735"
+    },
+    {
+      "id": "git-G111",
+      "task_text": "Font variation resources reset variation values ### Tested versions v4.7.2.stable.official [ed1daf0bf] ### System information Godot v4.7.2.stable - Windows 10 (build 19045) - Multi-window, 2 monitors - Direct3D 12 (Forward+) - dedicated NVIDIA GeForce RTX 3060 Ti (NVIDIA; 32.0.16.1047) - AMD Ryzen 5 5600X 6-Core Processor (12 threads) - 31.92 GiB memory - WASAPI (48000 Hz, Stereo/mono) ### Issue description When using a font variation resource as the project's custom font under **Project > GUI > Theme > Custom Font**, the variation values will reset when adding new scripts to the project. Pretty bizarre bug https://github.com/user-attachments/assets/35e6ec2b-f798-48a9-b633-c412e905a0fa Removing the script and reloading the editor restores the custom variation values. ### Steps to reproduce This happens in a brand new project but these steps are based on the font file I used in the reproduction project. 1. Right click in the file system tab and click \"New Resource\" 2. Select **FontVariation** and save it as `montserrat_medium.tres` (you can name it whatever). 3. With the new variation selected, change the following: - Set the base font to `montserrat_variable_weight.ttf`. - Under Variation, click Variation Coordinates and change the weight to 600. 4. Save. 5. Go to **Project > GUI > Theme > Custom Font** and select the font variation you just created. 6. At the bottom, click **Save and Restart**. 7. Upon restart, the weight should still not have changed however creating any new scripts will trigger the variation's weight to reset. 9. Right click the file system tab and create and save a new script with any name. 10. Inspect the font variation resource and you should see the weight has been reset back to 100. 11. This will stick between editor restarts until you delete the script. ### Minimal reproduction project (MRP) [font-variation.zip](https://github.com/user-attachments/files/31769571/font-variation.zip)",
+      "suite": "github_tasks",
+      "difficulty": "unknown",
+      "expected_kinds": [],
+      "acceptance_notes": "验收要点：基础闭环（无预成型 DAG——按任务语义执行并收口）",
+      "source": "https://github.com/godotengine/godot/issues/123131"
+    },
+    {
+      "id": "git-G140",
+      "task_text": "Always send an opaque buffer to interactive backends Currently, we send an RGBA buffer from Agg/Cairo up to the interactive backends. This buffer may contain non-opaque pixels. Most backends then composite this buffer onto a white background (macosx currently does not, but this is fixed in the macos rework). If we formalize this: \"our interactive backends will always render onto a white background\" or \"our interactive backends will provide an opaque backing color to the renderer\", we can instead pass up an RGBX buffer (alpha ignored, completely opaque). Depending on the backend, this may avoid a compositing operation and/or allow a less-expensive compositing operation. For example, on macOS, we could use `kCGImageAlphaNoneSkipLast` rather than `kCGImageAlphaLast` (which has to convert to premultiplied alpha). In Qt, we could use `Format_RGBX8888`. The actual performance impact of this could be hard to measure. At least in the macOS rework: actual compositing may occur at a lower level instead of our own process. That said, it seems non-ideal to hand a transparent buffer to a backend and say: \"Now make this opaque\" when we can instead do a `memset(ptr, 0xff, length)` at render time. Thoughts?",
+      "suite": "github_tasks",
+      "difficulty": "unknown",
+      "expected_kinds": [],
+      "acceptance_notes": "验收要点：基础闭环（无预成型 DAG——按任务语义执行并收口）",
+      "source": "https://github.com/matplotlib/matplotlib/issues/32258"
+    }
+  ]
+}

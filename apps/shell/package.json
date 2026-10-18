@@ -1,0 +1,25 @@
+{
+  "name": "wuxing-shell",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "WUXING 壳 TS 工作区（web 前端运行时 + desktop Electron 外壳）",
+  "main": "desktop/dist/main.js",
+  "scripts": {
+    "build:web": "tsc -p web/tsconfig.json",
+    "build:desktop": "tsc -p desktop/tsconfig.json",
+    "build": "npm run build:web && npm run build:desktop",
+    "typecheck": "tsc -p web/tsconfig.json --noEmit && tsc -p web/tsconfig.test.json && tsc -p desktop/tsconfig.json --noEmit && tsc -p desktop/tsconfig.test.json",
+    "test": "node --test",
+    "pretest": "npm run build:desktop",
+    "check:arch": "node scripts/check-arch.mjs",
+    "dev": "npm run build:desktop && electron .",
+    "deploy": "npm run build && node scripts/deploy.mjs",
+    "check": "npm run typecheck && npm run check:arch && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^26.5.1",
+    "electron": "^44.3.0",
+    "typescript": "^7.0.2"
+  }
+}

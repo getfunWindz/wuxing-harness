@@ -1,0 +1,27 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+smoke_out/
+.ab_run*/
+.eval_run/
+real_test/
+.superpowers/
+
+# 引擎在工作区产生的运行产物（壳自测/演示用——非源码）
+.wuxing/
+task_state.json
+reply_cache.json
+shape_cache.json
+brain_memory.json
+manifest.json
+artifacts/
+
+# TS 壳工作区（apps/shell）——构建产物与依赖不入库
+apps/shell/node_modules/
+apps/shell/web/dist/
+apps/shell/desktop/dist/
+wuxing/shell/web/static/next/
+
+# 缓存（不入库；.ruff_cache 自身也带 .gitignore，此行为防御性声明）
+.ruff_cache/

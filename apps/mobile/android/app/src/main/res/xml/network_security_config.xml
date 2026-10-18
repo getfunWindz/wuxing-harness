@@ -1,0 +1,4 @@
+<network-security-config>
+    <!-- LAN http 直连（T6 首台阶）；overlay/隧道为加密传输——威胁模型见 README -->
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

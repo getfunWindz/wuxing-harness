@@ -1,0 +1,4022 @@
+{
+ "meta": {
+  "version": "v5.1",
+  "note": "扩充+under覆盖（dataset_gen.py 生成）"
+ },
+ "tasks": [
+  {
+   "id": "T1",
+   "task_text": "You received your order #W2378156 and wish to exchange the mechanical keyboard for the same one but with clicky switches and the smart thermostat for one compatible with Google Home instead of Apple HomeKit. If there is no keyboard that is clicky, RGB backlight, full size, you'd go for no backlight.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "find user id by name zip",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "exchange delivered order items",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "T2",
+   "task_text": "You received your order #W2378156 and wish to exchange the mechanical keyboard for the same one but with clicky switches and the smart thermostat for one compatible with Google Home instead of Apple HomeKit. If there is no keyboard that is clicky, RGB backlight, full size, you'd rather only exchange the thermostat.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "find user id by name zip",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "exchange delivered order items",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "T3",
+   "task_text": "You want to know exactly how many tshirt options are available in the online store right now. You want to also return the cleaner, headphone, and smart watch.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "find user id by name zip",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get user details",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "return delivered order items",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ],
+     [
+      "n8",
+      "n9"
+     ],
+     [
+      "n9",
+      "n10"
+     ],
+     [
+      "n10",
+      "n11"
+     ]
+    ]
+   },
+   "expected_fragments": 5,
+   "human_difficulty": 4
+  },
+  {
+   "id": "T4",
+   "task_text": "You want to know exactly how many tshirt options are available in the online store right now. You want to modify all your pending small tshirt to purple, same size, same v-neck, and prefer polyester.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "find user id by name zip",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get user details",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get user details",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "modify pending order items",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ],
+     [
+      "n8",
+      "n9"
+     ],
+     [
+      "n9",
+      "n10"
+     ],
+     [
+      "n10",
+      "n11"
+     ],
+     [
+      "n11",
+      "n12"
+     ]
+    ]
+   },
+   "expected_fragments": 7,
+   "human_difficulty": 5
+  },
+  {
+   "id": "T5",
+   "task_text": "You want to know exactly how many tshirt options are available in the online store right now. You want to modify all your pending tshirts to purple, s size, same v-neck, and prefer polyester.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "find user id by name zip",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get user details",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get user details",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "modify pending order items",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "modify pending order items",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ],
+     [
+      "n8",
+      "n9"
+     ],
+     [
+      "n9",
+      "n10"
+     ],
+     [
+      "n10",
+      "n11"
+     ],
+     [
+      "n11",
+      "n12"
+     ],
+     [
+      "n12",
+      "n13"
+     ]
+    ]
+   },
+   "expected_fragments": 8,
+   "human_difficulty": 5
+  },
+  {
+   "id": "T6",
+   "task_text": "You want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a less bright one (prefer battery > USB > AC). If the agent asks for confirmation, only exchange the desk lamp. If the agent asks for confirmation again, do not exchange anything, and return the water bottle instead.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "find user id by name zip",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get user details",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "return delivered order items",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "T7",
+   "task_text": "You want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a less bright one (prefer battery > USB > AC). If the agent asks for confirmation, only exchange the desk lamp.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "find user id by name zip",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get user details",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "exchange delivered order items",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "T8",
+   "task_text": "You want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a less bright one (prefer AC adapter > battery > USB). If the agent asks for confirmation, only exchange the desk lamp.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "find user id by name zip",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get user details",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "exchange delivered order items",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "T9",
+   "task_text": "You want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a brighter one (prefer battery > USB > AC). If the agent asks for confirmation, only exchange the desk lamp.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "find user id by name zip",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get user details",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "exchange delivered order items",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "T10",
+   "task_text": "You want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a brighter one (prefer AC adapter > battery > USB). When the agent asks for confirmation, suddenly change your mind and ask to only exchange the desk lamp.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "find user id by name zip",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get user details",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get product details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "exchange delivered order items",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "T11",
+   "task_text": "For some reason, you want to return all things ordered. You have two payment methods and two orders, and you want to refund each order to the other order's payment method. If not possible, you are angry and swear for a few times, then ask for human representative. Make sure to return BOTH orders.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "find user id by email",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get user details",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "transfer to human agents",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "T12",
+   "task_text": "For some reason, you want to return all things ordered. You have two payment methods and two orders, and you want to refund each order to the other order's payment method. If not possible, you are angry and swear for a few times, then agree to return all things with the original payment method.",
+   "source": "tau2-retail",
+   "domain_tag": "retail",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "find user id by email",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get user details",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "get order details",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "return delivered order items",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "return delivered order items",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "L1",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "enable roaming",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "toggle roaming",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "L2",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "toggle airplane mode",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "toggle roaming",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "L3",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "toggle airplane mode",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "enable roaming",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "L4",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "toggle airplane mode",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "enable roaming",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "toggle roaming",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "L5",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "toggle airplane mode",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "toggle data",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "L6",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "toggle airplane mode",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "toggle data saver mode",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "L7",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "toggle airplane mode",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "set network mode preference",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "L8",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "toggle airplane mode",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "disconnect vpn",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "L9",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "toggle airplane mode",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "refuel data",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "L10",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "toggle data",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "toggle roaming",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "L11",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "toggle data saver mode",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "toggle roaming",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "L12",
+   "task_text": "You mobile data is not working properly. It either stops working or is very slow. You want to fix it and absolutely want to get excellent internet speed on your phone. You are not willing to accept any other internet speed (poor, fair or good). You do not have access to wifi.",
+   "source": "tau2-telecom",
+   "domain_tag": "telecom",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "set network mode preference",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "toggle roaming",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "B1",
+   "task_text": "You are playing the role of a customer contacting a customer service representative agent. Your character is Kenji Tanaka, a customer who initially comes in to check his account balances.\n\nYour email is kenji.tanaka@gmail.com. You are absolutely certain of this.\nYour phone number is 206-555-0293.\nYou do not know your address or date of birth on file, but do NOT reveal that you don't know them. Just deflect or say you don't have that information on hand right now.\n\nHere are your behavior guidelin",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "transfer to human agents",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "log verification",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "change user email",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "B2",
+   "task_text": "**Your character:** Wei Chen, a 45-year-old software architect from Boston. You are methodical and detail-oriented, but currently frustrated.\n\n**Your situation:** You signed up four of your friends for Rho-Bank credit cards. All four actually signed up. But you only got bonus money for two of them. You want to know why you didn't get the bonus for all four.\n\nYour user ID is 76ad9cc60e, your phone number is 617-555-0834, and your email is wei.chen.boston@gmail.com. Do NOT volunteer this unless sp",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "log verification",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "submit referral",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "B3",
+   "task_text": "**Your character:** Fatima Al-Hassan, a 31-year-old coffee shop owner from Detroit. You've been a Rho-Bank customer for about a year and have several credit cards with them.\n\n**Your situation:** You've been receiving various communications from Rho-Bank about referral programs for different credit cards. You have friends and family interested in opening credit cards and you want to earn referral bonuses. You've seen information about several different cards and their referral offers.\n\nYour user ",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "give discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "B4",
+   "task_text": "**Your character:** Oluwaseun Adeyemi, a 36-year-old product manager from Atlanta. You are generally patient but becoming frustrated because you referred a friend and haven't received your bonus.\n\n**Your situation:** You referred a friend to sign up for a Rho-Bank credit card. Your friend has already been approved and has been consistently using the card - they've made some transactions on it. But you haven't received your referral bonus yet. You want to know why.\n\nYour user ID is 86e92f639e (do",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "log verification",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "submit transaction",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 2
+  },
+  {
+   "id": "B5",
+   "task_text": "**Your character:** Kenji Tanaka, a 40-year-old software engineer from Seattle. You're detail-oriented and have noticed something seems off with your recent credit card rewards.\n\n**Your situation:** You've been reviewing your Silver Rewards Card transaction history and the cash back points don't seem quite right on a few transactions. You're not sure which ones are wrong or by how much, but you want the agent to investigate and help you fix any errors, including taking action by yourself if nece",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "log verification",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "give discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "expected_fragments": 1,
+   "human_difficulty": 3
+  },
+  {
+   "id": "B6",
+   "task_text": "**Your character:** Fatima Al-Hassan, a 31-year-old business consultant from Detroit. You're meticulous about tracking your finances and you feel something seems off with your recent credit card rewards.\n\n**Your situation:** The total amount of cash back rewards you have received is not what you expected. You're not sure which ones are wrong or by how much, but you want the agent to investigate and help you fix any errors. You are bad with technology so therefore you do not know how to, or want ",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "log verification",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "give discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "B7",
+   "task_text": "**Your character:** Priya Sharma, a 34-year-old marketing manager from Chicago. You're detail-oriented and have been carefully tracking your credit card rewards lately.\n\n**Your situation:** You've noticed that your recent cash back rewards don't seem to add up correctly. You have both a Gold Rewards Card and an EcoCard, and you suspect some of your rewards calculations might be off. You're not sure exactly which transactions are wrong, neither are you sure about the specific cash back percentage",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "log verification",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "give discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "B8",
+   "task_text": "**Your character:** Amara Okonkwo, a 27-year-old entrepreneur from Houston. You're meticulous about your business finances and personal spending, and you like to keep track of every dollar.\n\n**Your situation:** You've noticed that your recent cash back rewards don't seem to add up correctly. You have both a Business Silver Rewards Card and a Silver Rewards Card, and you suspect some of your rewards calculations might be off. You're not sure exactly which transactions are wrong, neither are you s",
+   "source": "tau2-banking",
+   "domain_tag": "banking",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "log verification",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "give discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "call discoverable user tool",
+      "domain": {
+       "写作": 0.7
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "S01",
+   "task_text": "规划一次 7 日欧洲多国自由行（签证/机票/住宿/行程/预算）",
+   "source": "synthetic-sports",
+   "domain_tag": "sports",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "目的地与路线调研",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "text": "签证材料准备",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "text": "机票与住宿预订",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "text": "每日行程编排",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "text": "预算核算与调整",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 3,
+   "human_difficulty": 3
+  },
+  {
+   "id": "S02",
+   "task_text": "组织一场社区篮球联赛（赛程/场地/裁判/报名）",
+   "source": "synthetic-sports",
+   "domain_tag": "sports",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "参赛队伍报名统计",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "text": "赛程编排",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "text": "场地与时间协调",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "text": "裁判与工作人员安排",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.5
+     },
+     {
+      "text": "赛事规则与通知发布",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "expected_fragments": 3,
+   "human_difficulty": 4
+  },
+  {
+   "id": "S03",
+   "task_text": "马拉松赛事筹备（路线/补给/医疗/志愿者）",
+   "source": "synthetic-sports",
+   "domain_tag": "sports",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "赛道勘测与路线规划",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "text": "补给站布置方案",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "text": "医疗保障体系搭建",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "text": "志愿者招募与培训",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "text": "应急预案编制",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "text": "赛事宣传与报名",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   },
+   "expected_fragments": 4,
+   "human_difficulty": 4
+  },
+  {
+   "id": "S04",
+   "task_text": "健身房年卡用户定制训练计划（评估/计划/饮食/跟踪）",
+   "source": "synthetic-sports",
+   "domain_tag": "sports",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "体测与目标评估",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "text": "个性化训练计划制定",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "text": "饮食方案搭配",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "text": "训练进度跟踪",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "S05",
+   "task_text": "户外徒步团 3 日行程（路线/装备/安全/天气）",
+   "source": "synthetic-sports",
+   "domain_tag": "sports",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "路线强度与难度评估",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "装备清单制定",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "天气与风险研判",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "应急预案与通讯保障",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "S06",
+   "task_text": "城市骑行活动策划（路线/保险/后勤/宣传）",
+   "source": "synthetic-sports",
+   "domain_tag": "sports",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "骑行路线勘察",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "text": "参与者保险办理",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "low",
+      "deliverable": "data",
+      "weight": 0.5
+     },
+     {
+      "text": "后勤补给与保障",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "管理"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "text": "活动宣传与报名",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "R01",
+   "task_text": "创建一位幻想 RPG 角色卡（背景/属性/技能/关系网）",
+   "source": "synthetic-rpg",
+   "domain_tag": "rpg",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "角色背景故事构思",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "text": "属性与技能体系设计",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "text": "装备与物品清单",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "人际关系网络设定",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "R02",
+   "task_text": "设计一条多分支剧情线（主线/分支/结局/隐藏要素）",
+   "source": "synthetic-rpg",
+   "domain_tag": "rpg",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "主线剧情框架",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "text": "分支选项设计",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "text": "结局多样性规划",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "text": "隐藏要素埋设",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "R03",
+   "task_text": "构建酒馆场景世界观设定（地理/势力/历史/冲突）",
+   "source": "synthetic-rpg",
+   "domain_tag": "rpg",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "地理与城邦设定",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "text": "势力与派系设计",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "text": "历史年表编写",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "text": "核心冲突与悬念",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "R04",
+   "task_text": "编写 NPC 互动对话树（性格/话题/反应/任务线）",
+   "source": "synthetic-rpg",
+   "domain_tag": "rpg",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "NPC 性格与口吻设定",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "text": "对话话题分支",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "text": "情绪反应规则",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "text": "任务线挂钩设计",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "R05",
+   "task_text": "设计一场 D&D 风格遭遇战（敌人/地形/奖励/平衡）",
+   "source": "synthetic-rpg",
+   "domain_tag": "rpg",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "敌人强度与数量设计",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "text": "地形与掩体布局",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "战利品与奖励表",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "text": "难度平衡校验",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "评审"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "R06",
+   "task_text": "生成沉浸式开场叙事（氛围/视角/悬念/钩子）",
+   "source": "synthetic-rpg",
+   "domain_tag": "rpg",
+   "dag_spec": {
+    "nodes": [
+     {
+      "text": "场景氛围渲染",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "text": "叙事视角选择",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "text": "悬念设置",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "text": "玩家钩子设计",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "expected_fragments": 2,
+   "human_difficulty": 3
+  },
+  {
+   "id": "D45",
+   "domain_tag": "banking",
+   "human_difficulty": 5,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "存量核心系统诊断",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "调研"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.7
+    },
+    {
+     "id": "n2",
+     "text": "核心重构方案设计",
+     "domain": {
+      "写作": 0.9
+     },
+     "trades": [
+      "创作"
+     ],
+     "complexity": "high",
+     "deliverable": "text",
+     "weight": 0.8
+    },
+    {
+     "id": "n3",
+     "text": "核心账务引擎重写",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "并行运行与切换",
+     "domain": {
+      "数据": 0.8
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.8
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ]
+   ],
+   "expected_fragments": 4,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "存量核心系统诊断",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "调研"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "核心重构方案设计",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "核心账务引擎重写",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "并行运行与切换",
+      "domain": {
+       "数据": 0.8
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "task_text": "核心银行系统现代化改造",
+   "source": "dataset-v5.1"
+  },
+  {
+   "id": "D46",
+   "domain_tag": "telecom",
+   "human_difficulty": 5,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "核心网云化方案设计",
+     "domain": {
+      "写作": 0.9
+     },
+     "trades": [
+      "创作"
+     ],
+     "complexity": "high",
+     "deliverable": "text",
+     "weight": 0.8
+    },
+    {
+     "id": "n2",
+     "text": "网络功能虚拟化开发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n3",
+     "text": "网络数据迁移",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "全网割接与保障",
+     "domain": {
+      "编程": 0.8
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.8
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ]
+   ],
+   "expected_fragments": 4,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "核心网云化方案设计",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "网络功能虚拟化开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "网络数据迁移",
+      "domain": {
+       "数据": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "全网割接与保障",
+      "domain": {
+       "编程": 0.8
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "task_text": "5G 核心网云化改造",
+   "source": "dataset-v5.1"
+  },
+  {
+   "id": "D47",
+   "domain_tag": "rpg",
+   "human_difficulty": 4,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "副本玩法重构设计",
+     "domain": {
+      "写作": 0.9
+     },
+     "trades": [
+      "创作"
+     ],
+     "complexity": "high",
+     "deliverable": "text",
+     "weight": 0.7
+    },
+    {
+     "id": "n2",
+     "text": "战斗数值体系重做",
+     "domain": {
+      "分析": 0.9
+     },
+     "trades": [
+      "分析"
+     ],
+     "complexity": "high",
+     "deliverable": "decision",
+     "weight": 0.8
+    },
+    {
+     "id": "n3",
+     "text": "副本引擎重构开发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "回归评测与平衡",
+     "domain": {
+      "编程": 0.7
+     },
+     "trades": [
+      "测试"
+     ],
+     "complexity": "mid",
+     "deliverable": "code",
+     "weight": 0.5
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ]
+   ],
+   "expected_fragments": 4,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "副本玩法重构设计",
+      "domain": {
+       "写作": 0.9
+      },
+      "trades": [
+       "创作"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "战斗数值体系重做",
+      "domain": {
+       "分析": 0.9
+      },
+      "trades": [
+       "分析"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "副本引擎重构开发",
+      "domain": {
+       "编程": 0.9
+      },
+      "trades": [
+       "实现"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "回归评测与平衡",
+      "domain": {
+       "编程": 0.7
+      },
+      "trades": [
+       "测试"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "task_text": "大型副本系统重构",
+   "source": "dataset-v5.1"
+  }
+ ]
+}

@@ -1,0 +1,128 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    # 与开发环境同平台（Windows——路径/编码语义一致）
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest ruff jieba requests textual mcp
+
+      - name: 引擎测试
+        run: python -m pytest wuxing/tests/ -q
+
+      - name: 算法层回归
+        run: python -m pytest golden_ratio/tests/ -q
+
+      - name: 静态检查（保留类外 0；F-2/D1 扩展至算法层与工程脚本）
+        run: python -m ruff check wuxing golden_ratio scripts e2e --ignore BLE001,S110,B017
+
+      - name: 协议对拍（契约源 → TS）
+        run: python -m scripts.gen_protocol_ts --check
+
+  node:
+    # TS 壳工作区（类型/单测/构建）——跳过 Electron 二进制下载（CI 不需要）
+    runs-on: windows-latest
+    timeout-minutes: 15
+    env:
+      ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
+    defaults:
+      run:
+        working-directory: apps/shell
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: apps/shell/package-lock.json
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 类型检查
+        run: npm run typecheck
+
+      - name: 架构红线检查
+        run: npm run check:arch
+
+      - name: 前端单测
+        run: npm test
+
+      - name: 构建
+        run: npm run build
+
+  e2e:
+    # 壳 E2E 全量（U14）：windows-latest + 预装 Edge；push/PR 全量跑
+    runs-on: windows-latest
+    timeout-minutes: 45
+    env:
+      PYTHONUTF8: "1"
+      ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Python 依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install jieba requests textual mcp
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: |
+            apps/shell/package-lock.json
+            e2e/shell/package-lock.json
+
+      - name: 前端构建并部署（static/next）
+        working-directory: apps/shell
+        run: |
+          npm ci
+          npm run deploy
+
+      - name: E2E 依赖安装
+        working-directory: e2e/shell
+        run: npm ci
+
+      - name: 浏览器可用性检查（严检——缺 Edge 直接失败）
+        shell: pwsh
+        run: |
+          $edge = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+          if (-not (Test-Path $edge)) { throw "Edge 未找到：$edge" }
+
+      - name: E2E 全量套件
+        run: python e2e/shell/run_all.py
+
+      - name: 仓库清洁检查（防夹具/构建写穿入库路径）
+        shell: pwsh
+        run: |
+          $s = git status --porcelain
+          if ($s) { Write-Error "工作树被污染：`n$s"; exit 1 }
+
+      - name: 失败证据上传
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-artifacts
+          path: e2e/shell/.runtime/artifacts/

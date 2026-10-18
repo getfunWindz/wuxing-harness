@@ -1,0 +1,196 @@
+{
+  "version": "v1",
+  "llm": "deepseek:deepseek-chat",
+  "real_shape": true,
+  "items": {
+    "n_tasks": 8,
+    "status_dist": {
+      "partial": 8
+    },
+    "metrics": {
+      "done_rate": 0.0,
+      "avg_steps_per_unit": 4.08,
+      "tool_correctness": {
+        "ok": 291,
+        "error": 0,
+        "blocked": 104
+      },
+      "tools_total": 395,
+      "tool_error_rate": 0.2633,
+      "retry_calls": 234,
+      "delegate_blocked": 0,
+      "verdict_fails": 0
+    },
+    "workdir": "C:\\Users\\GETFUN~1\\AppData\\Local\\Temp\\wuxing-eval-rwnl5iv2",
+    "tasks": [
+      {
+        "id": "cal-T17",
+        "suite": "calibration_tasks",
+        "status": "partial",
+        "metrics": {
+          "task_status": "partial",
+          "unit_ok_rate": 0.125,
+          "llm_calls": 33,
+          "steps_per_unit": 4.12,
+          "tool_correctness": {
+            "ok": 39,
+            "error": 0,
+            "blocked": 25
+          },
+          "tools_total": 64,
+          "tool_error_rate": 0.3906,
+          "retry_calls": 55,
+          "delegate_blocked": 0,
+          "verdict_fails": 0
+        }
+      },
+      {
+        "id": "cal-T13",
+        "suite": "calibration_tasks",
+        "status": "partial",
+        "metrics": {
+          "task_status": "partial",
+          "unit_ok_rate": 0.2857,
+          "llm_calls": 29,
+          "steps_per_unit": 4.14,
+          "tool_correctness": {
+            "ok": 41,
+            "error": 0,
+            "blocked": 12
+          },
+          "tools_total": 53,
+          "tool_error_rate": 0.2264,
+          "retry_calls": 26,
+          "delegate_blocked": 0,
+          "verdict_fails": 0
+        }
+      },
+      {
+        "id": "cal-T10",
+        "suite": "calibration_tasks",
+        "status": "partial",
+        "metrics": {
+          "task_status": "partial",
+          "unit_ok_rate": 0.75,
+          "llm_calls": 17,
+          "steps_per_unit": 4.25,
+          "tool_correctness": {
+            "ok": 22,
+            "error": 0,
+            "blocked": 2
+          },
+          "tools_total": 24,
+          "tool_error_rate": 0.0833,
+          "retry_calls": 7,
+          "delegate_blocked": 0,
+          "verdict_fails": 0
+        }
+      },
+      {
+        "id": "cal-T27",
+        "suite": "calibration_tasks",
+        "status": "partial",
+        "metrics": {
+          "task_status": "partial",
+          "unit_ok_rate": 0.2857,
+          "llm_calls": 27,
+          "steps_per_unit": 3.86,
+          "tool_correctness": {
+            "ok": 30,
+            "error": 0,
+            "blocked": 7
+          },
+          "tools_total": 37,
+          "tool_error_rate": 0.1892,
+          "retry_calls": 8,
+          "delegate_blocked": 0,
+          "verdict_fails": 0
+        }
+      },
+      {
+        "id": "meg-M15",
+        "suite": "mega_tasks",
+        "status": "partial",
+        "metrics": {
+          "task_status": "partial",
+          "unit_ok_rate": 0.2,
+          "llm_calls": 20,
+          "steps_per_unit": 4.0,
+          "tool_correctness": {
+            "ok": 23,
+            "error": 0,
+            "blocked": 11
+          },
+          "tools_total": 34,
+          "tool_error_rate": 0.3235,
+          "retry_calls": 24,
+          "delegate_blocked": 0,
+          "verdict_fails": 0
+        }
+      },
+      {
+        "id": "meg-M18",
+        "suite": "mega_tasks",
+        "status": "partial",
+        "metrics": {
+          "task_status": "partial",
+          "unit_ok_rate": 0.2857,
+          "llm_calls": 27,
+          "steps_per_unit": 3.86,
+          "tool_correctness": {
+            "ok": 35,
+            "error": 0,
+            "blocked": 0
+          },
+          "tools_total": 35,
+          "tool_error_rate": 0.0,
+          "retry_calls": 8,
+          "delegate_blocked": 0,
+          "verdict_fails": 0
+        }
+      },
+      {
+        "id": "meg-M08",
+        "suite": "mega_tasks",
+        "status": "partial",
+        "metrics": {
+          "task_status": "partial",
+          "unit_ok_rate": 0.2857,
+          "llm_calls": 30,
+          "steps_per_unit": 4.29,
+          "tool_correctness": {
+            "ok": 42,
+            "error": 0,
+            "blocked": 2
+          },
+          "tools_total": 44,
+          "tool_error_rate": 0.0455,
+          "retry_calls": 15,
+          "delegate_blocked": 0,
+          "verdict_fails": 0
+        }
+      },
+      {
+        "id": "meg-M11",
+        "suite": "mega_tasks",
+        "status": "partial",
+        "metrics": {
+          "task_status": "partial",
+          "unit_ok_rate": 0.1,
+          "llm_calls": 41,
+          "steps_per_unit": 4.1,
+          "tool_correctness": {
+            "ok": 59,
+            "error": 0,
+            "blocked": 45
+          },
+          "tools_total": 104,
+          "tool_error_rate": 0.4327,
+          "retry_calls": 91,
+          "delegate_blocked": 0,
+          "verdict_fails": 0
+        }
+      }
+    ]
+  }
+}

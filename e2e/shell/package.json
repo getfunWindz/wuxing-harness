@@ -1,0 +1,7 @@
+{
+  "name": "wuxing-e2e-shell",
+  "private": true,
+  "dependencies": {
+    "puppeteer-core": "^25.10.0"
+  }
+}

@@ -1,0 +1,73 @@
+name: WuxingShell
+options:
+  bundleIdPrefix: com.wuxing
+  deploymentTarget:
+    iOS: "18.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    SWIFT_STRICT_CONCURRENCY: minimal
+    TARGETED_DEVICE_FAMILY: "1"
+    CODE_SIGNING_ALLOWED: "NO"
+    CODE_SIGNING_REQUIRED: "NO"
+    CODE_SIGN_IDENTITY: ""
+    CODE_SIGN_STYLE: Manual
+    DEVELOPMENT_TEAM: ""
+    ENABLE_USER_SCRIPT_SANDBOXING: "NO"
+  configs:
+    Debug:
+      ONLY_ACTIVE_ARCH: "YES"
+    Release:
+      ONLY_ACTIVE_ARCH: "NO"
+packages:
+  WuxingCore:
+    path: Core
+targets:
+  WuxingShell:
+    type: application
+    platform: iOS
+    sources:
+      - path: WuxingShell
+        excludes:
+          - "Resources/Info.plist"
+    dependencies:
+      - package: WuxingCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.wuxing.shell
+        PRODUCT_NAME: WuxingShell
+        INFOPLIST_FILE: WuxingShell/Resources/Info.plist
+        GENERATE_INFOPLIST_FILE: "NO"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SUPPORTS_MACCATALYST: "NO"
+        TARGETED_DEVICE_FAMILY: "1"
+  WuxingShellTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: WuxingShellTests
+    dependencies:
+      - target: WuxingShell
+      - package: WuxingCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.wuxing.shell.tests
+        GENERATE_INFOPLIST_FILE: "YES"
+schemes:
+  WuxingShell:
+    build:
+      targets:
+        WuxingShell: all
+        WuxingShellTests: [test]
+    test:
+      targets:
+        - WuxingShellTests
+    run:
+      config: Debug
+    archive:
+      config: Release

@@ -1,0 +1,221 @@
+{
+  "version": "v1",
+  "llm": "mock",
+  "real_shape": false,
+  "items": {
+    "n_tasks": 5,
+    "status_dist": {
+      "done": 5
+    },
+    "cache_scope": "task-internal",
+    "metrics": {
+      "done_rate": 1.0,
+      "avg_steps_per_unit": 1.0,
+      "tool_correctness": {
+        "ok": 13,
+        "error": 0,
+        "blocked": 0
+      },
+      "tools_total": 13,
+      "tool_error_rate": 0.0,
+      "retry_calls": 3,
+      "delegate_blocked": 0,
+      "verdict_fails": 0,
+      "cache_prefix_breaks": 0
+    },
+    "cache": {
+      "avg_cache_read_ratio": 0.0,
+      "avg_reply_hit_rate": 0.0,
+      "avg_shape_hit_rate": 0.0
+    },
+    "workdir": "C:\\Users\\GETFUN~1\\AppData\\Local\\Temp\\wuxing-eval-1gcec46q",
+    "tasks": [
+      {
+        "id": "cal-T17",
+        "suite": "calibration_tasks",
+        "status": "done",
+        "metrics": {
+          "task_status": "done",
+          "unit_ok_rate": 1.0,
+          "llm_calls": 5,
+          "steps_per_unit": 1.0,
+          "tool_correctness": {
+            "ok": 5,
+            "error": 0,
+            "blocked": 0
+          },
+          "tools_total": 5,
+          "tool_error_rate": 0.0,
+          "retry_calls": 3,
+          "delegate_blocked": 0,
+          "verdict_fails": 0,
+          "cache_prefix_breaks": 0,
+          "failure_attribution": {
+            "provider_error": 0,
+            "no_llm_call": 0,
+            "contract_never_passed": 0,
+            "other": 0,
+            "by_domain": {}
+          },
+          "cache": {
+            "cache_read_ratio": 0.0,
+            "input_tokens": 0,
+            "cache_read_tokens": 0,
+            "cache_saved_cost": 0.0,
+            "reply_hit_rate": 0.0,
+            "shape_hit_rate": 0.0
+          }
+        }
+      },
+      {
+        "id": "cal-T13",
+        "suite": "calibration_tasks",
+        "status": "done",
+        "metrics": {
+          "task_status": "done",
+          "unit_ok_rate": 1.0,
+          "llm_calls": 2,
+          "steps_per_unit": 1.0,
+          "tool_correctness": {
+            "ok": 2,
+            "error": 0,
+            "blocked": 0
+          },
+          "tools_total": 2,
+          "tool_error_rate": 0.0,
+          "retry_calls": 0,
+          "delegate_blocked": 0,
+          "verdict_fails": 0,
+          "cache_prefix_breaks": 0,
+          "failure_attribution": {
+            "provider_error": 0,
+            "no_llm_call": 0,
+            "contract_never_passed": 0,
+            "other": 0,
+            "by_domain": {}
+          },
+          "cache": {
+            "cache_read_ratio": 0.0,
+            "input_tokens": 0,
+            "cache_read_tokens": 0,
+            "cache_saved_cost": 0.0,
+            "reply_hit_rate": 0.0,
+            "shape_hit_rate": 0.0
+          }
+        }
+      },
+      {
+        "id": "cal-T10",
+        "suite": "calibration_tasks",
+        "status": "done",
+        "metrics": {
+          "task_status": "done",
+          "unit_ok_rate": 1.0,
+          "llm_calls": 2,
+          "steps_per_unit": 1.0,
+          "tool_correctness": {
+            "ok": 2,
+            "error": 0,
+            "blocked": 0
+          },
+          "tools_total": 2,
+          "tool_error_rate": 0.0,
+          "retry_calls": 0,
+          "delegate_blocked": 0,
+          "verdict_fails": 0,
+          "cache_prefix_breaks": 0,
+          "failure_attribution": {
+            "provider_error": 0,
+            "no_llm_call": 0,
+            "contract_never_passed": 0,
+            "other": 0,
+            "by_domain": {}
+          },
+          "cache": {
+            "cache_read_ratio": 0.0,
+            "input_tokens": 0,
+            "cache_read_tokens": 0,
+            "cache_saved_cost": 0.0,
+            "reply_hit_rate": 0.0,
+            "shape_hit_rate": 0.0
+          }
+        }
+      },
+      {
+        "id": "cal-T27",
+        "suite": "calibration_tasks",
+        "status": "done",
+        "metrics": {
+          "task_status": "done",
+          "unit_ok_rate": 1.0,
+          "llm_calls": 2,
+          "steps_per_unit": 1.0,
+          "tool_correctness": {
+            "ok": 2,
+            "error": 0,
+            "blocked": 0
+          },
+          "tools_total": 2,
+          "tool_error_rate": 0.0,
+          "retry_calls": 0,
+          "delegate_blocked": 0,
+          "verdict_fails": 0,
+          "cache_prefix_breaks": 0,
+          "failure_attribution": {
+            "provider_error": 0,
+            "no_llm_call": 0,
+            "contract_never_passed": 0,
+            "other": 0,
+            "by_domain": {}
+          },
+          "cache": {
+            "cache_read_ratio": 0.0,
+            "input_tokens": 0,
+            "cache_read_tokens": 0,
+            "cache_saved_cost": 0.0,
+            "reply_hit_rate": 0.0,
+            "shape_hit_rate": 0.0
+          }
+        }
+      },
+      {
+        "id": "meg-M15",
+        "suite": "mega_tasks",
+        "status": "done",
+        "metrics": {
+          "task_status": "done",
+          "unit_ok_rate": 1.0,
+          "llm_calls": 2,
+          "steps_per_unit": 1.0,
+          "tool_correctness": {
+            "ok": 2,
+            "error": 0,
+            "blocked": 0
+          },
+          "tools_total": 2,
+          "tool_error_rate": 0.0,
+          "retry_calls": 0,
+          "delegate_blocked": 0,
+          "verdict_fails": 0,
+          "cache_prefix_breaks": 0,
+          "failure_attribution": {
+            "provider_error": 0,
+            "no_llm_call": 0,
+            "contract_never_passed": 0,
+            "other": 0,
+            "by_domain": {}
+          },
+          "cache": {
+            "cache_read_ratio": 0.0,
+            "input_tokens": 0,
+            "cache_read_tokens": 0,
+            "cache_saved_cost": 0.0,
+            "reply_hit_rate": 0.0,
+            "shape_hit_rate": 0.0
+          }
+        }
+      }
+    ]
+  },
+  "note": "2026-09-26 更新：REAL-3 路由细化（构造测试/样例资产 → execute；形状提示词节点单一职责）——retry_calls 2→3，其余指标不变（done_rate 1.0 / tools 13 / error 0 / verdict 0）。前注（2026-09-12）：语义缓存实质差异守卫生效后 avg_steps_per_unit 0.92→1.0（修正性）。"
+}

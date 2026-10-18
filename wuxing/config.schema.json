@@ -1,0 +1,194 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "max_loop_rounds": {
+      "type": "integer",
+      "description": "执行单元轮数上限"
+    },
+    "max_unit_budget": {
+      "type": "integer",
+      "description": "执行单元 LLM 调用预算（L4 真跑：3 轮不足——探索+产出+声明需≥4）"
+    },
+    "default_artifact_dir": {
+      "type": "string",
+      "description": ""
+    },
+    "default_domains": {
+      "type": "array",
+      "description": ""
+    },
+    "confirm_threshold": {
+      "type": "number",
+      "description": "0=全自动 1=全确认"
+    },
+    "confirm_threshold_difficulty": {
+      "type": "number",
+      "description": ""
+    },
+    "max_parallel_units": {
+      "type": "integer",
+      "description": "碎片并行度（目标 8/硬上限 10——用户裁决）"
+    },
+    "max_parallel_tools": {
+      "type": "integer",
+      "description": "单碎片工具批量并发上限（目标 8/硬上限 10——工具层防失控）"
+    },
+    "tool_concurrency_soft": {
+      "type": "integer",
+      "description": "分级放行软阈值（0=自动 64=8×8 目标——缓速起点）"
+    },
+    "tool_concurrency_hard": {
+      "type": "integer",
+      "description": "分级放行硬阈值（0=自动 100=10×10 硬限——阻止起点）"
+    },
+    "tool_throttle_delay_ms": {
+      "type": "integer",
+      "description": "缓速档每次获取前的节流延迟（毫秒）"
+    },
+    "use_real_shape": {
+      "type": "boolean",
+      "description": "真实形状化（默认开）：用【默认模型】拆分任务 DAG（与域级路由无关）；无凭据自动降级 mock 并在报告提示，可在设置关闭"
+    },
+    "llm": {
+      "type": "string",
+      "description": "模型规格：供应商:模型名（示例 deepseek:deepseek-v4-flash）",
+      "enum": [
+        "deepseek",
+        "openai",
+        "anthropic",
+        "responses",
+        "mock"
+      ]
+    },
+    "providers": {
+      "type": "object",
+      "description": "供应商注册表：id → {type, base_url?, credential_ref?, display_name?, models?[{{id, display_name?, context_window?, max_tokens?}}]}"
+    },
+    "router": {
+      "type": "object",
+      "description": "域级模型路由（域 → 模型规格；未指定的域用 _default）"
+    },
+    "default_tools": {
+      "type": "array",
+      "description": "全局工具白名单（引擎级工具不受过滤）"
+    },
+    "llm_max_retries": {
+      "type": "integer",
+      "description": "请求失败时的重试上限（供应商级）"
+    },
+    "llm_timeout": {
+      "type": "number",
+      "description": "单次请求超时（秒）——思考型模型长调用需适当放宽"
+    },
+    "brain_enabled": {
+      "type": "boolean",
+      "description": "智脑（默认关——验证收益后启用）"
+    },
+    "brain_max_cases": {
+      "type": "integer",
+      "description": ""
+    },
+    "cache_similar_threshold": {
+      "type": "number",
+      "description": "R3 语义缓存相似阈值（0=关闭；0.75 微漂移命中/真变体不误判）"
+    },
+    "fsc_enabled": {
+      "type": "boolean",
+      "description": "FSC 碎片会话延续（跨轮工作流键匹配复用——默认开，可自主关闭）"
+    },
+    "skill_evolution_enabled": {
+      "type": "boolean",
+      "description": "技能自进化（高效任务自评审→沉淀 SKILL.md——默认开）"
+    },
+    "progress_heartbeat_enabled": {
+      "type": "boolean",
+      "description": "进度心跳（模型自报进度→progress 事件——无固定定时器）"
+    },
+    "ui_theme": {
+      "type": "string",
+      "description": "界面主题：ink=水墨（默认）/ plain=纯白；壳读取后切换素材与品牌墨迹",
+      "enum": [
+        "ink",
+        "plain"
+      ]
+    },
+    "fsc_retention_rounds": {
+      "type": "integer",
+      "description": "FSC 会话保留轮数（K=4）"
+    },
+    "fsc_max_session_chars": {
+      "type": "integer",
+      "description": "FSC 单会话字符上限（超限不再复用）"
+    },
+    "fsc_max_reuse": {
+      "type": "integer",
+      "description": "FSC 单会话复用次数上限"
+    },
+    "fsc_total_char_budget": {
+      "type": "integer",
+      "description": "FSC 池总字符预算"
+    },
+    "fsc_fallback_digest": {
+      "type": "boolean",
+      "description": "低匹配回退：上一轮全部碎片上下文压缩 → 本轮前缀注入"
+    },
+    "fsc_digest_max_chars": {
+      "type": "integer",
+      "description": "跨轮碎片摘要字符上限（低匹配回退）"
+    },
+    "model_context_windows": {
+      "type": "object",
+      "description": "模型→上下文窗口表（API 不返回——实测；配置可覆盖）"
+    },
+    "default_context_window": {
+      "type": "integer",
+      "description": "未知模型窗口兜底"
+    },
+    "fsc_audit_ratio": {
+      "type": "number",
+      "description": "会话 60% 严格审查阈值（方案 A）"
+    },
+    "fsc_switch_ratio": {
+      "type": "number",
+      "description": "会话 80% 切换新会话阈值"
+    },
+    "confirm_auto": {
+      "type": "boolean",
+      "description": "人工介入：False=默认人工确认（interrupt on），True=全自动（CI/headless）"
+    },
+    "resources": {
+      "type": "object",
+      "description": "外部资源声明 {name: {type: file|dir|url, path, optional}}——配置生态面"
+    },
+    "context_max_chars": {
+      "type": "integer",
+      "description": "工具结果压缩阈值（字符——头尾保留+中间摘要；压缩点不破前缀）"
+    },
+    "context_tool_limits": {
+      "type": "object",
+      "description": "按工具来源的压缩上限（字符）——未列出工具用 context_max_chars"
+    },
+    "sandbox_enabled": {
+      "type": "boolean",
+      "description": "原生沙箱（R3-2）：工作目录限定于工作区 + 敏感环境变量剥离；网络允许；完整性 partial（原生强制能力有限）"
+    },
+    "mcp_servers": {
+      "type": "array",
+      "description": "MCP 服务列表：名称 + 启动命令 + 参数 + 权限声明；未声明权限的工具默认拦截"
+    },
+    "tool_retrieval_threshold": {
+      "type": "integer",
+      "description": "工具检索阈值：工具数超过才启用 top-k（0=关闭——小工具集零折腾）"
+    },
+    "tool_retrieval_top_k": {
+      "type": "integer",
+      "description": "工具检索 top-k 选择数"
+    },
+    "task_context_max_chars": {
+      "type": "integer",
+      "description": "任务背景投影阈值（确定性截断——碎片聚焦；0=关闭投影）"
+    }
+  },
+  "additionalProperties": false
+}

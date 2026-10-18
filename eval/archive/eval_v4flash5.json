@@ -1,0 +1,179 @@
+{
+  "version": "v1",
+  "llm": "deepseek:deepseek-v4-flash",
+  "real_shape": true,
+  "items": {
+    "n_tasks": 5,
+    "status_dist": {
+      "partial": 4,
+      "done": 1
+    },
+    "metrics": {
+      "done_rate": 0.2,
+      "avg_steps_per_unit": 2.3,
+      "tool_correctness": {
+        "ok": 157,
+        "error": 1,
+        "blocked": 14
+      },
+      "tools_total": 172,
+      "tool_error_rate": 0.0872,
+      "retry_calls": 67,
+      "delegate_blocked": 0,
+      "verdict_fails": 0
+    },
+    "cache": {
+      "avg_cache_read_ratio": 0.7279,
+      "avg_reply_hit_rate": 0.0,
+      "avg_shape_hit_rate": 0.0
+    },
+    "workdir": "C:\\Users\\GETFUN~1\\AppData\\Local\\Temp\\wuxing-eval-7xentosa",
+    "tasks": [
+      {
+        "id": "cal-T17",
+        "suite": "calibration_tasks",
+        "status": "partial",
+        "metrics": {
+          "task_status": "partial",
+          "unit_ok_rate": 0.7143,
+          "llm_calls": 22,
+          "steps_per_unit": 3.14,
+          "tool_correctness": {
+            "ok": 59,
+            "error": 0,
+            "blocked": 3
+          },
+          "tools_total": 62,
+          "tool_error_rate": 0.0484,
+          "retry_calls": 18,
+          "delegate_blocked": 0,
+          "verdict_fails": 0,
+          "cache": {
+            "cache_read_ratio": 0.6727,
+            "input_tokens": 104279,
+            "cache_read_tokens": 70144,
+            "cache_saved_cost": 0.0631,
+            "reply_hit_rate": 0.0,
+            "shape_hit_rate": 0.0
+          }
+        }
+      },
+      {
+        "id": "cal-T13",
+        "suite": "calibration_tasks",
+        "status": "partial",
+        "metrics": {
+          "task_status": "partial",
+          "unit_ok_rate": 0.3333,
+          "llm_calls": 7,
+          "steps_per_unit": 1.17,
+          "tool_correctness": {
+            "ok": 15,
+            "error": 0,
+            "blocked": 2
+          },
+          "tools_total": 17,
+          "tool_error_rate": 0.1176,
+          "retry_calls": 5,
+          "delegate_blocked": 0,
+          "verdict_fails": 0,
+          "cache": {
+            "cache_read_ratio": 0.717,
+            "input_tokens": 17852,
+            "cache_read_tokens": 12800,
+            "cache_saved_cost": 0.0115,
+            "reply_hit_rate": 0.0,
+            "shape_hit_rate": 0.0
+          }
+        }
+      },
+      {
+        "id": "cal-T10",
+        "suite": "calibration_tasks",
+        "status": "done",
+        "metrics": {
+          "task_status": "done",
+          "unit_ok_rate": 1.0,
+          "llm_calls": 6,
+          "steps_per_unit": 3.0,
+          "tool_correctness": {
+            "ok": 6,
+            "error": 0,
+            "blocked": 0
+          },
+          "tools_total": 6,
+          "tool_error_rate": 0.0,
+          "retry_calls": 0,
+          "delegate_blocked": 0,
+          "verdict_fails": 0,
+          "cache": {
+            "cache_read_ratio": 0.7701,
+            "input_tokens": 20609,
+            "cache_read_tokens": 15872,
+            "cache_saved_cost": 0.0143,
+            "reply_hit_rate": 0.0,
+            "shape_hit_rate": 0.0
+          }
+        }
+      },
+      {
+        "id": "cal-T27",
+        "suite": "calibration_tasks",
+        "status": "partial",
+        "metrics": {
+          "task_status": "partial",
+          "unit_ok_rate": 0.4286,
+          "llm_calls": 5,
+          "steps_per_unit": 0.71,
+          "tool_correctness": {
+            "ok": 5,
+            "error": 1,
+            "blocked": 2
+          },
+          "tools_total": 8,
+          "tool_error_rate": 0.375,
+          "retry_calls": 0,
+          "delegate_blocked": 0,
+          "verdict_fails": 0,
+          "cache": {
+            "cache_read_ratio": 0.7936,
+            "input_tokens": 8226,
+            "cache_read_tokens": 6528,
+            "cache_saved_cost": 0.0059,
+            "reply_hit_rate": 0.0,
+            "shape_hit_rate": 0.0
+          }
+        }
+      },
+      {
+        "id": "meg-M15",
+        "suite": "mega_tasks",
+        "status": "partial",
+        "metrics": {
+          "task_status": "partial",
+          "unit_ok_rate": 0.875,
+          "llm_calls": 28,
+          "steps_per_unit": 3.5,
+          "tool_correctness": {
+            "ok": 72,
+            "error": 0,
+            "blocked": 7
+          },
+          "tools_total": 79,
+          "tool_error_rate": 0.0886,
+          "retry_calls": 44,
+          "delegate_blocked": 0,
+          "verdict_fails": 0,
+          "cache": {
+            "cache_read_ratio": 0.6862,
+            "input_tokens": 280178,
+            "cache_read_tokens": 192256,
+            "cache_saved_cost": 0.173,
+            "reply_hit_rate": 0.0,
+            "shape_hit_rate": 0.0
+          }
+        }
+      }
+    ]
+  }
+}

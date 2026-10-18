@@ -1,0 +1,3528 @@
+{
+ "meta": {
+  "source": "real_shape_outputs",
+  "generated_by": "stage2_build.py",
+  "note": "真实形状化 DAG + 公式口径重标定期望（人工语义原值留痕 expected_fragments_human）",
+  "ds_bins_calibrated": [
+   3.5475,
+   5.0385,
+   5.0645,
+   5.224
+  ],
+  "ds_bins_note": "suite-aware (矩阵最优)：V0 公式回归",
+  "ds_formula": "V1-scale-node(w=0.25)+anti-collapse(lambda=0.3)"
+ },
+ "tasks": [
+  {
+   "id": "M01",
+   "task_text": "为企业部署一套完整的 ERP 系统（财务/供应链/生产/人力四大模块）",
+   "human_difficulty": 5,
+   "expected_fragments": 10,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "项目启动与规划",
+      "domain": {
+       "项目管理": 0.7,
+       "ERP实施": 0.3
+      },
+      "trades": [
+       "项目经理",
+       "ERP顾问"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "需求调研与分析",
+      "domain": {
+       "需求分析": 0.6,
+       "ERP实施": 0.4
+      },
+      "trades": [
+       "业务分析师",
+       "ERP顾问"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.95
+     },
+     {
+      "id": "n3",
+      "text": "系统蓝图设计",
+      "domain": {
+       "系统设计": 0.5,
+       "ERP实施": 0.5
+      },
+      "trades": [
+       "解决方案架构师",
+       "ERP顾问"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 1.0
+     },
+     {
+      "id": "n4",
+      "text": "财务模块实施",
+      "domain": {
+       "财务管理": 0.6,
+       "ERP实施": 0.4
+      },
+      "trades": [
+       "财务顾问",
+       "实施工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "供应链模块实施",
+      "domain": {
+       "供应链管理": 0.6,
+       "ERP实施": 0.4
+      },
+      "trades": [
+       "供应链顾问",
+       "实施工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.85
+     },
+     {
+      "id": "n6",
+      "text": "生产模块实施",
+      "domain": {
+       "生产管理": 0.6,
+       "ERP实施": 0.4
+      },
+      "trades": [
+       "生产顾问",
+       "实施工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n7",
+      "text": "人力模块实施",
+      "domain": {
+       "人力资源管理": 0.6,
+       "ERP实施": 0.4
+      },
+      "trades": [
+       "人力顾问",
+       "实施工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.75
+     },
+     {
+      "id": "n8",
+      "text": "系统集成与数据迁移",
+      "domain": {
+       "系统集成": 0.5,
+       "数据管理": 0.5
+      },
+      "trades": [
+       "系统集成工程师",
+       "数据迁移专家"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.95
+     },
+     {
+      "id": "n9",
+      "text": "测试与验收",
+      "domain": {
+       "质量保证": 0.6,
+       "ERP实施": 0.4
+      },
+      "trades": [
+       "QA工程师",
+       "项目经理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.85
+     },
+     {
+      "id": "n10",
+      "text": "上线与培训",
+      "domain": {
+       "变更管理": 0.5,
+       "培训": 0.5
+      },
+      "trades": [
+       "培训师",
+       "项目经理"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.8
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n3",
+      "n7"
+     ],
+     [
+      "n4",
+      "n8"
+     ],
+     [
+      "n5",
+      "n8"
+     ],
+     [
+      "n6",
+      "n8"
+     ],
+     [
+      "n7",
+      "n8"
+     ],
+     [
+      "n8",
+      "n9"
+     ],
+     [
+      "n9",
+      "n10"
+     ]
+    ]
+   },
+   "shape_n_nodes": 10,
+   "shape_total_effort_real": 370.97,
+   "expected_fragments_human": 20,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "M02",
+   "task_text": "对现有电商平台进行全栈重构（前端/后端/数据三层）",
+   "human_difficulty": 5,
+   "expected_fragments": 8,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "需求分析与架构设计",
+      "domain": {
+       "架构": 0.8,
+       "需求": 0.2
+      },
+      "trades": [
+       "架构师"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "数据库模型重构",
+      "domain": {
+       "数据": 1.0
+      },
+      "trades": [
+       "数据库管理员"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.85
+     },
+     {
+      "id": "n3",
+      "text": "后端API重构",
+      "domain": {
+       "后端": 0.9,
+       "API": 0.1
+      },
+      "trades": [
+       "后端工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "前端UI重构",
+      "domain": {
+       "前端": 1.0
+      },
+      "trades": [
+       "前端工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.85
+     },
+     {
+      "id": "n5",
+      "text": "数据迁移与同步",
+      "domain": {
+       "数据": 0.7,
+       "迁移": 0.3
+      },
+      "trades": [
+       "数据工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n6",
+      "text": "集成测试",
+      "domain": {
+       "测试": 0.9,
+       "集成": 0.1
+      },
+      "trades": [
+       "测试工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n7",
+      "text": "性能优化",
+      "domain": {
+       "性能": 0.6,
+       "后端": 0.2,
+       "前端": 0.2
+      },
+      "trades": [
+       "性能工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.75
+     },
+     {
+      "id": "n8",
+      "text": "部署上线",
+      "domain": {
+       "运维": 1.0
+      },
+      "trades": [
+       "运维工程师"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.95
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n4",
+      "n7"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ]
+    ]
+   },
+   "shape_n_nodes": 8,
+   "shape_total_effort_real": 314.24,
+   "expected_fragments_human": 17,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "M03",
+   "task_text": "建设企业级数据中台（采集/清洗/建模/服务/治理五层）",
+   "human_difficulty": 4,
+   "expected_fragments": 8,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "需求分析与整体规划",
+      "domain": {
+       "数据战略": 1.0
+      },
+      "trades": [
+       "数据架构师"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "数据采集层建设",
+      "domain": {
+       "数据采集": 1.0
+      },
+      "trades": [
+       "数据工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "数据清洗层建设",
+      "domain": {
+       "数据清洗": 1.0
+      },
+      "trades": [
+       "数据工程师",
+       "ETL工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.85
+     },
+     {
+      "id": "n4",
+      "text": "数据建模层建设",
+      "domain": {
+       "数据建模": 1.0
+      },
+      "trades": [
+       "数据建模师",
+       "数据工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "数据服务层建设",
+      "domain": {
+       "数据服务": 1.0
+      },
+      "trades": [
+       "后端开发工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n6",
+      "text": "数据治理层建设",
+      "domain": {
+       "数据治理": 1.0
+      },
+      "trades": [
+       "数据治理专家"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.95
+     },
+     {
+      "id": "n7",
+      "text": "集成与测试",
+      "domain": {
+       "系统集成": 1.0
+      },
+      "trades": [
+       "测试工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n8",
+      "text": "上线与运维",
+      "domain": {
+       "运维": 1.0
+      },
+      "trades": [
+       "运维工程师"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n1",
+      "n6"
+     ],
+     [
+      "n5",
+      "n7"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ]
+    ]
+   },
+   "note_expect_fix": "v5.1: 人工期望18>节点数15不可达，修正为15",
+   "shape_n_nodes": 8,
+   "shape_total_effort_real": 284.62,
+   "expected_fragments_human": 15,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 5,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "M04",
+   "task_text": "撰写并出版一份行业技术白皮书（调研/写作/评审/排版/发布）",
+   "human_difficulty": 3,
+   "expected_fragments": 4,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "调研",
+      "domain": {
+       "技术研究": 1.0
+      },
+      "trades": [
+       "技术分析师"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "写作",
+      "domain": {
+       "技术文档": 1.0
+      },
+      "trades": [
+       "技术编辑",
+       "内容策略师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 1.0
+     },
+     {
+      "id": "n3",
+      "text": "评审",
+      "domain": {
+       "技术审核": 1.0
+      },
+      "trades": [
+       "评审专家"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "排版",
+      "domain": {
+       "设计出版": 1.0
+      },
+      "trades": [
+       "排版设计师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n5",
+      "text": "发布",
+      "domain": {
+       "市场营销": 1.0
+      },
+      "trades": [
+       "出版经理"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   },
+   "shape_n_nodes": 5,
+   "shape_total_effort_real": 129.39,
+   "expected_fragments_human": 10,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 4,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "M05",
+   "task_text": "银行核心系统迁移（评估/改造/双跑/切换/验证全流程）",
+   "human_difficulty": 5,
+   "expected_fragments": 7,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "现状评估与风险分析",
+      "domain": {
+       "银行": 0.7,
+       "风险管理": 0.3
+      },
+      "trades": [
+       "业务分析师",
+       "系统架构师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "迁移方案设计",
+      "domain": {
+       "银行": 0.5,
+       "IT": 0.5
+      },
+      "trades": [
+       "系统架构师",
+       "项目经理"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "系统改造与开发",
+      "domain": {
+       "银行": 0.3,
+       "IT": 0.7
+      },
+      "trades": [
+       "开发工程师",
+       "测试工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "数据迁移与准备",
+      "domain": {
+       "银行": 0.4,
+       "数据": 0.6
+      },
+      "trades": [
+       "DBA",
+       "数据工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n5",
+      "text": "双轨并行运行",
+      "domain": {
+       "银行": 0.5,
+       "IT": 0.5
+      },
+      "trades": [
+       "测试工程师",
+       "业务分析师"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n6",
+      "text": "切换上线",
+      "domain": {
+       "银行": 0.6,
+       "IT": 0.4
+      },
+      "trades": [
+       "运维工程师",
+       "项目经理"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.95
+     },
+     {
+      "id": "n7",
+      "text": "业务验证与优化",
+      "domain": {
+       "银行": 0.7,
+       "IT": 0.3
+      },
+      "trades": [
+       "业务分析师",
+       "测试工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ]
+    ]
+   },
+   "shape_n_nodes": 7,
+   "shape_total_effort_real": 310.58,
+   "expected_fragments_human": 18,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "M06",
+   "task_text": "城市级智慧交通平台（感知/分析/调度/信息服务四大子系统）",
+   "human_difficulty": 5,
+   "expected_fragments": 9,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "平台总体架构与需求设计",
+      "domain": {
+       "智慧交通": 0.6,
+       "软件工程": 0.4
+      },
+      "trades": [
+       "系统架构师",
+       "产品经理"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "感知子系统-传感器与GPS数据接入",
+      "domain": {
+       "物联网": 0.5,
+       "智慧交通": 0.3,
+       "数据工程": 0.2
+      },
+      "trades": [
+       "嵌入式工程师",
+       "数据工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "感知子系统-视频图像处理与识别",
+      "domain": {
+       "计算机视觉": 0.6,
+       "智慧交通": 0.3,
+       "人工智能": 0.1
+      },
+      "trades": [
+       "算法工程师",
+       "图像处理工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "分析子系统-多源数据融合与清洗",
+      "domain": {
+       "大数据": 0.5,
+       "数据工程": 0.3,
+       "智慧交通": 0.2
+      },
+      "trades": [
+       "数据工程师",
+       "算法工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "分析子系统-交通流预测模型与分析",
+      "domain": {
+       "机器学习": 0.5,
+       "智慧交通": 0.4,
+       "统计": 0.1
+      },
+      "trades": [
+       "算法工程师",
+       "数据科学家"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "调度子系统-信号灯智能优化算法",
+      "domain": {
+       "智慧交通": 0.6,
+       "运筹优化": 0.3,
+       "机器学习": 0.1
+      },
+      "trades": [
+       "算法工程师",
+       "交通工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n7",
+      "text": "调度子系统-公交调度与应急响应",
+      "domain": {
+       "智慧交通": 0.5,
+       "运筹优化": 0.3,
+       "应急管理": 0.2
+      },
+      "trades": [
+       "交通工程师",
+       "决策分析师"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.6
+     },
+     {
+      "id": "n8",
+      "text": "信息服务子系统-动态诱导与信息发布平台",
+      "domain": {
+       "软件工程": 0.4,
+       "智慧交通": 0.4,
+       "用户体验": 0.2
+      },
+      "trades": [
+       "全栈工程师",
+       "产品经理"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n9",
+      "text": "系统集成与整体测试",
+      "domain": {
+       "软件工程": 0.5,
+       "系统工程": 0.3,
+       "智慧交通": 0.2
+      },
+      "trades": [
+       "测试工程师",
+       "系统架构师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.95
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n4",
+      "n7"
+     ],
+     [
+      "n5",
+      "n7"
+     ],
+     [
+      "n4",
+      "n8"
+     ],
+     [
+      "n5",
+      "n8"
+     ],
+     [
+      "n6",
+      "n8"
+     ],
+     [
+      "n7",
+      "n8"
+     ],
+     [
+      "n2",
+      "n9"
+     ],
+     [
+      "n3",
+      "n9"
+     ],
+     [
+      "n4",
+      "n9"
+     ],
+     [
+      "n5",
+      "n9"
+     ],
+     [
+      "n6",
+      "n9"
+     ],
+     [
+      "n7",
+      "n9"
+     ],
+     [
+      "n8",
+      "n9"
+     ]
+    ]
+   },
+   "note_expect_fix": "v5.1: 人工期望20>节点数18不可达，修正为18",
+   "shape_n_nodes": 9,
+   "shape_total_effort_real": 339.64,
+   "expected_fragments_human": 18,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "M07",
+   "task_text": "开源项目从 0 到 1 并进入维护期（设计/开发/社区/发布）",
+   "human_difficulty": 4,
+   "expected_fragments": 8,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "需求分析与项目规划",
+      "domain": {
+       "设计": 0.9,
+       "规划": 0.1
+      },
+      "trades": [
+       "产品经理"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "技术选型与架构设计",
+      "domain": {
+       "设计": 0.8,
+       "开发": 0.2
+      },
+      "trades": [
+       "架构师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "核心功能开发",
+      "domain": {
+       "开发": 0.95,
+       "测试": 0.05
+      },
+      "trades": [
+       "工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 1.0
+     },
+     {
+      "id": "n4",
+      "text": "测试与质量保障",
+      "domain": {
+       "开发": 0.4,
+       "测试": 0.6
+      },
+      "trades": [
+       "测试工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n5",
+      "text": "文档与示例编写",
+      "domain": {
+       "社区": 0.6,
+       "开发": 0.4
+      },
+      "trades": [
+       "文档工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n6",
+      "text": "社区建设与推广",
+      "domain": {
+       "社区": 0.9,
+       "运营": 0.1
+      },
+      "trades": [
+       "社区运营"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n7",
+      "text": "版本发布",
+      "domain": {
+       "发布": 0.9,
+       "决策": 0.1
+      },
+      "trades": [
+       "发布经理"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n8",
+      "text": "维护与迭代",
+      "domain": {
+       "维护": 0.8,
+       "开发": 0.2
+      },
+      "trades": [
+       "维护工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ]
+    ]
+   },
+   "shape_n_nodes": 8,
+   "shape_total_effort_real": 307.84,
+   "expected_fragments_human": 11,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "M08",
+   "task_text": "大型金融风控系统（规则/模型/决策/监控全链路）",
+   "human_difficulty": 5,
+   "expected_fragments": 8,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "需求分析",
+      "domain": {
+       "金融风控": 0.8,
+       "业务分析": 0.2
+      },
+      "trades": [
+       "风控经理"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "数据接入与预处理",
+      "domain": {
+       "金融风控": 0.5,
+       "数据工程": 0.5
+      },
+      "trades": [
+       "数据工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "规则引擎开发",
+      "domain": {
+       "金融风控": 0.6,
+       "软件开发": 0.4
+      },
+      "trades": [
+       "后端开发"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "风控模型训练",
+      "domain": {
+       "金融风控": 0.6,
+       "机器学习": 0.4
+      },
+      "trades": [
+       "算法工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n5",
+      "text": "决策引擎集成",
+      "domain": {
+       "金融风控": 0.7,
+       "软件开发": 0.3
+      },
+      "trades": [
+       "后端开发",
+       "算法工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.95
+     },
+     {
+      "id": "n6",
+      "text": "监控告警系统",
+      "domain": {
+       "金融风控": 0.4,
+       "运维": 0.6
+      },
+      "trades": [
+       "运维工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n7",
+      "text": "集成测试",
+      "domain": {
+       "金融风控": 0.5,
+       "质量保障": 0.5
+      },
+      "trades": [
+       "测试工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n8",
+      "text": "上线部署",
+      "domain": {
+       "金融风控": 0.3,
+       "运维": 0.7
+      },
+      "trades": [
+       "运维工程师"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n5",
+      "n7"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ]
+    ]
+   },
+   "note_expect_fix": "v5.1: 人工期望18>节点数16不可达，修正为16",
+   "shape_n_nodes": 8,
+   "shape_total_effort_real": 302.69,
+   "expected_fragments_human": 16,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "M09",
+   "task_text": "构建大规模企业知识库系统（采集/处理/检索/问答/权限）",
+   "human_difficulty": 4,
+   "expected_fragments": 6,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "企业数据采集",
+      "domain": {
+       "数据工程": 0.8,
+       "企业信息化": 0.2
+      },
+      "trades": [
+       "数据工程师",
+       "爬虫工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n2",
+      "text": "数据清洗与处理",
+      "domain": {
+       "数据处理": 0.6,
+       "NLP": 0.4
+      },
+      "trades": [
+       "数据工程师",
+       "NLP工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "知识库构建与存储",
+      "domain": {
+       "知识图谱": 0.5,
+       "向量数据库": 0.5
+      },
+      "trades": [
+       "算法工程师",
+       "后端工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "语义检索服务",
+      "domain": {
+       "信息检索": 0.7,
+       "后端开发": 0.3
+      },
+      "trades": [
+       "后端工程师",
+       "算法工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "智能问答系统",
+      "domain": {
+       "NLP": 0.6,
+       "问答系统": 0.4
+      },
+      "trades": [
+       "算法工程师",
+       "后端工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "权限与安全管控",
+      "domain": {
+       "信息安全": 0.8,
+       "权限管理": 0.2
+      },
+      "trades": [
+       "安全工程师",
+       "后端工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.95
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n2",
+      "n6"
+     ],
+     [
+      "n6",
+      "n4"
+     ],
+     [
+      "n6",
+      "n5"
+     ]
+    ]
+   },
+   "note_expect_fix": "v5.1: 人工期望15>节点数13不可达，修正为13",
+   "shape_n_nodes": 6,
+   "shape_total_effort_real": 277.06,
+   "expected_fragments_human": 13,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "M10",
+   "task_text": "医疗信息系统（HIS）全院部署（门诊/住院/药房/检验/影像）",
+   "human_difficulty": 5,
+   "expected_fragments": 11,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "项目启动与需求分析",
+      "domain": {
+       "医疗管理": 0.5,
+       "项目管理": 0.3,
+       "信息技术": 0.2
+      },
+      "trades": [
+       "项目经理",
+       "业务分析师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "系统架构设计",
+      "domain": {
+       "软件架构": 0.4,
+       "医疗业务": 0.3,
+       "数据集成": 0.3
+      },
+      "trades": [
+       "架构师",
+       "医疗信息化专家"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.85
+     },
+     {
+      "id": "n3",
+      "text": "基础数据准备",
+      "domain": {
+       "医疗编码": 0.4,
+       "数据管理": 0.3,
+       "医疗业务": 0.3
+      },
+      "trades": [
+       "数据管理员",
+       "医疗编码员"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n4",
+      "text": "门诊模块开发与测试",
+      "domain": {
+       "软件开发": 0.6,
+       "门诊业务": 0.3,
+       "测试技术": 0.1
+      },
+      "trades": [
+       "软件开发工程师",
+       "测试工程师",
+       "门诊业务专家"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "住院模块开发与测试",
+      "domain": {
+       "软件开发": 0.6,
+       "住院业务": 0.3,
+       "测试技术": 0.1
+      },
+      "trades": [
+       "软件开发工程师",
+       "测试工程师",
+       "住院业务专家"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n6",
+      "text": "药房模块开发与测试",
+      "domain": {
+       "软件开发": 0.5,
+       "药房管理": 0.3,
+       "测试技术": 0.2
+      },
+      "trades": [
+       "软件开发工程师",
+       "测试工程师",
+       "药师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n7",
+      "text": "检验系统(LIS)对接与集成",
+      "domain": {
+       "软件集成": 0.4,
+       "检验科技": 0.3,
+       "软件开发": 0.3
+      },
+      "trades": [
+       "集成工程师",
+       "检验技师",
+       "软件开发工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n8",
+      "text": "影像系统(PACS)对接与集成",
+      "domain": {
+       "软件集成": 0.4,
+       "医学影像": 0.3,
+       "软件开发": 0.3
+      },
+      "trades": [
+       "集成工程师",
+       "放射技师",
+       "软件开发工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n9",
+      "text": "全院系统集成测试",
+      "domain": {
+       "系统集成": 0.5,
+       "测试工程": 0.3,
+       "医疗业务": 0.2
+      },
+      "trades": [
+       "测试工程师",
+       "系统集成工程师",
+       "医务管理人员"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.95
+     },
+     {
+      "id": "n10",
+      "text": "用户培训与上线切换",
+      "domain": {
+       "培训管理": 0.4,
+       "项目管理": 0.3,
+       "医疗业务": 0.3
+      },
+      "trades": [
+       "培训讲师",
+       "项目经理",
+       "临床业务骨干"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 1.0
+     },
+     {
+      "id": "n11",
+      "text": "运维保障",
+      "domain": {
+       "IT运维": 0.4,
+       "系统维护": 0.3,
+       "医疗业务": 0.3
+      },
+      "trades": [
+       "运维工程师",
+       "系统管理员",
+       "技术支持"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n2",
+      "n6"
+     ],
+     [
+      "n2",
+      "n7"
+     ],
+     [
+      "n2",
+      "n8"
+     ],
+     [
+      "n3",
+      "n9"
+     ],
+     [
+      "n4",
+      "n9"
+     ],
+     [
+      "n5",
+      "n9"
+     ],
+     [
+      "n6",
+      "n9"
+     ],
+     [
+      "n7",
+      "n9"
+     ],
+     [
+      "n8",
+      "n9"
+     ],
+     [
+      "n9",
+      "n10"
+     ],
+     [
+      "n10",
+      "n11"
+     ]
+    ]
+   },
+   "note_expect_fix": "v5.1: 人工期望19>节点数18不可达，修正为18",
+   "shape_n_nodes": 11,
+   "shape_total_effort_real": 443.83,
+   "expected_fragments_human": 18,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "M11",
+   "task_text": "跨国企业年度报告编制（多语言/多币种/审计/发布）",
+   "human_difficulty": 4,
+   "expected_fragments": 7,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "制定报告框架与合规要求",
+      "domain": {
+       "合规": 0.6,
+       "审计": 0.4
+      },
+      "trades": [
+       "合规官",
+       "审计师"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.3
+     },
+     {
+      "id": "n2",
+      "text": "收集各子公司财务数据",
+      "domain": {
+       "财务": 0.5,
+       "数据": 0.5
+      },
+      "trades": [
+       "会计师",
+       "数据分析师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "财务合并与多币种折算",
+      "domain": {
+       "财务": 0.7,
+       "货币": 0.3
+      },
+      "trades": [
+       "会计师",
+       "财务分析师"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "内部审计与风险复核",
+      "domain": {
+       "审计": 0.7,
+       "风险": 0.3
+      },
+      "trades": [
+       "审计师",
+       "风险分析师"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.7
+     },
+     {
+      "id": "n5",
+      "text": "多语言翻译与本地化",
+      "domain": {
+       "语言": 0.8,
+       "文化": 0.2
+      },
+      "trades": [
+       "翻译",
+       "本地化专家"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n6",
+      "text": "报告排版与生成",
+      "domain": {
+       "报告": 0.6,
+       "设计": 0.4
+      },
+      "trades": [
+       "报告编辑",
+       "设计师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.4
+     },
+     {
+      "id": "n7",
+      "text": "审核与发布",
+      "domain": {
+       "发布": 0.5,
+       "合规": 0.5
+      },
+      "trades": [
+       "审核员",
+       "公关"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.9
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ]
+    ]
+   },
+   "shape_n_nodes": 7,
+   "shape_total_effort_real": 276.68,
+   "expected_fragments_human": 14,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "M12",
+   "task_text": "物联网平台建设（设备接入/边缘计算/数据处理/应用生态）",
+   "human_difficulty": 3,
+   "expected_fragments": 2,
+   "source": "mega-template-v1",
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "设备接入",
+      "domain": {
+       "物联网": 1.0
+      },
+      "trades": [
+       "嵌入式工程师",
+       "通信工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "边缘计算",
+      "domain": {
+       "物联网": 0.8,
+       "云计算": 0.2
+      },
+      "trades": [
+       "云计算工程师",
+       "嵌入式工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "数据处理",
+      "domain": {
+       "物联网": 0.7,
+       "大数据": 0.3
+      },
+      "trades": [
+       "大数据工程师",
+       "算法工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "应用生态",
+      "domain": {
+       "物联网": 0.6,
+       "软件工程": 0.4
+      },
+      "trades": [
+       "软件开发工程师",
+       "产品经理"
+      ],
+      "complexity": "low",
+      "deliverable": "code",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   },
+   "shape_n_nodes": 4,
+   "shape_total_effort_real": 71.87,
+   "expected_fragments_human": 16,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 5,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "M13",
+   "human_difficulty": 5,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "交通数据接入治理",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.9
+    },
+    {
+     "id": "n2",
+     "text": "信号控制模型研发",
+     "domain": {
+      "分析": 0.9
+     },
+     "trades": [
+      "分析"
+     ],
+     "complexity": "high",
+     "deliverable": "decision",
+     "weight": 0.8
+    },
+    {
+     "id": "n3",
+     "text": "调度平台开发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "城市路网数字孪生",
+     "domain": {
+      "数据": 0.8
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.8
+    },
+    {
+     "id": "n5",
+     "text": "整体联调与试运行",
+     "domain": {
+      "编程": 0.7
+     },
+     "trades": [
+      "测试"
+     ],
+     "complexity": "mid",
+     "deliverable": "code",
+     "weight": 0.5
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ],
+    [
+     "n4",
+     "n5"
+    ]
+   ],
+   "expected_fragments": 8,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "需求分析与总体规划",
+      "domain": {
+       "交通工程": 0.5,
+       "项目管理": 0.3,
+       "城市规划": 0.2
+      },
+      "trades": [
+       "交通规划师",
+       "项目经理"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "交通数据采集系统设计",
+      "domain": {
+       "物联网": 0.4,
+       "交通工程": 0.3,
+       "软件工程": 0.3
+      },
+      "trades": [
+       "系统架构师",
+       "物联网工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n3",
+      "text": "数据平台建设",
+      "domain": {
+       "数据科学": 0.6,
+       "软件工程": 0.4
+      },
+      "trades": [
+       "数据工程师",
+       "软件工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "交通流模型与仿真",
+      "domain": {
+       "交通工程": 0.7,
+       "数据科学": 0.3
+      },
+      "trades": [
+       "交通规划师",
+       "数据科学家"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "智能信号控制算法",
+      "domain": {
+       "交通工程": 0.5,
+       "人工智能": 0.3,
+       "控制工程": 0.2
+      },
+      "trades": [
+       "算法工程师",
+       "交通工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n6",
+      "text": "出行信息服务应用",
+      "domain": {
+       "软件工程": 0.5,
+       "数据科学": 0.3,
+       "交通工程": 0.2
+      },
+      "trades": [
+       "软件工程师",
+       "产品经理"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n7",
+      "text": "系统集成与测试",
+      "domain": {
+       "软件工程": 0.4,
+       "系统工程": 0.3,
+       "交通工程": 0.3
+      },
+      "trades": [
+       "系统集成工程师",
+       "测试工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.7
+     },
+     {
+      "id": "n8",
+      "text": "运营与维护",
+      "domain": {
+       "项目管理": 0.4,
+       "软件工程": 0.3,
+       "交通工程": 0.3
+      },
+      "trades": [
+       "运维工程师",
+       "项目经理"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.5
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n1",
+      "n5"
+     ],
+     [
+      "n1",
+      "n6"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n3",
+      "n6"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n4",
+      "n7"
+     ],
+     [
+      "n5",
+      "n7"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ]
+    ]
+   },
+   "task_text": "城市级智慧交通系统建设",
+   "source": "dataset-v5.1",
+   "shape_n_nodes": 8,
+   "shape_total_effort_real": 303.13,
+   "expected_fragments_human": 5,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "M14",
+   "human_difficulty": 4,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "存量数据资产盘点",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "调研"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.7
+    },
+    {
+     "id": "n2",
+     "text": "湖仓一体化架构搭建",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.9
+    },
+    {
+     "id": "n3",
+     "text": "数据管道迁移重写",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "全量数据校验",
+     "domain": {
+      "数据": 0.8
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.8
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ]
+   ],
+   "expected_fragments": 7,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "现状调研与需求分析",
+      "domain": {
+       "数据治理": 0.7,
+       "大数据": 0.3
+      },
+      "trades": [
+       "数据工程师",
+       "架构师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.6
+     },
+     {
+      "id": "n2",
+      "text": "迁移方案设计",
+      "domain": {
+       "大数据": 0.5,
+       "云计算": 0.3,
+       "数据治理": 0.2
+      },
+      "trades": [
+       "架构师",
+       "数据工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "数据迁移与同步",
+      "domain": {
+       "大数据": 0.8,
+       "云计算": 0.2
+      },
+      "trades": [
+       "数据工程师",
+       "运维工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n4",
+      "text": "平台部署与配置",
+      "domain": {
+       "云计算": 0.7,
+       "大数据": 0.3
+      },
+      "trades": [
+       "运维工程师",
+       "架构师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.5
+     },
+     {
+      "id": "n5",
+      "text": "数据验证与质量检查",
+      "domain": {
+       "数据治理": 0.6,
+       "大数据": 0.4
+      },
+      "trades": [
+       "数据工程师",
+       "质量分析师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n6",
+      "text": "性能优化与调优",
+      "domain": {
+       "大数据": 0.6,
+       "云计算": 0.4
+      },
+      "trades": [
+       "性能工程师",
+       "数据工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n7",
+      "text": "业务切换与上线",
+      "domain": {
+       "数据治理": 0.4,
+       "云计算": 0.4,
+       "大数据": 0.2
+      },
+      "trades": [
+       "运维工程师",
+       "业务分析师"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.7
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ]
+    ]
+   },
+   "task_text": "万亿级数据湖平台迁移",
+   "source": "dataset-v5.1",
+   "shape_n_nodes": 7,
+   "shape_total_effort_real": 272.15,
+   "expected_fragments_human": 4,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 5,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "M15",
+   "human_difficulty": 5,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "调度业务现状调研",
+     "domain": {
+      "分析": 0.9
+     },
+     "trades": [
+      "调研"
+     ],
+     "complexity": "high",
+     "deliverable": "text",
+     "weight": 0.6
+    },
+    {
+     "id": "n2",
+     "text": "调度自动化架构设计",
+     "domain": {
+      "写作": 0.8
+     },
+     "trades": [
+      "创作"
+     ],
+     "complexity": "high",
+     "deliverable": "text",
+     "weight": 0.8
+    },
+    {
+     "id": "n3",
+     "text": "核心调度引擎开发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "电网数据接入平台",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.9
+    },
+    {
+     "id": "n5",
+     "text": "容灾演练与切换",
+     "domain": {
+      "编程": 0.8
+     },
+     "trades": [
+      "测试"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.7
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ],
+    [
+     "n4",
+     "n5"
+    ]
+   ],
+   "expected_fragments": 10,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "需求分析",
+      "domain": {
+       "电力系统": 0.6,
+       "软件工程": 0.3,
+       "项目管理": 0.1
+      },
+      "trades": [
+       "电力系统工程师",
+       "项目经理"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "系统架构设计",
+      "domain": {
+       "软件工程": 0.7,
+       "电力系统": 0.2,
+       "项目管理": 0.1
+      },
+      "trades": [
+       "系统架构师",
+       "软件工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n3",
+      "text": "现有系统评估",
+      "domain": {
+       "电力系统": 0.5,
+       "软件工程": 0.4,
+       "数据工程": 0.1
+      },
+      "trades": [
+       "电力系统工程师",
+       "数据工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n4",
+      "text": "数据迁移方案设计",
+      "domain": {
+       "数据工程": 0.6,
+       "软件工程": 0.3,
+       "电力系统": 0.1
+      },
+      "trades": [
+       "数据工程师",
+       "软件工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n5",
+      "text": "核心调度模块开发",
+      "domain": {
+       "软件工程": 0.8,
+       "电力系统": 0.2
+      },
+      "trades": [
+       "软件工程师",
+       "电力系统工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.95
+     },
+     {
+      "id": "n6",
+      "text": "数据库升级与迁移",
+      "domain": {
+       "数据工程": 0.7,
+       "软件工程": 0.3
+      },
+      "trades": [
+       "数据工程师",
+       "软件工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.85
+     },
+     {
+      "id": "n7",
+      "text": "安全加固与防护",
+      "domain": {
+       "网络安全": 0.8,
+       "软件工程": 0.2
+      },
+      "trades": [
+       "网络安全工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.75
+     },
+     {
+      "id": "n8",
+      "text": "系统测试",
+      "domain": {
+       "软件工程": 0.6,
+       "电力系统": 0.2,
+       "项目管理": 0.2
+      },
+      "trades": [
+       "测试工程师",
+       "软件工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n9",
+      "text": "部署与上线",
+      "domain": {
+       "软件工程": 0.5,
+       "电力系统": 0.3,
+       "项目管理": 0.2
+      },
+      "trades": [
+       "运维工程师",
+       "电力系统工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "decision",
+      "weight": 0.8
+     },
+     {
+      "id": "n10",
+      "text": "培训与文档",
+      "domain": {
+       "项目管理": 0.5,
+       "软件工程": 0.3,
+       "电力系统": 0.2
+      },
+      "trades": [
+       "项目经理",
+       "电力系统工程师"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.6
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n2",
+      "n7"
+     ],
+     [
+      "n5",
+      "n8"
+     ],
+     [
+      "n6",
+      "n8"
+     ],
+     [
+      "n7",
+      "n8"
+     ],
+     [
+      "n8",
+      "n9"
+     ],
+     [
+      "n9",
+      "n10"
+     ]
+    ]
+   },
+   "task_text": "全国电力调度系统升级",
+   "source": "dataset-v5.1",
+   "shape_n_nodes": 10,
+   "shape_total_effort_real": 394.19,
+   "expected_fragments_human": 5,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "M16",
+   "human_difficulty": 5,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "数字货币体系设计",
+     "domain": {
+      "写作": 0.9
+     },
+     "trades": [
+      "创作"
+     ],
+     "complexity": "high",
+     "deliverable": "text",
+     "weight": 0.8
+    },
+    {
+     "id": "n2",
+     "text": "账本与共识机制研发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n3",
+     "text": "钱包与支付场景落地",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "货币发行结算系统",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.9
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ]
+   ],
+   "expected_fragments": 8,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "项目立项与需求分析",
+      "domain": {
+       "央行数字货币": 0.9,
+       "金融科技": 0.1
+      },
+      "trades": [
+       "项目经理",
+       "业务分析师"
+      ],
+      "complexity": "low",
+      "deliverable": "decision",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "总体架构设计",
+      "domain": {
+       "央行数字货币": 0.6,
+       "系统架构": 0.4
+      },
+      "trades": [
+       "系统架构师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.95
+     },
+     {
+      "id": "n3",
+      "text": "核心账本系统开发",
+      "domain": {
+       "央行数字货币": 0.7,
+       "分布式数据库": 0.3
+      },
+      "trades": [
+       "区块链开发者"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "交易处理与结算模块",
+      "domain": {
+       "央行数字货币": 0.6,
+       "支付系统": 0.4
+      },
+      "trades": [
+       "支付系统工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.8
+     },
+     {
+      "id": "n5",
+      "text": "安全与加密模块",
+      "domain": {
+       "央行数字货币": 0.5,
+       "网络安全": 0.5
+      },
+      "trades": [
+       "安全工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.85
+     },
+     {
+      "id": "n6",
+      "text": "监管与合规模块",
+      "domain": {
+       "央行数字货币": 0.5,
+       "法规合规": 0.5
+      },
+      "trades": [
+       "合规专员"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     },
+     {
+      "id": "n7",
+      "text": "系统集成与测试",
+      "domain": {
+       "央行数字货币": 0.5,
+       "软件测试": 0.5
+      },
+      "trades": [
+       "测试工程师",
+       "系统集成工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "data",
+      "weight": 0.8
+     },
+     {
+      "id": "n8",
+      "text": "部署与运维",
+      "domain": {
+       "央行数字货币": 0.4,
+       "运维": 0.6
+      },
+      "trades": [
+       "运维工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.75
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n2",
+      "n6"
+     ],
+     [
+      "n3",
+      "n7"
+     ],
+     [
+      "n4",
+      "n7"
+     ],
+     [
+      "n5",
+      "n7"
+     ],
+     [
+      "n6",
+      "n7"
+     ],
+     [
+      "n7",
+      "n8"
+     ]
+    ]
+   },
+   "task_text": "大型央行数字货币系统",
+   "source": "dataset-v5.1",
+   "shape_n_nodes": 8,
+   "shape_total_effort_real": 327.39,
+   "expected_fragments_human": 4,
+   "expected_fragments_method": "t40-realformula"
+  },
+  {
+   "id": "M17",
+   "human_difficulty": 4,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "供应链业务建模",
+     "domain": {
+      "分析": 0.9
+     },
+     "trades": [
+      "分析"
+     ],
+     "complexity": "high",
+     "deliverable": "decision",
+     "weight": 0.7
+    },
+    {
+     "id": "n2",
+     "text": "全球物流数据采集",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.8
+    },
+    {
+     "id": "n3",
+     "text": "孪生仿真引擎开发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n4",
+     "text": "优化决策算法研发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n5",
+     "text": "系统集成与上线",
+     "domain": {
+      "编程": 0.7
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "mid",
+     "deliverable": "code",
+     "weight": 0.6
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ],
+    [
+     "n4",
+     "n5"
+    ]
+   ],
+   "expected_fragments": 7,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "需求分析",
+      "domain": {
+       "供应链管理": 0.5833,
+       "数字孪生": 0.4167
+      },
+      "trades": [
+       "业务分析师"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n2",
+      "text": "数据采集与治理",
+      "domain": {
+       "物联网": 0.4615,
+       "大数据": 0.5385
+      },
+      "trades": [
+       "数据工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.6
+     },
+     {
+      "id": "n3",
+      "text": "数字孪生模型构建",
+      "domain": {
+       "数字孪生": 0.5625,
+       "仿真": 0.4375
+      },
+      "trades": [
+       "数字孪生专家"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "模型集成与校准",
+      "domain": {
+       "系统集成": 0.5,
+       "仿真": 0.5
+      },
+      "trades": [
+       "系统架构师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.95
+     },
+     {
+      "id": "n5",
+      "text": "仿真与优化",
+      "domain": {
+       "运筹学": 0.5333,
+       "仿真": 0.4667
+      },
+      "trades": [
+       "算法工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n6",
+      "text": "可视化与交互",
+      "domain": {
+       "人机交互": 0.4667,
+       "数据可视化": 0.5333
+      },
+      "trades": [
+       "前端工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.75
+     },
+     {
+      "id": "n7",
+      "text": "部署与运维",
+      "domain": {
+       "云计算": 0.5455,
+       "DevOps": 0.4545
+      },
+      "trades": [
+       "运维工程师"
+      ],
+      "complexity": "low",
+      "deliverable": "text",
+      "weight": 0.8
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n4",
+      "n6"
+     ],
+     [
+      "n5",
+      "n7"
+     ],
+     [
+      "n6",
+      "n7"
+     ]
+    ]
+   },
+   "task_text": "全球供应链数字孪生系统",
+   "source": "dataset-v5.1",
+   "shape_n_nodes": 7,
+   "shape_total_effort_real": 278.8,
+   "expected_fragments_human": 5,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 5,
+   "human_difficulty_method": "semantic-relabel-v1"
+  },
+  {
+   "id": "M18",
+   "human_difficulty": 4,
+   "nodes": [
+    {
+     "id": "n1",
+     "text": "产线工艺流程数字化",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.8
+    },
+    {
+     "id": "n2",
+     "text": "MES 核心功能开发",
+     "domain": {
+      "编程": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "code",
+     "weight": 0.9
+    },
+    {
+     "id": "n3",
+     "text": "设备数据采集平台",
+     "domain": {
+      "数据": 0.9
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.8
+    },
+    {
+     "id": "n4",
+     "text": "质量追溯体系",
+     "domain": {
+      "数据": 0.8
+     },
+     "trades": [
+      "实现"
+     ],
+     "complexity": "high",
+     "deliverable": "data",
+     "weight": 0.7
+    },
+    {
+     "id": "n5",
+     "text": "车间部署与培训",
+     "domain": {
+      "写作": 0.7
+     },
+     "trades": [
+      "创作"
+     ],
+     "complexity": "mid",
+     "deliverable": "text",
+     "weight": 0.5
+    }
+   ],
+   "edges": [
+    [
+     "n1",
+     "n2"
+    ],
+    [
+     "n2",
+     "n3"
+    ],
+    [
+     "n3",
+     "n4"
+    ],
+    [
+     "n4",
+     "n5"
+    ]
+   ],
+   "expected_fragments": 7,
+   "dag_spec": {
+    "nodes": [
+     {
+      "id": "n1",
+      "text": "需求分析与规划",
+      "domain": {
+       "智能制造": 0.8,
+       "IT": 0.2
+      },
+      "trades": [
+       "项目经理",
+       "系统分析师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.9
+     },
+     {
+      "id": "n2",
+      "text": "系统架构与蓝图设计",
+      "domain": {
+       "智能制造": 0.7,
+       "IT": 0.3
+      },
+      "trades": [
+       "系统架构师"
+      ],
+      "complexity": "high",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n3",
+      "text": "功能模块开发",
+      "domain": {
+       "软件工程": 0.8,
+       "智能制造": 0.2
+      },
+      "trades": [
+       "开发工程师"
+      ],
+      "complexity": "high",
+      "deliverable": "code",
+      "weight": 0.9
+     },
+     {
+      "id": "n4",
+      "text": "设备数据采集集成",
+      "domain": {
+       "物联网": 0.7,
+       "工业自动化": 0.3
+      },
+      "trades": [
+       "物联网工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "data",
+      "weight": 0.7
+     },
+     {
+      "id": "n5",
+      "text": "系统集成测试",
+      "domain": {
+       "测试": 0.8,
+       "智能制造": 0.2
+      },
+      "trades": [
+       "测试工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.8
+     },
+     {
+      "id": "n6",
+      "text": "数据迁移与接口",
+      "domain": {
+       "数据工程": 0.7,
+       "IT": 0.3
+      },
+      "trades": [
+       "数据工程师"
+      ],
+      "complexity": "mid",
+      "deliverable": "code",
+      "weight": 0.6
+     },
+     {
+      "id": "n7",
+      "text": "上线部署与培训",
+      "domain": {
+       "智能制造": 0.6,
+       "IT": 0.4
+      },
+      "trades": [
+       "运维工程师",
+       "培训师"
+      ],
+      "complexity": "mid",
+      "deliverable": "text",
+      "weight": 0.7
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n5"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ],
+     [
+      "n6",
+      "n7"
+     ]
+    ]
+   },
+   "task_text": "智能工厂 MES 系统建设",
+   "source": "dataset-v5.1",
+   "shape_n_nodes": 7,
+   "shape_total_effort_real": 272.79,
+   "expected_fragments_human": 5,
+   "expected_fragments_method": "t40-realformula",
+   "human_difficulty_old": 5,
+   "human_difficulty_method": "semantic-relabel-v1"
+  }
+ ]
+}

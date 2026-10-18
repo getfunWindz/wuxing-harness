@@ -1,0 +1,161 @@
+name: iOS Unsigned Build
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "apps/mobile/ios/**"
+      - ".github/workflows/ios-unsigned.yml"
+  pull_request:
+    paths:
+      - "apps/mobile/ios/**"
+      - ".github/workflows/ios-unsigned.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-unsigned-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 工具链信息
+        run: |
+          set -euo pipefail
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-version
+
+      - name: 安装 XcodeGen
+        run: |
+          set -euo pipefail
+          if ! command -v xcodegen >/dev/null 2>&1; then
+            brew install xcodegen
+          fi
+          xcodegen --version
+
+      - name: Core 单测
+        run: swift test --package-path apps/mobile/ios/Core
+
+      - name: 生成 Xcode 工程
+        working-directory: apps/mobile/ios
+        run: xcodegen generate
+
+      - name: 选择可用 iPhone 模拟器
+        id: sim
+        run: |
+          set -euo pipefail
+          UDID=$(python3 - <<'PY'
+          import json
+          import subprocess
+
+          data = json.loads(subprocess.check_output(
+              ["xcrun", "simctl", "list", "devices", "available", "-j"]))
+          for runtime in sorted(data["devices"].keys(), reverse=True):
+              for device in data["devices"][runtime]:
+                  if device.get("isAvailable") and device["name"].startswith("iPhone"):
+                      print(device["udid"])
+                      raise SystemExit(0)
+          raise SystemExit("no available iPhone simulator")
+          PY
+          )
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+          echo "simulator=$UDID"
+
+      - name: App 单测（模拟器）
+        working-directory: apps/mobile/ios
+        run: |
+          set -euo pipefail
+          xcodebuild test \
+            -project WuxingShell.xcodeproj \
+            -scheme WuxingShell \
+            -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.udid }}" \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO | tee test.log
+
+      - name: 无签名设备构建
+        working-directory: apps/mobile/ios
+        run: |
+          set -euo pipefail
+          SDK_VERSION=$(xcrun --sdk iphoneos --show-sdk-version)
+          echo "IOS_SDK=$SDK_VERSION" >> "$GITHUB_ENV"
+          xcodebuild \
+            -project WuxingShell.xcodeproj \
+            -scheme WuxingShell \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination "generic/platform=iOS" \
+            -derivedDataPath build \
+            IPHONEOS_DEPLOYMENT_TARGET="$SDK_VERSION" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build | tee build.log
+
+      - name: 打包与校验
+        working-directory: apps/mobile/ios
+        run: |
+          set -euo pipefail
+          APP="build/Build/Products/Release-iphoneos/WuxingShell.app"
+          test -d "$APP"
+          rm -rf Payload
+          mkdir Payload
+          cp -R "$APP" Payload/
+          zip -qry WuxingShell-unsigned.ipa Payload
+          ditto -c -k --sequesterRsrc --keepParent "$APP" WuxingShell-unsigned-app.zip
+          if [ -d "$APP.dSYM" ]; then
+            ditto -c -k --sequesterRsrc --keepParent "$APP.dSYM" WuxingShell-dSYM.zip
+          fi
+          plutil -p "$APP/Info.plist" | tee info-plist.txt
+          codesign -dv "$APP" > codesign.txt 2>&1 || true
+          shasum -a 256 WuxingShell-unsigned.ipa WuxingShell-unsigned-app.zip | tee checksums.txt
+          unzip -l WuxingShell-unsigned.ipa | head -20
+
+      - name: 上传产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: wuxing-ios-unsigned
+          path: |
+            apps/mobile/ios/WuxingShell-unsigned.ipa
+            apps/mobile/ios/WuxingShell-unsigned-app.zip
+            apps/mobile/ios/checksums.txt
+            apps/mobile/ios/info-plist.txt
+            apps/mobile/ios/codesign.txt
+            apps/mobile/ios/build.log
+            apps/mobile/ios/test.log
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: 上传 dSYM
+        uses: actions/upload-artifact@v4
+        with:
+          name: wuxing-ios-dsym
+          path: apps/mobile/ios/WuxingShell-dSYM.zip
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: 摘要
+        working-directory: apps/mobile/ios
+        run: |
+          set -euo pipefail
+          APP="build/Build/Products/Release-iphoneos/WuxingShell.app"
+          {
+            echo "## WUXING iOS unsigned build"
+            echo ""
+            echo "- iOS SDK: ${IOS_SDK}"
+            echo "- Bundle ID: $(plutil -extract CFBundleIdentifier raw "$APP/Info.plist")"
+            echo "- MinimumOSVersion: $(plutil -extract MinimumOSVersion raw "$APP/Info.plist")"
+            echo "- IPA: \`WuxingShell-unsigned.ipa\`"
+            echo ""
+            echo "下载 artifact 后，在 Windows 用 Sideloadly + 免费 Apple ID 重签安装（7 天有效期）。"
+            echo "详见 \`apps/mobile/ios/README.md\`。"
+          } >> "$GITHUB_STEP_SUMMARY"

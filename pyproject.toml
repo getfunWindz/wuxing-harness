@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wuxing-harness"
+version = "0.1.0"
+description = "WUXING（无形）harness——LLM 是辅佐者（每一环的把关者），机制是裁决者"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "jieba",
+    "requests",
+]
+
+[project.optional-dependencies]
+# 桌面承载（壳：一套前端两种承载——浏览器 + pywebview 窗口）
+desktop = ["pywebview"]
+# MCP 工具桥（外部工具接入）
+mcp = ["mcp"]
+
+[project.scripts]
+# pi 式短命令：安装后直接 `wuxing` 启动壳（桌面窗口；无 pywebview → 浏览器 URL）
+wuxing = "wuxing.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["wuxing*", "golden_ratio*"]
+exclude = ["wuxing.tests*", "golden_ratio.tests*"]
+
+[tool.setuptools.package-data]
+wuxing = ["shell/web/static/**/*", "builtin_skills/**/*"]
+golden_ratio = ["data/*.json"]

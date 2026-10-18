@@ -1,0 +1,13 @@
+# e2e/shell 运行时生成物（夹具与运行产物——不入库）
+node_modules/
+fake-ws/
+fake-ws2/
+fake-ws-keep/
+g8-par-ws/
+g8-claim-ws/
+picked-ws-*/
+next-tmp-ws/
+.runtime/
+visual/
+*.log
+__pycache__/

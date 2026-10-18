@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">WUXING</string>
+    <string name="connect_title">连接 WUXING</string>
+    <string name="connect_hint">填写电脑上壳服务的地址与访问令牌（同局域网：192.168.x.x:8723；隧道/overlay：对应地址）。</string>
+    <string name="label_url">地址</string>
+    <string name="hint_url">http://192.168.1.5:8723</string>
+    <string name="label_token">访问令牌（WUXING_SHELL_TOKEN）</string>
+    <string name="hint_token">留空 = 沿用已保存令牌</string>
+    <string name="connect">连接</string>
+    <string name="connect_note">令牌保存在系统安全存储（Android Keystore），不以明文落盘。</string>
+    <string name="error_url">地址无效（需 http/https 主机）</string>
+    <string name="error_token">令牌不能为空</string>
+    <string name="vault_unavailable">安全存储不可用：</string>
+    <string name="token_saved_hint">已保存（留空沿用）</string>
+    <string name="error_connect">无法连接</string>
+    <string name="retry">重试</string>
+    <string name="menu_settings">连接设置</string>
+    <string name="menu_reload">重新加载</string>
+    <string name="webview_old_title">WebView 版本较旧</string>
+    <string name="webview_old_message">当前 WebView 内核 Chrome/%1$d 低于所需版本（105+）。建议更新「Android System WebView」后重试；继续可能出现界面异常。</string>
+    <string name="continue_anyway">继续</string>
+    <string name="quit">退出</string>
+    <string name="channel_name">WUXING 确认提醒</string>
+</resources>

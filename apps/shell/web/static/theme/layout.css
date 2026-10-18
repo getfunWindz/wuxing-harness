@@ -1,0 +1,206 @@
+/* 布局层（外观复现 A2）——中性/语义令牌 + 尺寸令牌 + 间距/圆角尺度 + 100vh 三栏任务台骨架。
+   依据：docs/WUXING_外观复现裁决与布局规范_2026-09-18.md（§1 配色=旧壳基线 / §3 间距与圆角尺度）
+   与 docs/WUXING_旧壳外观全量清单与新壳差异对照_2026-09-17.md（C1.1/C1.2）。
+   顺序：theme/ink.css（水墨令牌）→ 本层 → app.css（壳粘合，逐批并入 components.css）。 */
+
+:root {
+  /* ---- 中性 / 语义（旧壳 layout.css 原样复现） ---- */
+  --bg: #fafbfb;             /* R4-1：工作区底色——仅比侧边栏白色略灰一档（弱对比） */
+  --panel: #ffffff;
+  --panel-2: #fafbfb;
+  --border: #e2e6ea;
+  --border-2: #d5dbe0;
+  --text: #1e242b;
+  --muted: #5f6873;          /* 5.65:1 */
+  --faint: #6b7480;          /* 4.74:1 */
+  --accent: var(--jade, #2b6a5c);
+  --accent-soft: rgba(43, 106, 92, 0.10);
+  --ok: #2f7d5d;
+  --warn: #a8662a;
+  --bad: #a8422f;
+
+  /* ---- 尺寸（旧壳规格） ---- */
+  --rail-w: 236px;
+  --rail-w-collapsed: 48px;
+  --dock-w: 320px;
+  --topbar-h: 44px;
+
+  /* ---- 间距尺度（裁决 §3：4 的倍数——组件一律取档，禁止杂值） ---- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+
+  /* ---- 圆角尺度（裁决 §3：禁止直角面板） ---- */
+  --r-sm: 8px;      /* 按钮 / 小控件 / 行项 */
+  --r-md: 10px;     /* 菜单 / 图标按钮容器 */
+  --r-lg: 12px;     /* 卡片 / 瓦片 / 弹窗小卡 */
+  --r-xl: 14px;     /* 面板 / hero 输入卡 / 模态 */
+  --r-pill: 999px;  /* 胶囊（chips / 开关 / 角标） */
+  --r-input: 22px;  /* 输入浮层 .cbox */
+}
+
+* { box-sizing: border-box; }
+
+/* hidden 属性优先于组件 display 声明（状态驱动显隐的正确性保障） */
+[hidden] { display: none !important; }
+
+html, body { height: 100%; margin: 0; }
+
+.grow { flex: 1; }
+
+/* 状态点（旧壳 layout.css 原样） */
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--faint); display: inline-block; }
+.dot.ok { background: var(--ok); }
+.dot.run { background: var(--accent); }
+.dot.warn { background: var(--warn); }
+.dot.bad { background: var(--bad); }
+
+body {
+  font-family: var(--font-sans, system-ui, "Segoe UI", "Microsoft YaHei", sans-serif);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--bg);
+}
+
+/* ---------- 应用骨架：顶条（全宽 44px）+ 三栏任务台（列独立滚动） ---------- */
+.app-shell {
+  display: flex; flex-direction: column;
+  height: 100vh;            /* 旧 WebView 回退 */
+  height: 100dvh;           /* 移动视口动态高度（地址栏/软键盘） */
+  box-sizing: border-box;
+  /* 安全区接缝：生产取系统真值（viewport-fit=cover），测试可注入 --safe-* */
+  padding-top: var(--safe-top, env(safe-area-inset-top));
+  padding-right: var(--safe-right, env(safe-area-inset-right));
+  padding-bottom: var(--safe-bottom, env(safe-area-inset-bottom));
+  padding-left: var(--safe-left, env(safe-area-inset-left));
+}
+
+.app-topbar {
+  flex: none;
+  height: var(--topbar-h);
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.app-topbar > div { height: 100%; }
+.app-topbar .app-top { display: flex; align-items: center; flex-wrap: nowrap; gap: 10px; height: 100%; padding: 0 12px; }   /* 旧壳 #topbar 口径（gap 10/12px 与旧壳逐值一致） */
+
+.app-body {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr) var(--dock-w);
+  transition: grid-template-columns var(--motion-structural);
+}
+.app-shell:has(.rail.collapsed) .app-body {
+  grid-template-columns: var(--rail-w-collapsed) minmax(0, 1fr) var(--dock-w);
+}
+.app-shell:has(.dock.collapsed) .app-body {
+  grid-template-columns: var(--rail-w) minmax(0, 1fr) var(--rail-w-collapsed);
+}
+.app-shell:has(.rail.collapsed):has(.dock.collapsed) .app-body {
+  grid-template-columns: var(--rail-w-collapsed) minmax(0, 1fr) var(--rail-w-collapsed);
+}
+
+.app-rail-slot, .app-dock-slot, .app-center { min-width: 0; min-height: 0; }
+
+.app-rail-slot {
+  display: flex; flex-direction: column; overflow: hidden;
+}
+/* 槽内包装 div（railHost/dockHost）不引入额外层次：拉伸到满高并把尺寸传给视图根 */
+.app-rail-slot > div, .app-dock-slot > div {
+  flex: 1; min-height: 0; display: flex; flex-direction: column;
+}
+.app-rail-slot > div > .rail { flex: 1; min-height: 0; }
+.app-dock-slot > div > .dock { flex: 1; min-height: 0; }
+
+.app-center { display: flex; flex-direction: column; overflow: hidden; }
+.app-hero-slot { flex: 1 1 auto; min-height: 0; overflow-y: auto; }   /* 2026-09-21 修复：高度不足时滚动，不再裁切 hero 输入框 */
+.app-stream-slot { flex: 1; min-height: 0; overflow-y: auto; padding: var(--sp-4) 20px; }
+.app-composer-slot { flex: none; padding: var(--sp-2) 20px 22px; }
+
+.app-dock-slot {
+  display: flex; flex-direction: column; overflow: hidden;
+}
+
+/* ---------- 动效降级 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  /* Wave-2 T6：动效令牌降级（1ms——与下方全局 duration 覆盖同口径） */
+  :root {
+    --motion-structural: 1ms;
+    --motion-content: 1ms;
+    --motion-micro: 1ms;
+  }
+  .app-body { transition: none; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- 响应式（A13：旧壳 layout.css <1280 / <768 口径） ---------- */
+@media (max-width: 1280px) {
+  /* dock 转固定浮层（收起态 = 右侧 40px 贴边条，靠 translateX 滑入滑出）。
+     注意：dock 浮出后不再占网格列——必须用带 :has() 的全变体覆盖（同位）
+     否则基础三列规则（含 :has 高特异性变体）会保留 --dock-w 幽灵列，
+     窄屏时把主列挤至 ~22px（2026-10-17 实测根因）。 */
+  .app-body { grid-template-columns: var(--rail-w) minmax(0, 1fr); }
+  .app-shell:has(.rail.collapsed) .app-body {
+    grid-template-columns: var(--rail-w-collapsed) minmax(0, 1fr);
+  }
+  .app-shell:has(.dock.collapsed) .app-body {
+    grid-template-columns: var(--rail-w) minmax(0, 1fr);
+  }
+  .app-shell:has(.rail.collapsed):has(.dock.collapsed) .app-body {
+    grid-template-columns: var(--rail-w-collapsed) minmax(0, 1fr);
+  }
+  .app-dock-slot {
+    position: fixed;
+    top: var(--topbar-h);
+    right: 0;
+    bottom: 0;
+    width: var(--dock-w);
+    z-index: 4;
+    transform: translateX(0);
+    transition: transform var(--motion-structural);
+    box-shadow: -10px 0 30px rgba(20, 30, 40, 0.12);
+    background: var(--panel);
+  }
+  .app-dock-slot:has(.dock.collapsed) {
+    transform: translateX(calc(100% - 40px));
+    box-shadow: none;
+    background: transparent;
+  }
+  .app-dock-slot:has(.dock.collapsed) > div > .dock {
+    width: var(--rail-w-collapsed);
+    border-left: 0;
+    background: transparent;
+  }
+}
+
+@media (max-width: 768px) {
+  /* rail = 48px 迷你轨道；展开为抽屉浮层 */
+  .app-body,
+  .app-shell:has(.rail.collapsed) .app-body,
+  .app-shell:has(.dock.collapsed) .app-body,
+  .app-shell:has(.rail.collapsed):has(.dock.collapsed) .app-body {
+    grid-template-columns: var(--rail-w-collapsed) minmax(0, 1fr);
+  }
+  .app-rail-slot:not(:has(.rail.collapsed)) {
+    position: fixed;
+    top: var(--topbar-h);
+    bottom: 0;
+    left: 0;
+    width: var(--rail-w);
+    z-index: 8;
+    box-shadow: 8px 0 30px rgba(20, 30, 40, 0.14);
+    animation: rail-drawer-in var(--motion-structural);
+  }
+}
+@keyframes rail-drawer-in {
+  from { transform: translateX(-14px); opacity: 0.5; }
+}

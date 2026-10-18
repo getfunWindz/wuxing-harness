@@ -1,0 +1,190 @@
+{
+  "version": "v1",
+  "description": "WUXING 真实测试批跑器任务集（P0-3 A）——固定任务 + 机械断言（状态/产物/pytest/票据）。真实花费：默认 dry-run，需 --yes。",
+  "tasks": [
+    {
+      "id": "greet-cli",
+      "kind": "cli",
+      "task": "创建 greeter.py：函数 greet(name) 返回 'Hello, <name>!'；创建 test_greeter.py 用 pytest 两个断言；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["greeter.py", "test_greeter.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本（验收应通过）"}
+    },
+    {
+      "id": "stats-cli",
+      "kind": "cli",
+      "task": "创建 stats.py：读取 data.txt（每行一个整数），打印总和、平均值（保留两位小数）与最大值；创建 data.txt 样例（3 行整数）；创建 test_stats.py 用 pytest 覆盖正常输入与空文件；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["stats.py", "data.txt", "test_stats.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本（验收应通过）"}
+    },
+    {
+      "id": "json2csv-cli",
+      "kind": "cli",
+      "task": "创建 json2csv.py：读取 data.json（数组，键 name,age），转换为 data.csv 并打印行数；创建 data.json 样例；写 test_json2csv.py 用 pytest 覆盖正常转换与空数组；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["json2csv.py", "data.json", "test_json2csv.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本（验收应通过）"}
+    },
+    {
+      "id": "notes-md-fallback",
+      "kind": "cli",
+      "task": "创建 notes.md：用三句话说明 JSON 与 CSV 的格式差异；不要运行任何命令、不要创建其它文件。",
+      "expect_status": "done",
+      "files": ["notes.md"],
+      "verify_gold": {"expect": "pass",
+                      "note": "回退路径专项样本（无结构化验收条目——状态判定）"}
+    },
+    {
+      "id": "theroad-tickets",
+      "kind": "theroad",
+      "description": "票据链回归：对指定工作区重置失败票 → 提交执行 → 确认回路 → 断言全部票据 done。",
+      "ws_path": "real_test/llm-batch1/ws-theroad2",
+      "session": "conversation-theroad2.jsonl",
+      "reset_failed": true,
+      "reset_ids": ["T-5"],
+      "submit_text": "批跑回归：按已发布票据复跑至收敛。",
+      "expect_status": "done",
+      "expect_tickets": "all_done",
+      "verify_gold": {"expect": "pass", "note": "票据链正样本（终态一致）"}
+    },
+    {
+      "id": "wordcount-basic",
+      "kind": "cli",
+      "task": "创建 wordcount.py：读取 text.txt，按空白切分统计词数并打印；创建 text.txt（不少于 3 行文本）与 test_wordcount.py（覆盖正常输入与空文件）；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["wordcount.py", "text.txt", "test_wordcount.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本"}
+    },
+    {
+      "id": "csv-column-sum",
+      "kind": "cli",
+      "task": "创建 csv_sum.py：读取 data.csv（列名 a,b）并打印 b 列整数之和；创建 data.csv 样例与 test_csv_sum.py；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["csv_sum.py", "data.csv", "test_csv_sum.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本"}
+    },
+    {
+      "id": "palindrome-check",
+      "kind": "cli",
+      "task": "创建 palindrome.py：函数 is_palindrome(s) 忽略大小写与空白判断回文；写 test_palindrome.py 覆盖正反例（含空串）；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["palindrome.py", "test_palindrome.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本"}
+    },
+    {
+      "id": "roman-numeral",
+      "kind": "cli",
+      "task": "创建 roman.py：函数 to_roman(n) 将 1-3999 整数转为罗马数字；写 test_roman.py 覆盖边界（1、4、9、3999）与非法输入异常；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["roman.py", "test_roman.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本"}
+    },
+    {
+      "id": "dedup-lines",
+      "kind": "cli",
+      "task": "创建 dedup.py：读取 input.txt 删除重复行（保持首次出现顺序）写入 output.txt 并打印去重后行数；创建样例与 test_dedup.py；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["dedup.py", "input.txt", "test_dedup.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本"}
+    },
+    {
+      "id": "json-config-merge",
+      "kind": "cli",
+      "task": "创建 merge_cfg.py：深合并两个 JSON 配置文件（后者覆盖前者）并写入 merged.json；创建两个输入样例与 test_merge_cfg.py（含嵌套键）；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["merge_cfg.py", "test_merge_cfg.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本"}
+    },
+    {
+      "id": "log-level-count",
+      "kind": "cli",
+      "task": "创建 logcount.py：解析 app.log（每行含 INFO/WARN/ERROR 级别），打印各等级计数；创建样例日志与 test_logcount.py；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["logcount.py", "app.log", "test_logcount.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本"}
+    },
+    {
+      "id": "bank-balance-json",
+      "kind": "cli",
+      "task": "创建 bank.py：读取 transactions.json（[{\"type\":\"in|out\",\"amount\":n}]）计算余额并打印；写 test_bank.py 覆盖空列表与混合交易；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["bank.py", "test_bank.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本"}
+    },
+    {
+      "id": "date-diff",
+      "kind": "cli",
+      "task": "创建 datediff.py：用标准库 datetime 计算两个 YYYY-MM-DD 日期相差天数并打印；写 test_datediff.py 覆盖同日/跨月/跨年；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["datediff.py", "test_datediff.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本"}
+    },
+    {
+      "id": "with-retries-decorator",
+      "kind": "cli",
+      "task": "创建 retry.py：实现 with_retries(n) 装饰器（失败重试，最终仍失败抛原异常）；写 test_retry.py 用计数器验证重试次数与成功短路；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["retry.py", "test_retry.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本"}
+    },
+    {
+      "id": "slugify-ascii",
+      "kind": "cli",
+      "task": "创建 slugify.py：函数 slugify(s) 将标题转为小写连字符 slug（去多余空白与符号）；写 test_slugify.py 覆盖多空格与混合符号；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["slugify.py", "test_slugify.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本"}
+    },
+    {
+      "id": "matrix-multiply",
+      "kind": "cli",
+      "task": "创建 matrix.py：函数 matmul(A, B) 做二维矩阵乘法（纯标准库）；写 test_matrix.py 覆盖 2x2 与维度不符异常；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["matrix.py", "test_matrix.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本"}
+    },
+    {
+      "id": "parallel-three-modules",
+      "kind": "cli",
+      "task": "同时创建三个互不依赖的模块：util_a.py（字符串反转）、util_b.py（整数阶乘）、util_c.py（列表去重保序），各自附带 pytest 测试；三个模块可并行完成；最后运行 pytest 确认全部通过。",
+      "expect_status": "done",
+      "files": ["util_a.py", "util_b.py", "util_c.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "并行碎片样本（三独立交付物）"}
+    },
+    {
+      "id": "fix-until-green",
+      "kind": "cli",
+      "task": "创建 stats2.py：实现 mean/median/mode；先写好 test_stats2.py（含边界：偶数个数中位数、多众数），运行 pytest——若首次失败必须修复实现或测试直至全部通过，最后确认 pytest 绿灯。",
+      "expect_status": "done",
+      "files": ["stats2.py", "test_stats2.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "失败恢复语义样本（运行-修复至绿）"}
+    },
+    {
+      "id": "csv-to-json",
+      "kind": "cli",
+      "task": "创建 csv2json.py：读取 data.csv 输出 data.json（数组，数值字段保持数值类型）并打印记录数；创建样例与 test_csv2json.py；运行 pytest 确认通过。",
+      "expect_status": "done",
+      "files": ["csv2json.py", "data.csv", "test_csv2json.py"],
+      "pytest": true,
+      "verify_gold": {"expect": "pass", "note": "cli 正样本"}
+    }
+  ]
+}

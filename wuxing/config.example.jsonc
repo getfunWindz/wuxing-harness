@@ -1,0 +1,84 @@
+{
+  "assembly_preset": "standard",
+  // WUXING 配置示例（R5 形态 · 最小可读版）
+  //
+  // 三层结构（后层覆盖前层，非冲突保留）：
+  //   ~/.wuxing/config.jsonc（用户级） ← <工作区>/.wuxing/config.jsonc（项目） ← <工作区>/config.jsonc（工作区）
+  // 载入即校验（错误 → 早报）；本文件可用 IDE 按 $schema 校验。
+  //
+  // 推荐路径：模型与供应商在「设置 → 模型与供应商」中配置——
+  //   输入端点自动匹配名称/协议 → 粘贴密钥（只写保存、仅存本机、界面不回读）→ 获取可用模型 → 保存。
+  //   下方 providers / llm / router 为**手写形态参考**（按需取消注释、填入自己的值）。
+  //
+  // 机制项默认值已按实践调优——不建议随意修改（可在设置 → 机制调优 中调整）。
+
+  "$schema": "./config.schema.json",
+
+  // === 供应商（providers）—— id → { type, base_url, models? } ===
+  // type：openai（OpenAI 兼容）| anthropic | responses | deepseek
+  // models：只列你要用的模型 id（不填也可——默认模型/域路由指向具体模型即可）
+  // API 密钥：在设置页保存（只写、仅存本机）；如用环境变量，变量名 = <ID>_API_KEY（大写）
+  // "providers": {
+  //   "my-provider": {
+  //     "type": "openai",
+  //     "base_url": "https://api.example.com/v1",
+  //     "display_name": "我的中转站",
+  //     "models": [{ "id": "model-id-a" }, { "id": "model-id-b" }]
+  //   }
+  // },
+
+  // === 模型：默认模型 + 域级路由（值 = "供应商id/模型id"） ===
+  // "llm": "my-provider/model-id-a",
+  // 域级路由（为不同域指定模型；未指定的域使用默认模型）：
+  // "router": {
+  //   "plan": "my-provider/model-id-a",
+  //   "execute": "my-provider/model-id-a",
+  //   "verify": "my-provider/model-id-b"
+  // },
+
+  // === 工作区与产物 ===
+  "default_artifact_dir": "artifacts",
+  "default_domains": ["plan", "execute", "verify", "user"],
+
+  // === 护栏与并行（机制调优）===
+  "max_loop_rounds": 6,
+  "max_unit_budget": 5,
+  "max_parallel_units": 8,
+  "max_parallel_tools": 8,
+  "confirm_threshold": 0.0,
+  "confirm_auto": false,
+
+  // === 缓存与碎片会话延续（FSC）===
+  "cache_similar_threshold": 0.75,
+  "fsc_enabled": true,
+  "fsc_retention_rounds": 4,
+  "fsc_max_reuse": 3,
+  "fsc_fallback_digest": true,
+  "fsc_audit_ratio": 0.6,
+  "fsc_switch_ratio": 0.8,
+
+  // === 自动压缩（G7：接近窗口自动压缩；机械链默认开，LLM 摘要链可选）===
+  // 触发线 = min(ratio×window, window − reserve − output_reserve)（E2-2 修订）；
+  // 机械链滞回至 max(window−2×reserve, window/2)。
+  // LLM 摘要链开启且可用时优先（失败降级机械链；原文零删除，摘要以压缩行持久化）。
+  "auto_trim_enabled": true,
+  "auto_trim_reserve_tokens": 16384,
+  "auto_trim_trigger_ratio": 0.8,
+  "auto_trim_output_reserve_tokens": 8192,
+  "auto_compact_llm_enabled": false,
+  "auto_compact_keep_recent_tokens": 20000,
+
+  // === 形状化与增强（真实形状化默认开：算法测试期经验；无凭据自动降级 mock 并在报告提示。
+  //     智脑默认关——收益未验证，请勿默认开启）===
+  "use_real_shape": true,
+  "brain_enabled": false,
+  "skill_evolution_enabled": true,
+  "progress_heartbeat_enabled": true,
+
+  // === 扩展（E0-A 一期：自定义工具 + 事件钩子；默认开启）===
+  // 目录约定：~/.wuxing/extensions/*.py（用户级）+ <工作区>/.wuxing/extensions/*.py（项目级）；
+  // extension_dirs 为附加目录（相对路径按工作区解析）。目录不存在 = 零行为。
+  // 扩展 = 进程内完全信任代码，只加载可信来源；扩展工具须显式声明 permission（缺省全禁）。
+  "extension_enabled": true,
+  "extension_dirs": []
+}
