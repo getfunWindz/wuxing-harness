@@ -78,9 +78,7 @@ jobs:
             -project WuxingShell.xcodeproj \
             -scheme WuxingShell \
             -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.udid }}" \
-            -derivedDataPath build \
-            CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGNING_REQUIRED=NO | tee test.log
+            -derivedDataPath build | tee test.log
 
       - name: 无签名设备构建
         working-directory: apps/mobile/ios
