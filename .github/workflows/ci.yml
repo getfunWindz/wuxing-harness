@@ -9,6 +9,10 @@ jobs:
     # 与开发环境同平台（Windows——路径/编码语义一致）
     runs-on: windows-latest
     timeout-minutes: 30
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: "utf-8"
+      WUXING_STRESS_DAG_LIMIT_S: "120"
     steps:
       - uses: actions/checkout@v4
 
@@ -20,7 +24,7 @@ jobs:
       - name: 安装依赖
         run: |
           python -m pip install --upgrade pip
-          pip install pytest ruff jieba requests textual mcp
+          pip install -e . pytest ruff jieba requests textual "mcp<2"
 
       - name: 引擎测试
         run: python -m pytest wuxing/tests/ -q
@@ -85,7 +89,7 @@ jobs:
       - name: Python 依赖
         run: |
           python -m pip install --upgrade pip
-          pip install jieba requests textual mcp
+          pip install -e . jieba requests textual "mcp<2"
 
       - uses: actions/setup-node@v4
         with:

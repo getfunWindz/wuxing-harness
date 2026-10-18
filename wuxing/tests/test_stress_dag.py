@@ -1,3 +1,4 @@
+import os
 import pathlib
 import random
 import tempfile
@@ -7,6 +8,9 @@ import pytest
 
 from wuxing.engine import Engine
 from wuxing.router import route_fragment
+
+# CI 负载可能高于本机；默认 30s，CI 可用环境变量放宽（不改变本机口径）
+_DAG_LIMIT_S = float(os.environ.get("WUXING_STRESS_DAG_LIMIT_S", "30"))
 
 
 def _mk_eng():
@@ -21,7 +25,7 @@ def test_500_chain_dag():
     results = eng.orchestrator.run(frags, "压力")
     assert len(results) == 500
     assert all(r.status == "ok" for r in results)
-    assert time.time() - t0 < 30  # 韧性：可接受时间
+    assert time.time() - t0 < _DAG_LIMIT_S  # 韧性：可接受时间（CI 可放宽）
 
 @pytest.mark.slow
 def test_500_shuffled_dag():
@@ -34,7 +38,7 @@ def test_500_shuffled_dag():
     results = eng.orchestrator.run(frags, "乱序压力")
     assert len(results) == 500
     assert all(r.status == "ok" for r in results)
-    assert time.time() - t0 < 30
+    assert time.time() - t0 < _DAG_LIMIT_S
 
 @pytest.mark.slow
 def test_cycle_dag_detected():

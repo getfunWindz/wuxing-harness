@@ -17,7 +17,7 @@ dependencies = [
 # 桌面承载（壳：一套前端两种承载——浏览器 + pywebview 窗口）
 desktop = ["pywebview"]
 # MCP 工具桥（外部工具接入）
-mcp = ["mcp"]
+mcp = ["mcp<2"]
 
 [project.scripts]
 # pi 式短命令：安装后直接 `wuxing` 启动壳（桌面窗口；无 pywebview → 浏览器 URL）

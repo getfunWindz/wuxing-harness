@@ -243,7 +243,17 @@ function check(name, pass, detail) {
     cardVis = await cardVisible();
     if (!cardVis) await sleep(200);
   }
-  await mouseClick('[data-st^="unit:"]');
+  // CI 慢环境：fold 动画/滚动可能暂时遮挡——滚动到中心并重试真实鼠标点击
+  await page.evaluate(() => {
+    document.querySelector('[data-st^="unit:"]')
+      ?.scrollIntoView({ block: "center", behavior: "auto" });
+  });
+  await sleep(200);
+  let cardClicked = false;
+  for (let i = 0; i < 12 && !cardClicked; i += 1) {
+    cardClicked = await mouseClick('[data-st^="unit:"]');
+    if (!cardClicked) await sleep(200);
+  }
   await sleep(400);
   const expanded = await page.evaluate(() => {
     const c = document.querySelector(".unit-card.expanded");

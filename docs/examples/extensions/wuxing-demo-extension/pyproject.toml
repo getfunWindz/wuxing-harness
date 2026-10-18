@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wuxing-demo-extension"
+version = "0.1.0"
+description = "WUXING 扩展示例包（entry-points 分发示范：提示词段 + 只读工具 + 事件钩子）"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.entry-points."wuxing.extensions"]
+wuxing-demo = "wuxing_demo_extension"
+
+[tool.setuptools]
+packages = ["wuxing_demo_extension"]
