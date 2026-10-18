@@ -282,6 +282,16 @@ class ConversationState:
                     logger.debug("会话行终态重写失败（不阻断）：%s", exc)
             return row
 
+    def reload(self) -> None:
+        """I2（v65）：从磁盘重读轮次（压缩互斥后刷新跨实例视图）。"""
+        with self._lock:
+            self.turns = []
+            self._load()
+
+    def compaction_guard(self):
+        """I2（v65）：压缩读-改-写互斥（按会话路径；跨实例）。"""
+        return _file_lock(pathlib.Path(str(self.path) + ".compact"))
+
     def last_compaction(self) -> dict | None:
         """最近一次压缩行（G7：生效链=最后一个——迭代摘要已含更早内容）。"""
         for t in reversed(self.turns):

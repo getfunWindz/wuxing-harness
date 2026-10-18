@@ -227,32 +227,24 @@ function check(name, pass, detail) {
   // 轮次化（2026-09-21）：完成态过程组默认收起——先展开过程组，再点击碎片卡
   // E2E 加固（2026-09-30）：展开是异步渲染——先确认卡片已可见（尺寸 > 0），
   // 否则未展开时探测到 0 尺寸坐标 (0,0) → 被顶栏 app-top 假遮挡（历史抖动根因）。
-  const cardVisible = async () => await page.evaluate(() => {
-    const el = document.querySelector('[data-st^="unit:"]');
-    if (!el || el.offsetParent === null) return false;
-    return el.getBoundingClientRect().height > 0;
-  });
-  await mouseClick('[data-st="process-summary"]');
-  await sleep(300);
-  if (!(await cardVisible())) {
-    await mouseClick('[data-st="process-summary"]');   // 首次未生效 → 重试一次
-    await sleep(300);
+  const processOpen = async () => await page.evaluate(() =>
+    !!document.querySelector(".round-process.open"));
+  // 完成态过程组默认收起；只在未展开时点击一次（避免双击把它重新收起）
+  if (!(await processOpen())) {
+    await mouseClick('[data-st="process-summary"]');
   }
-  let cardVis = false;
-  for (let i = 0; i < 12 && !cardVis; i += 1) {
-    cardVis = await cardVisible();
-    if (!cardVis) await sleep(200);
+  for (let i = 0; i < 20 && !(await processOpen()); i += 1) {
+    await sleep(100);
   }
-  // CI 慢环境：fold 动画/滚动可能暂时遮挡——滚动到中心并重试真实鼠标点击
-  await page.evaluate(() => {
-    document.querySelector('[data-st^="unit:"]')
-      ?.scrollIntoView({ block: "center", behavior: "auto" });
-  });
-  await sleep(200);
+  // 真实鼠标点击卡片头（unit-card 的 header）——避免卡片中心被 fold 容器遮挡
+  const cardHeader = '[data-st^="unit:"] .frag-head';
   let cardClicked = false;
   for (let i = 0; i < 12 && !cardClicked; i += 1) {
-    cardClicked = await mouseClick('[data-st^="unit:"]');
+    cardClicked = await mouseClick(cardHeader);
     if (!cardClicked) await sleep(200);
+  }
+  if (!cardClicked) {
+    cardClicked = await mouseClick('[data-st^="unit:"]');
   }
   await sleep(400);
   const expanded = await page.evaluate(() => {

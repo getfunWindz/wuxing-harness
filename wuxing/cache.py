@@ -60,6 +60,16 @@ def _deserialize(v):
     return v
 
 
+class _Flight:
+    """I1（v65）：同键 in-flight 单飞的共享槽（event + value/error）。"""
+    __slots__ = ("error", "event", "value")
+
+    def __init__(self):
+        self.event = threading.Event()
+        self.value = None
+        self.error = None
+
+
 class ReplyCache:
     def __init__(self, path: pathlib.Path, max_entries: int = 500,
                  similar_threshold: float = 0.75):
@@ -75,6 +85,10 @@ class ReplyCache:
         self._order = []    # FIFO 顺序
         self._sim_index = {}  # key -> tokens（put 建/evict 删——查询热路径不分词）
         self._lock = threading.Lock()  # P16：多手并行缓存读写互斥
+        # I1（v65）：同键并发单飞——leader 执行，waiter 复用结果；异常释放等待者
+        self._flights = {}
+        self._flights_lock = threading.Lock()
+        self.singleflight_waits = 0
         self._load()
 
     def _load(self):
@@ -126,6 +140,40 @@ class ReplyCache:
             self._data[key] = _serialize(copy.deepcopy(value))
             self._sim_index[key] = _tokens_for_sim(key)  # P1 T3：索引随写入维护
             self._save()
+
+    def singleflight(self, key: str, fn):
+        """I1（v65）：同一 key 的并发调用只执行一次 fn（leader），其余等待结果。
+
+        - leader 正常返回 → 所有等待者拿到同一 value；
+        - leader 抛异常 → 释放等待者，等待者可重新竞争为 leader（不死锁）；
+        - 仅覆盖精确 key；相似命中仍由 similar_get 处理。
+        """
+        with self._flights_lock:
+            flight = self._flights.get(key)
+            if flight is None:
+                flight = _Flight()
+                self._flights[key] = flight
+                leader = True
+            else:
+                leader = False
+                self.singleflight_waits += 1
+        if not leader:
+            flight.event.wait()
+            if flight.error is not None:
+                # leader 失败：允许等待者重新成为 leader（避免永久等待）
+                return self.singleflight(key, fn)
+            return flight.value
+        try:
+            value = fn()
+            flight.value = value
+            return value
+        except BaseException as exc:
+            flight.error = exc
+            raise
+        finally:
+            with self._flights_lock:
+                self._flights.pop(key, None)
+            flight.event.set()
 
     def clear(self):
         """（保留 API——P13 记录：当前无生产调用，缓存管理备用）。"""

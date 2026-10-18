@@ -286,11 +286,85 @@ def test_preview_auto_budget_and_compacted_flag(tmp_path):
                        auto_trim_trigger_ratio=1.0)
     eng = Engine(cfg=cfg, workdir=tmp_path)
     conv = tmp_path / ".wuxing" / "conversation-a.jsonl"
-    _write_rows(conv, [_turn(1, "第一轮" + "字" * 2000), _comp(1, 1),
-                       _turn(2, "第二轮" + "字" * 2000)])
+    # 多轮填充：不依赖用户技能索引即可超过自动触发线（CI 空 HOME 也稳定）
+    rows = [_turn(1, "第一轮" + "字" * 2000), _comp(1, 1),
+            _turn(2, "第二轮" + "字" * 2000)]
+    rows += [_turn(i, f"第{i}轮" + "字" * 200) for i in range(3, 11)]
+    _write_rows(conv, rows)
     pv = eng.preview_session_context(conversation_path=conv)
     assert pv["budget_auto"] is True
     assert pv["budget_tokens"] > 0
     rounds = {r["round"]: r for r in pv["rounds"]}
     assert rounds[1]["compacted"] is True
     assert rounds[2]["compacted"] is False
+
+
+def test_compaction_guard_shared_across_state_instances(tmp_path):
+    """I2（v65）：同一 conversation 路径的两个实例共享压缩互斥。"""
+    from wuxing.conversation import ConversationState
+
+    conv = tmp_path / "conversation-a.jsonl"
+    conv.write_text("", encoding="utf-8")
+    a = ConversationState(conv)
+    b = ConversationState(conv)
+    assert a.compaction_guard() is b.compaction_guard()
+
+
+def test_concurrent_compact_only_one_row_and_one_llm_call(tmp_path):
+    """I2（v65）：并发压缩只有 leader 写一行/调一次模型；跟随者重读后跳过。"""
+    import threading
+    import time
+
+    from wuxing.config import EngineConfig
+    from wuxing.conversation import ConversationState
+    from wuxing.runner import Runner
+    from wuxing.trace import TraceLogger
+    from wuxing.workspace import Workspace
+
+    class SlowCompLlm(_FakeCompLlm):
+        def __init__(self):
+            super().__init__()
+            self.entered = threading.Event()
+            self.release = threading.Event()
+
+        def chat(self, messages, tools=None):
+            self.entered.set()
+            self.release.wait(timeout=5)
+            return super().chat(messages, tools)
+
+    conv = tmp_path / ".wuxing" / "conversation-a.jsonl"
+    _write_rows(conv, [_turn(1, "第一轮需求" + "x" * 30),
+                       _turn(2, "第二轮需求" + "x" * 30),
+                       _turn(3, "第三轮需求")])
+    state_a = ConversationState(conv)
+    state_b = ConversationState(conv)
+    ws = Workspace(tmp_path)
+    cfg = EngineConfig(auto_compact_llm_enabled=True,
+                       auto_compact_keep_recent_tokens=5)
+    fake = SlowCompLlm()
+    trace_a = TraceLogger(tmp_path / ".wuxing" / "trace-a.jsonl")
+    trace_b = TraceLogger(tmp_path / ".wuxing" / "trace-b.jsonl")
+    runner_a = Runner(cfg, None, ws, fake, [], trace=trace_a,
+                      conversation=state_a)
+    runner_b = Runner(cfg, None, ws, fake, [], trace=trace_b,
+                      conversation=state_b)
+    runner_a._current_domain_id = "execute"
+    runner_b._current_domain_id = "execute"
+    results = []
+
+    t1 = threading.Thread(
+        target=lambda: results.append(runner_a._compact_llm_history("F-1", 10)))
+    t1.start()
+    assert fake.entered.wait(timeout=2)
+    t2 = threading.Thread(
+        target=lambda: results.append(runner_b._compact_llm_history("F-1", 10)))
+    t2.start()
+    time.sleep(0.2)  # 让 B 阻塞在压缩互斥上
+    fake.release.set()
+    t1.join(timeout=5)
+    t2.join(timeout=5)
+    assert not t1.is_alive() and not t2.is_alive(), "压缩互斥不得死锁"
+    assert len(fake.calls) == 1, f"只应调用一次摘要模型（实际 {len(fake.calls)}）"
+    rows = [t for t in state_a.turns if t.get("type") == "compaction"]
+    assert len(rows) == 1, f"只应写一行压缩记录（实际 {len(rows)}）"
+    assert sorted(results) == [False, True]

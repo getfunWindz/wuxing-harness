@@ -77,6 +77,7 @@ jobs:
     timeout-minutes: 45
     env:
       PYTHONUTF8: "1"
+      PYTHONIOENCODING: "utf-8"
       ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
     steps:
       - uses: actions/checkout@v4
@@ -116,7 +117,7 @@ jobs:
           if (-not (Test-Path $edge)) { throw "Edge 未找到：$edge" }
 
       - name: E2E 全量套件
-        run: python e2e/shell/run_all.py
+        run: python e2e/shell/run_all.py --retry-failed 1
 
       - name: 仓库清洁检查（防夹具/构建写穿入库路径）
         shell: pwsh

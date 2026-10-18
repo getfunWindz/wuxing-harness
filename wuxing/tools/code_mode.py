@@ -258,7 +258,8 @@ class RunScriptTool(Tool):
         timed_out = False
         try:
             proc = subprocess.Popen(
-                [sys.executable, "-I", str(boot_path), str(script_path)],
+                [sys.executable, "-I", "-X", "utf8",
+                 str(boot_path), str(script_path)],
                 cwd=str(self._ws.root), env=env,
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             try:

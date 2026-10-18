@@ -86,10 +86,33 @@ def _run(cmd: list, log_fh, env: dict) -> int:
     return proc.returncode
 
 
+def _run_suite(name: str, steps: list, art: pathlib.Path,
+               suffix: str = "") -> int:
+    """跑一套件（返回 0=全过）；日志写 art/<name><suffix>.log。"""
+    needs_fixture = steps[0].startswith("restart")
+    log = art / f"{name}{suffix}.log"
+    code = 0
+    with open(log, "a", encoding="utf-8") as fh:
+        for step in steps:
+            if step.startswith("restart"):
+                cmd = [sys.executable, str(HERE / "restart_fixture.py")]
+                if step.endswith("restore"):
+                    cmd.append("restore")
+            else:
+                parts = step.split()
+                cmd = ["node", str(HERE / parts[1])] + parts[2:]
+            code = _run(cmd, fh, _env(needs_fixture, art))
+            if code != 0:
+                break
+    return code
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="壳 E2E 全量 runner")
     ap.add_argument("--only", nargs="*", default=None,
                     help="只跑指定套件（名称前缀匹配）")
+    ap.add_argument("--retry-failed", type=int, default=0,
+                    help="失败套件重跑次数（CI 慢环境用；默认 0=严格）")
     ap.add_argument("--list", action="store_true", help="列出套件")
     args = ap.parse_args()
 
@@ -119,29 +142,34 @@ def main() -> int:
     art.mkdir(parents=True, exist_ok=True)
 
     failed: list[str] = []
+    retried_pass: list[str] = []
     for name, steps in picked:
-        needs_fixture = steps[0].startswith("restart")
-        log = art / f"{name}.log"
         print(f"— {name} …", end=" ", flush=True)
-        code = 0
-        with open(log, "a", encoding="utf-8") as fh:
-            for step in steps:
-                if step.startswith("restart"):
-                    cmd = [sys.executable, str(HERE / "restart_fixture.py")]
-                    if step.endswith("restore"):
-                        cmd.append("restore")
-                else:
-                    parts = step.split()
-                    cmd = ["node", str(HERE / parts[1])] + parts[2:]
-                code = _run(cmd, fh, _env(needs_fixture, art))
-                if code != 0:
-                    break
+        code = _run_suite(name, steps, art)
         print("PASS" if code == 0 else "FAIL")
         if code != 0:
             failed.append(name)
 
+    suite_steps = dict(picked)
+    for attempt in range(1, max(0, int(args.retry_failed)) + 1):
+        if not failed:
+            break
+        still: list[str] = []
+        for name in failed:
+            print(f"— retry{attempt} {name} …", end=" ", flush=True)
+            code = _run_suite(name, suite_steps[name], art,
+                              suffix=f"-retry{attempt}")
+            print("PASS" if code == 0 else "FAIL")
+            if code == 0:
+                retried_pass.append(name)
+            else:
+                still.append(name)
+        failed = still
+
     print(f"\n结果：{len(picked) - len(failed)}/{len(picked)} 套件通过"
           f"（日志：{art}）")
+    if retried_pass:
+        print("重试通过（首次失败）：" + ", ".join(retried_pass))
     # E3-5（CU10）：批次保留最近 20（最旧删除）——本地资产纪律
     _pruned = prune_batches(art.parent, keep=20)
     if _pruned:

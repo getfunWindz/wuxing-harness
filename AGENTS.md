@@ -153,6 +153,7 @@ WUXING 是一个面向通用任务的编程 harness：
 ### 3.9 移动端接入
 
 - 手机与电脑同一网络（或 overlay/隧道）→ `wuxing shell serve --host <LAN地址>` + token → App 填 URL/token。
+- 接入步骤、令牌纪律与吊销：见 [REMOTE_ACCESS.md](REMOTE_ACCESS.md)。
 - Android：Java + WebView + Keystore；HarmonyOS：ArkTS + ArkWeb + AssetStore；iOS：WKWebView + Keychain。
 - iOS 是**无签名 CI 产物 + Sideloadly 免费重签**（7 天有效），不是 App Store 分发。
 - 移动端只承载 Web UI；原生桥最小集（通知/剪贴板）；不要假设 Web Notification API 在所有 WebView 可用。

@@ -87,7 +87,7 @@ python e2e/shell/run_all.py              # 壳 E2E 全量（需先 deploy）
 - **HarmonyOS**：`apps/mobile/harmony/README.md`（ArkTS + ArkWeb + AssetStore）。
 - **iOS**：`apps/mobile/ios/README.md`（WKWebView + Keychain；GitHub Actions 产出**无签名 IPA**，用 Sideloadly + 免费 Apple ID 重签安装）。
 
-远程访问通过你自选的 overlay / 隧道（Tailscale、Cloudflare Tunnel、frp 等）；WUXING 只提供支持层，不运营穿透服务。
+远程访问通过你自选的 overlay / 隧道（Tailscale、Cloudflare Tunnel、frp 等）；WUXING 只提供支持层，不运营穿透服务。接入步骤与令牌/吊销纪律见 [REMOTE_ACCESS.md](REMOTE_ACCESS.md)。
 
 ## 安全模型
 

@@ -149,6 +149,7 @@ class RunnerRecordsMixin:
         CLI 路径由机械链（auto_trim）承担。
         E2-2（G7 v2）：保留区以 (W−O)×16% 封顶（K2）；摘要不缩小即拒绝（B1）；
         details.files 跨压缩累计（PP5）。
+        I2（v65）：读-改-写整体持有 conversation 压缩互斥；跨实例按路径协调。
         """
         state = getattr(self, "conversation", None)
         if state is None:
@@ -158,6 +159,14 @@ class RunnerRecordsMixin:
             return False
         if trigger <= 0:
             return False
+        with state.compaction_guard():
+            # 跨实例互斥后刷新磁盘视图（另一实例可能已写入压缩行）
+            state.reload()
+            return self._compact_llm_history_locked(unit_id, trigger, window, state)
+
+    def _compact_llm_history_locked(self, unit_id: str, trigger: int,
+                                    window: int, state) -> bool:
+        """I2：压缩读-改-写临界区（调用方必须持有 state.compaction_guard()）。"""
         try:
             spec = self.llm.spec() if hasattr(self.llm, "spec") else ""
         except Exception:

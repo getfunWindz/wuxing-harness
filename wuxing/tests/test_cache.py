@@ -112,3 +112,54 @@ def test_similar_get_allows_punctuation_and_tiny_drift():
     rc.put(f"execute|{shared}\n目标：写一个班级成绩系统的报告。", "OUT")
     val, _ = rc.similar_get(f"execute|{shared}\n目标：写一个班级成绩系统的报告！")
     assert val == "OUT", "标点漂移必须命中"
+
+
+def test_singleflight_dedupes_concurrent_calls():
+    """I1（v65）：同键并发只执行一次 fn；跟随者拿到同一结果。"""
+    import threading
+    import time
+
+    from wuxing.cache import ReplyCache
+
+    cache = ReplyCache(pathlib.Path(tempfile.mkdtemp()) / "c.json")
+    calls = []
+    entered = threading.Event()
+    release = threading.Event()
+
+    def fn():
+        calls.append(1)
+        entered.set()
+        release.wait(timeout=5)
+        return "VALUE"
+
+    results = []
+    t1 = threading.Thread(target=lambda: results.append(cache.singleflight("k", fn)))
+    t1.start()
+    assert entered.wait(timeout=2)
+    t2 = threading.Thread(target=lambda: results.append(cache.singleflight("k", fn)))
+    t2.start()
+    deadline = time.time() + 2
+    while cache.singleflight_waits < 1 and time.time() < deadline:
+        time.sleep(0.01)
+    release.set()
+    t1.join(timeout=5)
+    t2.join(timeout=5)
+    assert not t1.is_alive() and not t2.is_alive()
+    assert len(calls) == 1, f"并发同键必须只调用一次（实际 {len(calls)}）"
+    assert results == ["VALUE", "VALUE"]
+
+
+def test_singleflight_releases_after_failure():
+    """I1（v65）：leader 异常后释放 flight——后续调用可重新成为 leader。"""
+    import pytest
+
+    from wuxing.cache import ReplyCache
+
+    cache = ReplyCache(pathlib.Path(tempfile.mkdtemp()) / "c.json")
+
+    def boom():
+        raise RuntimeError("boom")
+
+    with pytest.raises(RuntimeError):
+        cache.singleflight("k", boom)
+    assert cache.singleflight("k", lambda: "OK") == "OK"

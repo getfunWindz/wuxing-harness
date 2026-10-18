@@ -438,13 +438,20 @@ class Runner(RunnerContextMixin, RunnerLlmMixin, RunnerRecordsMixin, RunnerTools
                     out = cached
                 else:
                     self._cache_breakdown["first_round_misses"] += 1
+
+                    def _compute_and_store(cache_key=cache_key):
+                        value = self._chat_traced(llm, unit_id, domain_id)
+                        self.reply_cache.put(cache_key, value)
+                        return value
+
                     try:
-                        out = self._chat_traced(llm, unit_id, domain_id)
+                        # I1（v65）：同键并发单飞——leader 计算并写缓存，waiter 复用结果
+                        out = self.reply_cache.singleflight(
+                            cache_key, _compute_and_store)
                     except Exception as e:
                         self._transition("failed", unit_id, domain_id)
                         return self._provider_failure(unit_id, domain_id, artifacts,
                                                       logs, llm, params, e)
-                    self.reply_cache.put(cache_key, out)
             else:
                 try:
                     out = self._chat_traced(llm, unit_id, domain_id)
